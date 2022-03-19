@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+<!--<!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Getting Started: Serving Web Content</title>
@@ -13,4 +13,22 @@
 </div>
 <div th:insert="blocks/footer :: footer"></div>
 </body>
+</html> -->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core" xmlns:s="http://java.sun.com/jsf/facelets" lang="">
+<h:head>
+</h:head>
+<h:body>
+    <h:form>
+        <h2>Описание</h2>
+        <f:metadata>
+            <f:viewParam name="title"
+                         value="#{title}" />
+        </f:metadata>
+    </h:form>
+</h:body>
 </html>

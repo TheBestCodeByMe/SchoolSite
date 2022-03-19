@@ -10,10 +10,14 @@
 <header th:insert="blocks/header :: header"></header>
 <div class="container mt-5">
     <h1>Блог сайта</h1>
-    <div th:each="el : ${users}" class="alert alert-info mt-2">
+    <div th:each="el : ${post}" class="alert alert-info mt-2">
         <h3 th:text="${el.role}"/>
         <p th:text="${el.login}"/>
-        <a th:href="'/blog/' + ${el.id}" class="btn btn-warning">Детальнее</a>
+       <!-- <p><b>Просмотры:</b><span th:text="${views}"></span></p> -->
+        <a th:href="'/blog/' + ${el.id} + '/edit'" class="btn btn-warning">Редактировать</a>
+        <form th:action="'/blog/'+${el.id} + '/remove'" method="post">
+        <button th:href="'/blog/' + ${el.id} + '/remove'" class="btn btn-warning">Удалить</button>
+        </form>
     </div>
 </div>
 <div th:insert="blocks/footer :: footer"></div>
