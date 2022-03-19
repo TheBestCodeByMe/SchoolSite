@@ -9,26 +9,33 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8080")
-@RequestMapping("/api/registration")
+@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/api/v1")
 public class UserController {
 
     @Autowired
     private UserRepository userRepository;
 
+    @GetMapping("/users")
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+
     @GetMapping("/users/{id}")
-    public ResponseEntity<User> getEmployeeById(@PathVariable(value = "id") Long employeeId)
+    public ResponseEntity<User> getUserById(@PathVariable(value = "id") Long employeeId)
             throws ResourceNotFoundException {
         User user = userRepository.findById(employeeId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + employeeId));
         return ResponseEntity.ok().body(user);
     }
 
-    @PostMapping("/user")
-    public User createEmployee(@Validated @RequestBody User user) {
+    @PostMapping("/users")
+    public User createUser(@Validated @RequestBody User user) {
         return userRepository.save(user);
     }
 

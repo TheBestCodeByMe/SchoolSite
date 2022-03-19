@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-  private baseUrl = 'http://localhost:8080/springboot-crud-rest/api/v1/users';
+  private baseUrl = 'http://localhost:8080/api/v1/users';
 
   constructor(private http: HttpClient) { }
 
@@ -14,8 +14,8 @@ export class UserService {
     return this.http.get(`${this.baseUrl}/${id}`);
   }
 
-  createUser(employee: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}`, employee);
+  createUser(user: Object): Observable<Object> {
+    return this.http.post(`${this.baseUrl}`, user);
   }
 
   updateUser(id: number, value: any): Observable<Object> {

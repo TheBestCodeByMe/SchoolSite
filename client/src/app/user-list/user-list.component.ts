@@ -6,7 +6,7 @@ import { User } from "../user";
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-employee-list',
+  selector: 'app-user-list',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.css']
 })
@@ -25,7 +25,7 @@ export class UserListComponent implements OnInit {
     this.users = this.userService.getUsersList();
   }
 
-  deleteEmployee(id: number) {
+  deleteUser(id: number) {
     this.userService.deleteUser(id)
       .subscribe(
         data => {
@@ -35,7 +35,7 @@ export class UserListComponent implements OnInit {
         error => console.log(error));
   }
 
-  employeeDetails(id: number){
+  userDetails(id: number){
     this.router.navigate(['details', id]);
   }
 }

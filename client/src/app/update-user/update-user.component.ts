@@ -12,6 +12,7 @@ export class UpdateUserComponent implements OnInit {
 
   id: number;
   user: User;
+  submitted: any;
 
   constructor(private route: ActivatedRoute,private router: Router,
     private userService: UserService) { }
