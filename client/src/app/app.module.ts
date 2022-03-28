@@ -11,6 +11,14 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {AlertModule} from "ngx-bootstrap/alert";
 import {MainComponent} from "./main/main.component";
+import {AboutSiteComponent} from "./aboutSite/aboutSite.component";
+import {AboutStudentComponent} from "./aboutStudent/aboutStudent.component";
+import {AnalyticComponent} from "./analytic/analytic.component";
+import {AskQuestionComponent} from "./askQuestion/ask-question.component";
+import {DiaryComponent} from "./diary/diary.component";
+import {EditDiaryComponent} from "./editDiary/edit-diary.component";
+import {EditUsersComponent} from "./editUsers/edit-users.component";
+import {EmployeeComponent} from "./employee/employee.component";
 
 @NgModule({
   declarations: [
@@ -19,7 +27,15 @@ import {MainComponent} from "./main/main.component";
     UserDetailsComponent,
     UserListComponent,
     UpdateUserComponent,
-    MainComponent
+    MainComponent,
+    AboutSiteComponent,
+    AboutStudentComponent,
+    AnalyticComponent,
+    AskQuestionComponent,
+    DiaryComponent,
+    EditDiaryComponent,
+    EditUsersComponent,
+    EmployeeComponent
   ],
   imports: [
     BrowserModule,

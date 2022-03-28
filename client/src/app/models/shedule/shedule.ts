@@ -6,4 +6,6 @@ export class Shedule {
   weekDay: number;
   LessonID: number;
   date: string;
+  semectrId: number;
+  hometask: string;
 }

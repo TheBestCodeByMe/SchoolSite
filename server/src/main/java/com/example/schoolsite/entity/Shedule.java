@@ -33,8 +33,10 @@ public class Shedule {
     private Date date;
     @Column(name = "semestrID", nullable = false)
     private Long semestrID;
+    @Column(name = "hometask", nullable = false)
+    private String hometask;
 
-    public Shedule(Long classroomID, Long subjectID, Long teacherID, Long weekDay, String lessonID, Date date, Long semestrID) {
+    public Shedule(Long classroomID, Long subjectID, Long teacherID, Long weekDay, String lessonID, Date date, Long semestrID, String hometask) {
         this.classroomID = classroomID;
         this.subjectID = subjectID;
         this.teacherID = teacherID;
@@ -42,6 +44,7 @@ public class Shedule {
         this.lessonID = lessonID;
         this.date = date;
         this.semestrID = semestrID;
+        this.hometask = hometask;
     }
 
     @Override
@@ -49,11 +52,11 @@ public class Shedule {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Shedule shedule = (Shedule) o;
-        return Objects.equals(id, shedule.id) && Objects.equals(classroomID, shedule.classroomID) && Objects.equals(subjectID, shedule.subjectID) && Objects.equals(teacherID, shedule.teacherID) && Objects.equals(weekDay, shedule.weekDay) && Objects.equals(lessonID, shedule.lessonID) && Objects.equals(date, shedule.date) && Objects.equals(semestrID, shedule.semestrID);
+        return Objects.equals(id, shedule.id) && Objects.equals(classroomID, shedule.classroomID) && Objects.equals(subjectID, shedule.subjectID) && Objects.equals(teacherID, shedule.teacherID) && Objects.equals(weekDay, shedule.weekDay) && Objects.equals(lessonID, shedule.lessonID) && Objects.equals(date, shedule.date) && Objects.equals(semestrID, shedule.semestrID) && Objects.equals(hometask, shedule.hometask);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, classroomID, subjectID, teacherID, weekDay, lessonID, date, semestrID);
+        return Objects.hash(id, classroomID, subjectID, teacherID, weekDay, lessonID, date, semestrID, hometask);
     }
 }
