@@ -19,6 +19,9 @@ import {DiaryComponent} from "./diary/diary.component";
 import {EditDiaryComponent} from "./editDiary/edit-diary.component";
 import {EditUsersComponent} from "./editUsers/edit-users.component";
 import {EmployeeComponent} from "./employee/employee.component";
+import {MenuDirectorComponent} from "./menuDirector/menu-director.component";
+import {UpdateUsersComponent} from "./updateUser/update-users.component";
+import {MenuStudentComponent} from "./menuStudent/menu-student.component";
 
 @NgModule({
   declarations: [
@@ -35,7 +38,10 @@ import {EmployeeComponent} from "./employee/employee.component";
     DiaryComponent,
     EditDiaryComponent,
     EditUsersComponent,
-    EmployeeComponent
+    EmployeeComponent,
+    MenuDirectorComponent,
+    UpdateUsersComponent,
+    MenuStudentComponent
   ],
   imports: [
     BrowserModule,

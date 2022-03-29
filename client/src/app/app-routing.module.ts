@@ -13,6 +13,9 @@ import {DiaryComponent} from "./diary/diary.component";
 import {EditDiaryComponent} from "./editDiary/edit-diary.component";
 import {EditUsersComponent} from "./editUsers/edit-users.component";
 import {EmployeeComponent} from "./employee/employee.component";
+import {MenuDirectorComponent} from "./menuDirector/menu-director.component";
+import {UpdateUsersComponent} from "./updateUser/update-users.component";
+import {MenuStudentComponent} from "./menuStudent/menu-student.component";
 
 
 const routes: Routes = [
@@ -27,6 +30,9 @@ const routes: Routes = [
   {path: 'editDiary', component: EditDiaryComponent},
   {path: 'editUsers', component: EditUsersComponent},
   {path: 'employee', component: EmployeeComponent},
+  {path: 'menuDirector', component: MenuDirectorComponent},
+  {path: 'menuStudent', component: MenuStudentComponent},
+  {path: 'updateUsers', component: UpdateUsersComponent},
   {path: 'users', component: UserListComponent},
   {path: 'add', component: CreateUserComponent},
   {path: 'update/:id', component: UpdateUserComponent},
