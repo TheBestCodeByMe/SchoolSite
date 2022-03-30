@@ -23,6 +23,8 @@ import {MenuDirectorComponent} from "./menuDirector/menu-director.component";
 import {UpdateUsersComponent} from "./updateUser/update-users.component";
 import {MenuStudentComponent} from "./menuStudent/menu-student.component";
 import {MenuTeacherComponent} from "./menuTeacher/menu-teacher.component";
+import {RegistrationComponent} from "./registration/registration.component";
+import {SignInComponent} from "./signIn/sign-in.component";
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import {MenuTeacherComponent} from "./menuTeacher/menu-teacher.component";
     MenuDirectorComponent,
     UpdateUsersComponent,
     MenuStudentComponent,
-    MenuTeacherComponent
+    MenuTeacherComponent,
+    RegistrationComponent,
+    SignInComponent
   ],
   imports: [
     BrowserModule,

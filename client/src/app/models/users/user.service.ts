@@ -1,14 +1,15 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private baseUrl = 'http://localhost:8080/api/v1/users';
+  private baseUrl = 'http://localhost:8080/api/v1';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getUser(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/${id}`);
@@ -23,7 +24,7 @@ export class UserService {
   }
 
   deleteUser(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id}`, { responseType: 'text' });
+    return this.http.delete(`${this.baseUrl}/${id}`, {responseType: 'text'});
   }
 
   getUsersList(): Observable<any> {

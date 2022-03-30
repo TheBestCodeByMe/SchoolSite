@@ -24,6 +24,8 @@ public class User {
     private String password;
     @Column(name = "role", nullable = false)
     private String role;
+    @Column(name = "status", nullable = false)
+    private String status;
     @Column(name = "link", nullable = true)
     private String link;
 

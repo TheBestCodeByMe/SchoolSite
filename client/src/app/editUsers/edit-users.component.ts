@@ -1,4 +1,10 @@
 import {Component, OnInit} from '@angular/core';
+import {Observable} from "rxjs";
+import {User} from "../models/users/user";
+import {UserService} from "../models/users/user.service";
+import {Router} from "@angular/router";
+import {PupilDTO} from "../models/pupilDTO/pupilDTO";
+import {PupilDTOService} from "../models/pupilDTO/pupilDTO.service";
 
 
 @Component({
@@ -12,7 +18,19 @@ import {Component, OnInit} from '@angular/core';
 })
 export class EditUsersComponent implements OnInit {
 
+  users: Observable<User[]>;
+  pupilDTOs: Observable<PupilDTO[]>;
+
+  constructor(private userService: UserService,
+              private pupilDTOService: PupilDTOService,
+              private router: Router) {}
+
   ngOnInit() {
+    this.reloadData();
   }
 
+  reloadData() {
+    this.users = this.userService.getUsersList();
+    this.pupilDTOs = this.pupilDTOService.getPupilDTOsList();
+  }
 }

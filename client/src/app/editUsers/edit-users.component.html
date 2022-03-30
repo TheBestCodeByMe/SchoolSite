@@ -173,23 +173,17 @@
               </tr>
               </thead>
               <tbody>
-              <tr>
-                <td>Cell 1</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-              </tr>
-              <tr>
-                <td>Cell 3</td>
-                <td>Cell 4</td>
-                <td>Cell 4</td>
-                <td>Cell 4</td>
+              <tr *ngFor="let user of users | async">
+                <td>{{user.login}}</td>
+                <td>{{user.password}}</td>
+                <td>{{user.role}}</td>
+                <td>{{user.status}}</td>
               </tr>
               </tbody>
             </table>
           </div>
           <div class="mb-3"></div>
-          <button class="btn btn-primary d-block w-100" type="submit" data-bs-target="updateTableUser">Обновить</button>
+          <button (click)="reloadData()" class="btn btn-primary d-block w-100" type="submit" data-bs-target="updateTableUser">Обновить</button>
         </form>
       </div>
     </section>
@@ -210,13 +204,13 @@
               </tr>
               </thead>
               <tbody>
-              <tr>
-                <td>Cell 1</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
-                <td>Cell 2</td>
+              <tr *ngFor="let studentDTO of pupilDTOs | async">
+                <td>{{studentDTO.lastname}} {{studentDTO.name}} {{studentDTO.patronymic}}</td>
+                <td>{{studentDTO.nameMom}} {{studentDTO.lastnameMom}} {{studentDTO.patronymicMom}}, {{studentDTO.nameDad}} {{studentDTO.lastnameDad}} {{studentDTO.patronymicDad}}</td>
+                <td>{{studentDTO.className}}</td>
+                <td>{{studentDTO.dateOfBirthday}}</td>
+                <td>{{studentDTO.email}}</td>
+                <td>{{studentDTO.personalCheck}}</td>
               </tr>
               <tr>
                 <td>Cell 3</td>

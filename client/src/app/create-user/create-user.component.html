@@ -69,12 +69,13 @@
       <div>
         <input type="checkbox"
                name="pupil" value="pupil"
-               style="margin-left: 0px;margin-top: 25px;"><small
+               style="margin-left: 0px;margin-top: 25px;"
+        [(ngModel)]="check"><small
         class="form-text"></small><small style="margin-left: 5px;">Ученик</small>
       </div>
       <button class="btn btn-primary d-block w-100" type="submit" (click)="onSubmit()" data-bs-target="registration">Зарегистрироваться
       </button>
-      <a class="already" href="#" style="padding: 5px;margin: 51px;" data-bs-target="autorization">У вас уже есть
+      <a class="already" href="signIn" style="padding: 5px;margin: 51px;" data-bs-target="autorization">У вас уже есть
         аккаунт? Войдите в него.</a>
     </form>
   </div>
