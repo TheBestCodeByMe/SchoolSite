@@ -16,6 +16,7 @@ import {EmployeeComponent} from "./employee/employee.component";
 import {MenuDirectorComponent} from "./menuDirector/menu-director.component";
 import {UpdateUsersComponent} from "./updateUser/update-users.component";
 import {MenuStudentComponent} from "./menuStudent/menu-student.component";
+import {MenuTeacherComponent} from "./menuTeacher/menu-teacher.component";
 
 
 const routes: Routes = [
@@ -32,6 +33,7 @@ const routes: Routes = [
   {path: 'employee', component: EmployeeComponent},
   {path: 'menuDirector', component: MenuDirectorComponent},
   {path: 'menuStudent', component: MenuStudentComponent},
+  {path: 'menuTeacher', component: MenuTeacherComponent},
   {path: 'updateUsers', component: UpdateUsersComponent},
   {path: 'users', component: UserListComponent},
   {path: 'add', component: CreateUserComponent},

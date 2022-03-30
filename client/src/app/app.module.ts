@@ -22,6 +22,7 @@ import {EmployeeComponent} from "./employee/employee.component";
 import {MenuDirectorComponent} from "./menuDirector/menu-director.component";
 import {UpdateUsersComponent} from "./updateUser/update-users.component";
 import {MenuStudentComponent} from "./menuStudent/menu-student.component";
+import {MenuTeacherComponent} from "./menuTeacher/menu-teacher.component";
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import {MenuStudentComponent} from "./menuStudent/menu-student.component";
     EmployeeComponent,
     MenuDirectorComponent,
     UpdateUsersComponent,
-    MenuStudentComponent
+    MenuStudentComponent,
+    MenuTeacherComponent
   ],
   imports: [
     BrowserModule,
