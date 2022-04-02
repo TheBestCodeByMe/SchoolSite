@@ -6,8 +6,9 @@ import {Component, OnInit} from '@angular/core';
   templateUrl: './shedule.component.html',
   styleUrls: ['./shedule.component.css',
     './assets/bootstrap/css/bootstrap.min.css',
-    './assets/css/styles.css',
-    './assets/css/Registration-Form-with-Photo.css'
+    './assets/fonts/font-awesome.min.css',
+    './assets/fonts/fontawesome5-overrides.min.css',
+    './assets/fonts/fontawesome-all.min.css'
   ]
 })
 export class SheduleComponent implements OnInit {

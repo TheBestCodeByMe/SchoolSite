@@ -19,6 +19,7 @@ import {MenuStudentComponent} from "./menuStudent/menu-student.component";
 import {MenuTeacherComponent} from "./menuTeacher/menu-teacher.component";
 import {RegistrationComponent} from "./registration/registration.component";
 import {SignInComponent} from "./signIn/sign-in.component";
+import {SheduleComponent} from "./shedule/shedule.component";
 
 
 const routes: Routes = [
@@ -39,6 +40,7 @@ const routes: Routes = [
   {path: 'signIn', component: SignInComponent},
   {path: 'updateUsers', component: UpdateUsersComponent},
   {path: 'add', component: CreateUserComponent},
+  {path: 'shedule', component: SheduleComponent},
 
   {path: 'users', component: UserListComponent},
   {path: 'registration', component: RegistrationComponent},

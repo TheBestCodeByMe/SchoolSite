@@ -25,6 +25,7 @@ import {MenuStudentComponent} from "./menuStudent/menu-student.component";
 import {MenuTeacherComponent} from "./menuTeacher/menu-teacher.component";
 import {RegistrationComponent} from "./registration/registration.component";
 import {SignInComponent} from "./signIn/sign-in.component";
+import {SheduleComponent} from "./shedule/shedule.component";
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import {SignInComponent} from "./signIn/sign-in.component";
     MenuStudentComponent,
     MenuTeacherComponent,
     RegistrationComponent,
-    SignInComponent
+    SignInComponent,
+    SheduleComponent
   ],
   imports: [
     BrowserModule,
