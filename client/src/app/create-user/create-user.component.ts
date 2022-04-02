@@ -39,6 +39,7 @@ export class CreateUserComponent implements OnInit {
     } else {
       this.user.role = "teacher";
     }
+    this.user.status = "unBlock";
     this.userService.createUser(this.user)
       .subscribe(data => console.log(data), error => console.log(error));
     this.user = new User();

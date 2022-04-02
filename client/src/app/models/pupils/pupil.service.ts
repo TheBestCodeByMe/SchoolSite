@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PupilService {
-  private baseUrl = 'http://localhost:8080/api/v1/users';
+  private baseUrl = 'http://localhost:8080/api/v1/editUsers';
 
   constructor(private http: HttpClient) { }
 
@@ -14,8 +14,8 @@ export class PupilService {
     return this.http.get(`${this.baseUrl}/${id}`);
   }
 
-  createPupil(pupil: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}`, pupil);
+  createPupil(pupil: Object, parents: Object): Observable<Object> {
+    return this.http.post(`${this.baseUrl}/createPupil`, pupil, parents);
   }
 
   updatePupil(id: number, value: any): Observable<Object> {

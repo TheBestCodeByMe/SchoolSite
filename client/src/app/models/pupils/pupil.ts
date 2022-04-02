@@ -1,12 +1,12 @@
 export class Pupil {
   id: number;
-  userId: number;
+  user_id: number;
   name: string
   lastname: string;
   patronymic: string;
-  dateOfBirthday: string;
+  date_of_birthday: string;
   email: string;
-  personalCheck: string;
-  classroomId: number;
-  parentsId: number;
+  personal_check: string;
+  classroom_id: number;
+  parents_id: number;
 }

@@ -12,7 +12,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "academicPerfomance")
+@Table(name = "academicperfomance")
 @ToString
 public class AcademicPerfomance {
     @Id

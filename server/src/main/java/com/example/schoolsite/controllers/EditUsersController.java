@@ -10,6 +10,7 @@ import com.example.schoolsite.workWithDatabase.repo.ParentsRepository;
 import com.example.schoolsite.workWithDatabase.repo.PupilRepository;
 import com.example.schoolsite.workWithDatabase.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/editUsers")
 public class EditUsersController {
 
     @Autowired
@@ -34,7 +35,16 @@ public class EditUsersController {
     //    return userRepository.findAll();
     //}
 
-    @GetMapping("/editUsers")
+    @PostMapping("/createPupil")
+    public Pupil createUser(@Validated @RequestBody Pupil pupil, @Validated Parents parents) {
+        System.out.println(pupil);
+        System.out.println(parents);
+        parentsRepository.save(parents);
+        // TODO: сделать поиск родителей по id и приписать к ребенку, чтобы соединить с родителями
+        return pupilRepository.save(pupil);
+    }
+
+    @GetMapping("/showPupilDTO")
     public List<PupilDTO> getAllPupilDTO() {
         List<Pupil> pupils = pupilRepository.findAll();
         List<Parents> parents = parentsRepository.findAll();

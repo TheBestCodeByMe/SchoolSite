@@ -16,28 +16,31 @@
     <form method="post" style="padding: 7px 60px;margin: 0px;height: 658.4px;">
       <h2 class="text-center" style="margin: 24px;padding: -52px;"><strong>Регистрация ученика</strong></h2>
       <div class="mb-3"></div>
-      <input class="form-control" type="email" name="name" placeholder="Имя"
+      <input class="form-control" id="name" required [(ngModel)]="pupil.name"  type="text" name="name" placeholder="Имя"
              style="width: 349px;margin: 0px;padding: 14px 12px;margin-bottom: 12px;" minlength="1"
-             maxlength="20"><input class="form-control" type="email" name="lastname" placeholder="Фамилия"
+             maxlength="20">
+      <input class="form-control" id="lastname" required [(ngModel)]="pupil.lastname" type="text" name="lastname" placeholder="Фамилия"
                                    style="width: 349px;margin-top: -51px;margin-left: 420px;margin-right: 0px;"
-                                   minlength="1" maxlength="20"><input class="form-control" type="email"
-                                                                       name="patronymic" placeholder="Отчество"
-                                                                       style="margin-top: 19px;width: 349.0px;"
-                                                                       minlength="1" maxlength="20"><small
+                                   minlength="1" maxlength="20">
+      <input class="form-control"  id="patronymic" required [(ngModel)]="pupil.patronymic"  type="text"
+             name="patronymic" placeholder="Отчество"
+             style="margin-top: 19px;width: 349.0px;" minlength="1" maxlength="20"><small
       style="margin-top: 0px;margin-right: 0px;height: 0px;padding: 0px;width: 0px;">Введите дату рождения</small><input
-      class="form-control" type="date" style="margin-top: 17px;" name="dateOfBirth"><input class="form-control"
-                                                                                           type="email"
-                                                                                           name="personalCheck"
-                                                                                           style="margin-top: 19px;"
-                                                                                           minlength="1" maxlength="25"
-                                                                                           placeholder="Введите номер личного счета"><input
-      class="form-control" type="text" style="padding-top: 6px;margin-top: 13px;padding-left: 12px;" name="txtFIOMom"
-      placeholder="Введите ФИО мамы через пробел" minlength="3" maxlength="245"><input class="form-control" type="text"
-                                                                                       style="margin-top: 18px;"
-                                                                                       name="txtFIODad"
-                                                                                       placeholder="Введите ФИО папы через пробел"
-                                                                                       minlength="3" maxlength="245">
-      <button class="btn btn-primary d-block w-100" type="submit" data-bs-target="registrationStudent">Зарегистрировать
+      class="form-control"  id="dateOfBirthday" required [(ngModel)]="pupil.date_of_birthday"  type="date" style="margin-top: 17px;" name="dateOfBirth">
+      <input class="form-control"  id="personalCheck" required [(ngModel)]="pupil.personal_check"  type="text"
+             name="personalCheck"
+             style="margin-top: 19px;"
+             minlength="1" maxlength="25"
+             placeholder="Введите номер личного счета">
+      <input
+      class="form-control"  id="fioMom" required [(ngModel)]="fioMom"  type="text" style="padding-top: 6px;margin-top: 13px;padding-left: 12px;" name="txtFIOMom"
+      placeholder="Введите ФИО мамы через пробел" minlength="3" maxlength="245">
+      <input class="form-control"  id="fioDad" required [(ngModel)]="fioDad"  type="text"
+             style="margin-top: 18px;"
+             name="txtFIODad"
+             placeholder="Введите ФИО папы через пробел"
+             minlength="3" maxlength="245">
+      <button class="btn btn-primary d-block w-100" type="submit" data-bs-target="registrationStudent" (click)="savePupil()">Зарегистрировать
         ученика
       </button>
     </form>
@@ -173,7 +176,7 @@
               </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let user of users | async">
+              <tr *ngFor="let user of users">
                 <td>{{user.login}}</td>
                 <td>{{user.password}}</td>
                 <td>{{user.role}}</td>
@@ -187,7 +190,7 @@
         </form>
       </div>
     </section>
-    <section class="register-photo">
+   <!-- <section class="register-photo">
       <div class="form-container">
         <form method="post" style="padding: 7px 60px;margin: 0px;height: 464.4px;">
           <h2 class="text-center" style="margin: 24px;padding: -52px;"><strong>Просмотр учеников</strong></h2>
@@ -264,7 +267,7 @@
           </button>
         </form>
       </div>
-    </section>
+    </section>-->
   </section>
 </section>
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>

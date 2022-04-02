@@ -1,9 +1,9 @@
 export class Parent {
   id: number;
-  nameMom: string;
-  lastnameMom: string;
-  patronymicMom: string;
-  nameDad: string;
-  lastnameDad: string;
-  patronymicDad: string;
+  name_mom: string;
+  lastname_mom: string;
+  patronymic_mom: string;
+  name_dad: string;
+  lastname_dad: string;
+  patronymic_dad: string;
 }
