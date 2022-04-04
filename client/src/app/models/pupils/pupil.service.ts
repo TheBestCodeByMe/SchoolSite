@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {Parents} from "../parents/parents";
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,10 @@ export class PupilService {
   getPupil(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/${id}`);
   }
-
-  createPupil(pupil: Object, parents: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/createPupil`, pupil, parents);
+// parentsId: number
+  createPupil(pupil: Object): Observable<Object> {
+    // @ts-ignore
+    return this.http.post(`${this.baseUrl}/createPupil`, pupil);
   }
 
   updatePupil(id: number, value: any): Observable<Object> {

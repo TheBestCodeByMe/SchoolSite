@@ -14,8 +14,8 @@ export class PupilDTOService {
     return this.http.get(`${this.baseUrl}/${id}`);
   }
 
-  createPupilDTO(pupil: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}`, pupil);
+  createPupilDTO(pupilDTO: Object): Observable<any> {
+    return this.http.post(`${this.baseUrl}/createPupilDTO`, pupilDTO);
   }
 
   updatePupilDTO(id: number, value: any): Observable<Object> {

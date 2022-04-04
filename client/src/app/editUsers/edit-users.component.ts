@@ -1,13 +1,16 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable} from "rxjs";
+import {catchError, Observable, Subscription, tap} from "rxjs";
 import {User} from "../models/users/user";
 import {UserService} from "../models/users/user.service";
 import {Router} from "@angular/router";
 import {PupilDTO} from "../models/pupilDTO/pupilDTO";
 import {PupilDTOService} from "../models/pupilDTO/pupilDTO.service";
 import {Pupil} from "../models/pupils/pupil";
-import {Parent} from "../models/parents/parent";
+import {Parents} from "../models/parents/parents";
 import {PupilService} from "../models/pupils/pupil.service";
+import {ParentsService} from "../models/parents/parents.service";
+import {__await} from "tslib";
+import {waitForAsync} from "@angular/core/testing";
 
 
 @Component({
@@ -24,14 +27,18 @@ export class EditUsersComponent implements OnInit {
   users: Observable<User[]>;
   pupilDTOs: Observable<PupilDTO[]>;
   pupil: Pupil = new Pupil();
-  parents: Parent = new Parent();
-  fioMom
-  fioDad
+  parents: Parents = new Parents();
+  fioMom;
+  fioDad;
+  parentForId: Observable<Parents[]>;
+  pupilDToForReg: PupilDTO = new PupilDTO();
 
   constructor(private userService: UserService,
               private pupilDTOService: PupilDTOService,
               private pupilService: PupilService,
-              private router: Router) {}
+              private parentService: ParentsService,
+              private router: Router) {
+  }
 
   ngOnInit() {
     this.reloadData();
@@ -44,16 +51,41 @@ export class EditUsersComponent implements OnInit {
 
   savePupil() {
     const tempMom = this.fioMom.split(" ");
-    this.parents.name_mom = tempMom[0];
-    this.parents.lastname_mom = tempMom[1];
-    this.parents.patronymic_mom = tempMom[2];
+    this.pupilDToForReg.nameMom = tempMom[0];
+    this.pupilDToForReg.lastnameMom = tempMom[1];
+    this.pupilDToForReg.patronymicMom = tempMom[2];
     const tempDad = this.fioDad.split(" ");
-    this.parents.name_dad = tempDad[0];
-    this.parents.lastname_dad = tempDad[1];
-    this.parents.patronymic_dad = tempDad[2];
-    this.pupilService.createPupil(this.pupil, this.parents)
+    this.pupilDToForReg.nameDad = tempDad[0];
+    this.pupilDToForReg.lastnameDad = tempDad[1];
+    this.pupilDToForReg.patronymicDad = tempDad[2];
+
+    this.pupilDTOService.createPupilDTO(this.pupilDToForReg)
       .subscribe(data => console.log(data), error => console.log(error));
+
+    //this.parentForId = this.parentService.createParents(this.parents);
+
+    //this.parentForId.forEach(parent => this.pupil.parentsId = parent[0].id);
+
+    //this.pupilService.createPupil(this.pupil)
+    //       .subscribe(data => console.log(data), error => console.log(error));
+
+    // .pipe(tap(() => {
+      //   crPupil(this.pupil, this.pupilService, this.pId)
+      // }));
+
+    // function crPupil(pupil, pupilService, pId) {
+    //   if (pId != null) {
+    //     pupil.parentsId = pId;
+    //     pupilService.createPupil(pupil)
+    //       .subscribe(data => console.log(data), error => console.log(error));
+    //   }
+    // }
+    //  .subscribe(((data: any) => this.pupil.parentsId = data), error => console.log(error));
+    //this.parentService.getParentsByFIO(this.parents)
+    //  .subscribe(data => console.log(data), error => console.log(error));
+
+    this.pupilDToForReg = new PupilDTO();
     this.pupil = new Pupil();
-    this.parents = new Parent();
+    this.parents = new Parents();
   }
 }

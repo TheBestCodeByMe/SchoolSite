@@ -16,18 +16,21 @@
     <form method="post" style="padding: 7px 60px;margin: 0px;height: 658.4px;">
       <h2 class="text-center" style="margin: 24px;padding: -52px;"><strong>Регистрация ученика</strong></h2>
       <div class="mb-3"></div>
-      <input class="form-control" id="name" required [(ngModel)]="pupil.name"  type="text" name="name" placeholder="Имя"
+      <input class="form-control" id="name" required [(ngModel)]="pupilDToForReg.name"  type="text" name="name" placeholder="Имя"
              style="width: 349px;margin: 0px;padding: 14px 12px;margin-bottom: 12px;" minlength="1"
              maxlength="20">
-      <input class="form-control" id="lastname" required [(ngModel)]="pupil.lastname" type="text" name="lastname" placeholder="Фамилия"
+      <input class="form-control" id="lastname" required [(ngModel)]="pupilDToForReg.lastname" type="text" name="lastname" placeholder="Фамилия"
                                    style="width: 349px;margin-top: -51px;margin-left: 420px;margin-right: 0px;"
                                    minlength="1" maxlength="20">
-      <input class="form-control"  id="patronymic" required [(ngModel)]="pupil.patronymic"  type="text"
+      <input class="form-control"  id="patronymic" required [(ngModel)]="pupilDToForReg.patronymic"  type="text"
              name="patronymic" placeholder="Отчество"
+             style="margin-top: 19px;width: 349.0px;" minlength="1" maxlength="20">
+      <input class="form-control"  id="classroomName" required [(ngModel)]="pupilDToForReg.className"  type="text"
+             name="classroomName" placeholder="Класс в формате 11 А"
              style="margin-top: 19px;width: 349.0px;" minlength="1" maxlength="20"><small
       style="margin-top: 0px;margin-right: 0px;height: 0px;padding: 0px;width: 0px;">Введите дату рождения</small><input
-      class="form-control"  id="dateOfBirthday" required [(ngModel)]="pupil.date_of_birthday"  type="date" style="margin-top: 17px;" name="dateOfBirth">
-      <input class="form-control"  id="personalCheck" required [(ngModel)]="pupil.personal_check"  type="text"
+      class="form-control" id="dateOfBirthday" required [(ngModel)]="pupilDToForReg.dateOfBirthday" type="date" style="margin-top: 17px;" name="dateOfBirth">
+      <input class="form-control" id="personalCheck" required [(ngModel)]="pupilDToForReg.personalCheck" type="text"
              name="personalCheck"
              style="margin-top: 19px;"
              minlength="1" maxlength="25"

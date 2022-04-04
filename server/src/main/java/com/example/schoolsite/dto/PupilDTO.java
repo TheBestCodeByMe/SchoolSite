@@ -15,7 +15,7 @@ import java.util.Objects;
 @ToString
 public class PupilDTO implements Serializable {
     private Long id;
-    private String userId;
+    private long userId;
     private String name;
     private String lastname;
     private String patronymic;
@@ -30,7 +30,7 @@ public class PupilDTO implements Serializable {
     private String patronymicDad;
     private String className;
 
-    public PupilDTO(String userId, String name, String lastname, String patronymic, Date dateOfBirthday, String email, String personalCheck, String nameMom, String lastnameMom, String patronymicMom, String nameDad, String lastnameDad, String patronymicDad, String className) {
+    public PupilDTO(long userId, String name, String lastname, String patronymic, Date dateOfBirthday, String email, String personalCheck, String nameMom, String lastnameMom, String patronymicMom, String nameDad, String lastnameDad, String patronymicDad, String className) {
         this.userId = userId;
         this.name = name;
         this.lastname = lastname;

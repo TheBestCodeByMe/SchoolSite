@@ -1,12 +1,14 @@
+import {Subscription} from "rxjs";
+
 export class Pupil {
   id: number;
   user_id: number;
   name: string
   lastname: string;
   patronymic: string;
-  date_of_birthday: string;
+  dateOfBirthday: string;
   email: string;
-  personal_check: string;
-  classroom_id: number;
-  parents_id: number;
+  personalCheck: string;
+  classroomId: number;
+  parentsId: number;
 }

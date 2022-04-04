@@ -5,6 +5,7 @@ import com.example.schoolsite.entity.Classroom;
 import com.example.schoolsite.entity.Parents;
 import com.example.schoolsite.entity.Pupil;
 import com.example.schoolsite.entity.User;
+import com.example.schoolsite.map.Mapper;
 import com.example.schoolsite.workWithDatabase.repo.ClassroomRepository;
 import com.example.schoolsite.workWithDatabase.repo.ParentsRepository;
 import com.example.schoolsite.workWithDatabase.repo.PupilRepository;
@@ -35,13 +36,36 @@ public class EditUsersController {
     //    return userRepository.findAll();
     //}
 
-    @PostMapping("/createPupil")
-    public Pupil createUser(@Validated @RequestBody Pupil pupil, @Validated Parents parents) {
+    @PostMapping("/createPupilDTO")
+    public Pupil createPupil(@Validated @RequestBody PupilDTO pupilDTO) {
+        System.out.println(pupilDTO);
+        System.out.println("6");
+        Pupil pupil = Mapper.mapToPupil(pupilDTO);
+        Parents parents = Mapper.mapToParents(pupilDTO);
+        Classroom classroom = Mapper.mapToClassroom(pupilDTO);
+        Classroom classroom1 = classroomRepository.findClassroomByName(classroom.getName());
+        if (classroom1 != null) {
+            System.out.println("1C");
+            pupil.setClassroomId(classroom1.getId());
+
+            Parents parent = parentsRepository.findByNameDadAndLastnameDadAndPatronymicDadAndNameMomAndLastnameMomAndPatronymicMom(parents.getNameDad(), parents.getLastnameDad(), parents.getPatronymicDad(), parents.getNameMom(), parents.getLastnameMom(), parents.getPatronymicMom());
+            System.out.println(parents);
+
+            if (parent != null) {
+                System.out.println("1");
+                pupil.setParentsId(parent.getId());
+            } else {
+                parentsRepository.save(parents);
+                System.out.println("2");
+                Parents newParents = parentsRepository.findByNameDadAndLastnameDadAndPatronymicDadAndNameMomAndLastnameMomAndPatronymicMom(parents.getNameDad(), parents.getLastnameDad(), parents.getPatronymicDad(), parents.getNameMom(), parents.getLastnameMom(), parents.getPatronymicMom());
+                pupil.setParentsId(newParents.getId());
+            }
+            return pupilRepository.save(pupil);
+        }
+
         System.out.println(pupil);
-        System.out.println(parents);
-        parentsRepository.save(parents);
-        // TODO: сделать поиск родителей по id и приписать к ребенку, чтобы соединить с родителями
-        return pupilRepository.save(pupil);
+        Pupil pupil1 = new Pupil();
+        return pupilRepository.save(pupil1);
     }
 
     @GetMapping("/showPupilDTO")
@@ -49,22 +73,19 @@ public class EditUsersController {
         List<Pupil> pupils = pupilRepository.findAll();
         List<Parents> parents = parentsRepository.findAll();
         List<Classroom> classrooms = classroomRepository.findAll();
+
         List<PupilDTO> pupilDTOS = new ArrayList<>();
 
-        for (int i = 0; i < pupils.size(); i++) {
-            pupilDTOS.get(i).setName(pupils.get(i).getName());
-            pupilDTOS.get(i).setLastname(pupils.get(i).getLastname());
-            pupilDTOS.get(i).setPatronymic(pupils.get(i).getPatronymic());
-            pupilDTOS.get(i).setEmail(pupils.get(i).getEmail());
-            pupilDTOS.get(i).setDateOfBirthday(pupils.get(i).getDateOfBirthday());
-            pupilDTOS.get(i).setPersonalCheck(pupils.get(i).getPersonalCheck());
-            pupilDTOS.get(i).setClassName(classrooms.get(i).getName());
-            pupilDTOS.get(i).setNameMom(parents.get(i).getNameMom());
-            pupilDTOS.get(i).setNameDad(parents.get(i).getNameDad());
-            pupilDTOS.get(i).setLastnameDad(parents.get(i).getLastnameDad());
-            pupilDTOS.get(i).setPatronymicDad(parents.get(i).getPatronymicDad());
-            pupilDTOS.get(i).setLastnameMom(parents.get(i).getLastnameMom());
-            pupilDTOS.get(i).setPatronymicMom(parents.get(i).getPatronymicMom());
+        for (Pupil pupil : pupils) {
+            for (Parents parent : parents) {
+                if (pupil.getParentsId() == parent.getId()) {
+                    for (Classroom classroom : classrooms) {
+                        if (pupil.getClassroomId() == classroom.getId()) {
+                            Mapper.mapToPupilDTO(pupil, parent, classroom);
+                        }
+                    }
+                }
+            }
         }
 
         return pupilDTOS;//userRepository.findAll();

@@ -19,8 +19,8 @@ public class Pupil {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "userId", nullable = false)
-    private String userId; // TODO: сделать внешним ключом
+    @Column(name = "userId")
+    private long userId; // TODO: сделать внешним ключом
     @Column(name = "name", nullable = false)
     private String name;
     @Column(name = "lastname", nullable = false)
@@ -34,11 +34,11 @@ public class Pupil {
     @Column(name = "personalCheck", nullable = false)
     private String personalCheck;
     @Column(name = "classroomId", nullable = false)
-    private String classroomId; // TODO: сделать внешним ключом
+    private long classroomId; // TODO: сделать внешним ключом
     @Column(name = "parentsId", nullable = false)
-    private String parentsId; // TODO: сделать внешним ключом
+    private long parentsId; // TODO: сделать внешним ключом
 
-    public Pupil(String userId, String name, String lastname, String patronymic, Date dateOfBirthday, String email, String personalCheck, String classroomId, String parentsId) {
+    public Pupil(long userId, String name, String lastname, String patronymic, Date dateOfBirthday, String email, String personalCheck, long classroomId, long parentsId) {
         this.userId = userId;
         this.name = name;
         this.lastname = lastname;
