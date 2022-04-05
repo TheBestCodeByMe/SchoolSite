@@ -51,27 +51,29 @@
 </section>
 <section class="register-photo">
   <div class="form-container">
-    <form method="post" style="padding: 7px 60px;margin: 0px;height: 658.4px;">
+    <form method="post" style="padding: 7px 60px;margin: 0px;height: 408.4px;">
       <h2 class="text-center" style="margin: 24px;padding: -52px;"><strong>Регистрация учителя</strong></h2>
       <div class="mb-3"></div>
-      <input class="form-control" type="email" name="nameTeacher" placeholder="Имя"
+      <input class="form-control" [(ngModel)]="teacher.name" type="text" name="nameTeacher" placeholder="Имя"
              style="width: 349px;margin: 0px;padding: 14px 12px;margin-bottom: 12px;" minlength="1"
-             maxlength="20"><input class="form-control" type="email" name="lastnameTeacher" placeholder="Фамилия"
-                                   style="width: 349px;margin-top: -51px;margin-left: 420px;margin-right: 0px;"
-                                   minlength="1" maxlength="20"><input class="form-control" type="email"
-                                                                       name="patronymicTeacher" placeholder="Отчество"
-                                                                       style="margin-top: 19px;width: 349.0px;"
-                                                                       minlength="1" maxlength="20"><input
-      class="form-control" type="email" name="emailTeacher" style="margin-top: 19px;" minlength="1" maxlength="25"
-      placeholder="Введите email"><input class="form-control" type="text"
-                                         style="padding-top: 6px;margin-top: 13px;padding-left: 12px;"
-                                         name="txtQualification" placeholder="Введите квалификацию преподавателя"
-                                         minlength="3" maxlength="245"><input class="form-control" type="text"
-                                                                              style="margin-top: 18px;"
-                                                                              name="txtPosition"
-                                                                              placeholder="Введите должность: учитель, директор, зам.директора"
-                                                                              minlength="3" maxlength="245">
-      <button class="btn btn-primary d-block w-100" type="submit" data-bs-target="registrationTeacher">Зарегистрировать
+             maxlength="20" required>
+      <input class="form-control" [(ngModel)]="teacher.lastName" type="text" name="lastnameTeacher" placeholder="Фамилия"
+             style="width: 349px;margin-top: -51px;margin-left: 420px;margin-right: 0px;"
+             minlength="1" maxlength="20" required>
+      <input class="form-control" [(ngModel)]="teacher.patronymic" type="text"
+             name="patronymicTeacher" placeholder="Отчество"
+             style="margin-top: 19px;width: 349.0px;"
+             minlength="1" maxlength="20" required>
+      <input class="form-control" [(ngModel)]="teacher.qualification" type="text"
+             style="padding-top: 6px;margin-top: 13px;padding-left: 12px;"
+             name="txtQualification" placeholder="Введите квалификацию преподавателя"
+             minlength="3" maxlength="245" required>
+      <input class="form-control" [(ngModel)]="teacher.position" type="text"
+             style="margin-top: 18px;"
+             name="txtPosition"
+             placeholder="Введите должность: учитель, директор, зам.директора"
+             minlength="3" maxlength="245" required>
+      <button class="btn btn-primary d-block w-100" type="submit" data-bs-target="registrationTeacher" (click)="createTeacher()">Зарегистрировать
         учителя
       </button>
     </form>
@@ -80,11 +82,11 @@
 <section class="register-photo">
   <div class="form-container">
     <form method="post" style="padding: 7px 60px;margin: 0px;height: 286.4px;">
-      <h2 class="text-center" style="margin: 24px;padding: -52px;"><strong>Добавление новых предметов</strong></h2>
+      <h2 class="text-center" style="margin: 24px;padding: -52px;" ><strong>Добавление новых предметов</strong></h2>
       <div class="mb-3"></div>
-      <input class="form-control" type="email" name="subjectForAdd" placeholder="Укажите предмет для добавления"
-             style="width: 349px;margin: 0px;padding: 14px 12px;margin-bottom: 12px;" minlength="1" maxlength="20">
-      <button class="btn btn-primary d-block w-100" type="submit" data-bs-target="addSubject">Добавить предмет</button>
+      <input class="form-control" [(ngModel)]="subject.subjectName" type="text" name="subjectForAdd" placeholder="Укажите предмет для добавления"
+             style="width: 349px;margin: 0px;padding: 14px 12px;margin-bottom: 12px;" minlength="1" maxlength="20" required>
+      <button class="btn btn-primary d-block w-100" type="submit" data-bs-target="addSubject" (click)="createSubject()">Добавить предмет</button>
     </form>
   </div>
 </section>
@@ -93,24 +95,28 @@
     <form method="post" style="padding: 7px 60px;margin: 0px;height: 658.4px;">
       <h2 class="text-center" style="margin: 24px;padding: -52px;"><strong>Расписание</strong></h2>
       <div class="mb-3"></div>
-      <input class="form-control" type="email" name="classForShedule"
+      <input class="form-control" [(ngModel)]="sheduleDTO.classroomName" type="text" name="classForShedule"
              placeholder="Введите класс в формате &quot;11 А&quot;"
-             style="width: 349px;margin: 0px;padding: 14px 12px;margin-bottom: 12px;" minlength="3" maxlength="4"><input
-      class="form-control" type="email" name="subjectForShedule" placeholder="Введите предмет"
-      style="margin-top: 5px;width: 349.0px;" minlength="1" maxlength="20"><small class="form-text">Введите дату
-      занятия.</small><input class="form-control" type="date" name="dateSubject" style="margin-top: 4px;"><input
-      class="form-control" type="email" name="weekDayForShedule" style="margin-top: 9px;" minlength="1" maxlength="25"
-      placeholder="Введите день недели"><input class="form-control" type="number" name="lessonID" min="1" max="11"
-                                               placeholder="Введите номер урока в расписании" style="margin-top: 12px;"><input
-      class="form-control" type="number" name="weekDay" placeholder="Введите день недели по счёту" min="1" max="6"
-      style="margin-top: 11px;"><input class="form-control" type="text"
-                                       placeholder="Введите время занятия, напимер, &quot;с 12:20 до 15:50&quot;"
-                                       name="lessonTime" style="margin-top: 13px;"><input class="form-control"
-                                                                                          type="text"
-                                                                                          style="margin-top: 14px;"
-                                                                                          placeholder="Введите ФИО преподавателя через пробел"
-                                                                                          name="FIOTeacherForShedule">
-      <button class="btn btn-primary d-block w-100" type="submit" data-bs-target="addShedule">Добавление расписания
+             style="width: 349px;margin: 0px;padding: 14px 12px;margin-bottom: 12px;" minlength="3" maxlength="4" required>
+      <input
+      class="form-control" [(ngModel)]="sheduleDTO.subjectName" type="text" name="subjectForShedule" placeholder="Введите предмет"
+      style="margin-top: 5px;width: 349.0px;" minlength="1" maxlength="20" required><small class="form-text">Введите дату
+      занятия.</small>
+      <input class="form-control" [(ngModel)]="sheduleDTO.date" type="date" name="dateSubject" style="margin-top: 4px;" required>
+      <input
+      class="form-control" [(ngModel)]="sheduleDTO.weekDay" type="text" name="weekDayForShedule" style="margin-top: 9px;" minlength="1" maxlength="25"
+      placeholder="Введите день недели" required>
+      <input class="form-control" [(ngModel)]="sheduleDTO.lessonNumber" type="number" name="lessonID" min="1" max="11"
+             placeholder="Введите номер урока в расписании" style="margin-top: 12px;" required>
+      <input
+      class="form-control" [(ngModel)]="sheduleDTO.weekDay" type="number" name="weekDay" placeholder="Введите день недели по счёту" min="1" max="6"
+      style="margin-top: 11px;" required>
+      <input class="form-control" [(ngModel)]="fioTeacher"
+             type="text"
+             style="margin-top: 14px;"
+             placeholder="Введите ФИО преподавателя через пробел"
+             name="FIOTeacherForShedule" required>
+      <button class="btn btn-primary d-block w-100" type="submit" data-bs-target="addShedule" (click)="createShedule()">Добавление расписания
       </button>
     </form>
   </div>

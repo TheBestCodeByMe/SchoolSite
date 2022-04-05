@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SubjectService {
-  private baseUrl = 'http://localhost:8080/api/v1/users';
+  private baseUrl = 'http://localhost:8080/api/v1';
 
   constructor(private http: HttpClient) { }
 
@@ -15,7 +15,7 @@ export class SubjectService {
   }
 
   createSubject(subject: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}`, subject);
+    return this.http.post(`${this.baseUrl}/editUsers/createSubject`, subject);
   }
 
   updateSubject(id: number, value: any): Observable<Object> {

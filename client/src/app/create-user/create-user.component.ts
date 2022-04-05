@@ -46,6 +46,9 @@ export class CreateUserComponent implements OnInit {
       this.userDTO.role = "teacher";
     }
     this.userDTO.status = "unBlock";
+
+    // возвращает в имени сущности строку с комментарием ошибки, если что-то не так
+    // возвращает сущность, если всё так
     this.userDTOService.createUserDTO(this.userDTO)
       .subscribe(data => console.log(data), error => console.log(error));
     this.userDTO = new UserDTO();

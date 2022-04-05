@@ -4,8 +4,7 @@ export class Shedule {
   subjectID: number;
   teacherID: number;
   weekDay: number;
-  LessonID: number;
   date: string;
-  semectrId: number;
+  calendarId: number;
   hometask: string;
 }

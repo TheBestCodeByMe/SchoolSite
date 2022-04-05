@@ -11,6 +11,14 @@ import {PupilService} from "../models/pupils/pupil.service";
 import {ParentsService} from "../models/parents/parents.service";
 import {__await} from "tslib";
 import {waitForAsync} from "@angular/core/testing";
+import {Teacher} from "../models/teachers/teacher";
+import {TeacherService} from "../models/teachers/teacher.service";
+import {Classroom} from "../models/classrooms/classroom";
+import {ClassroomService} from "../models/classrooms/classroom.service";
+import {Subject} from "../models/subjects/subject";
+import {SubjectService} from "../models/subjects/subject.service";
+import {SheduleDTO} from "../models/sheduleDTO/sheduleDTO";
+import {SheduleDTOService} from "../models/sheduleDTO/sheduleDTO.service";
 
 
 @Component({
@@ -30,13 +38,22 @@ export class EditUsersComponent implements OnInit {
   parents: Parents = new Parents();
   fioMom;
   fioDad;
+  fioTeacher;
   parentForId: Observable<Parents[]>;
   pupilDToForReg: PupilDTO = new PupilDTO();
+  teacher: Teacher = new Teacher();
+  classroom: Classroom = new Classroom();
+  subject: Subject = new Subject();
+  sheduleDTO: SheduleDTO = new SheduleDTO();
 
   constructor(private userService: UserService,
               private pupilDTOService: PupilDTOService,
               private pupilService: PupilService,
               private parentService: ParentsService,
+              private teacherService: TeacherService,
+              private classroomService: ClassroomService,
+              private subjectService: SubjectService,
+              private sheduleDTOService: SheduleDTOService,
               private router: Router) {
   }
 
@@ -59,9 +76,12 @@ export class EditUsersComponent implements OnInit {
     this.pupilDToForReg.lastnameDad = tempDad[1];
     this.pupilDToForReg.patronymicDad = tempDad[2];
 
+    // возвращает null, если не сохранено
+    // сущность, если сохранено
     this.pupilDTOService.createPupilDTO(this.pupilDToForReg)
       .subscribe(data => console.log(data), error => console.log(error));
 
+    /*
     //this.parentForId = this.parentService.createParents(this.parents);
 
     //this.parentForId.forEach(parent => this.pupil.parentsId = parent[0].id);
@@ -70,8 +90,8 @@ export class EditUsersComponent implements OnInit {
     //       .subscribe(data => console.log(data), error => console.log(error));
 
     // .pipe(tap(() => {
-      //   crPupil(this.pupil, this.pupilService, this.pId)
-      // }));
+    //   crPupil(this.pupil, this.pupilService, this.pId)
+    // }));
 
     // function crPupil(pupil, pupilService, pId) {
     //   if (pId != null) {
@@ -83,9 +103,33 @@ export class EditUsersComponent implements OnInit {
     //  .subscribe(((data: any) => this.pupil.parentsId = data), error => console.log(error));
     //this.parentService.getParentsByFIO(this.parents)
     //  .subscribe(data => console.log(data), error => console.log(error));
-
+*/
     this.pupilDToForReg = new PupilDTO();
-    this.pupil = new Pupil();
-    this.parents = new Parents();
+  }
+
+  createTeacher() {
+    // возвращает null, если не сохранено
+    // сущность, если сохранено
+    this.teacherService.createTeacher(this.teacher)
+      .subscribe(data => console.log(data), error => console.log(error));
+  }
+
+  createSubject() {
+    // возвращает null, если не сохранено
+    // сущность, если сохранено
+    this.subjectService.createSubject(this.subject)
+      .subscribe(data => console.log(data), error => console.log(error));
+  }
+
+  createShedule() {
+    const tempTeacher = this.fioTeacher.split(" ");
+    this.sheduleDTO.nameTeacher = tempTeacher[0];
+    this.sheduleDTO.lastnameTeacher = tempTeacher[1];
+    this.sheduleDTO.patronymicTeacher = tempTeacher[2];
+
+    // возвращает в имени сущности строку с комментарием ошибки, если что-то не так
+    // возвращает сущность, если всё так
+    this.sheduleDTOService.createSheduleDTO(this.sheduleDTO)
+      .subscribe(data => console.log(data), error => console.log(error));
   }
 }

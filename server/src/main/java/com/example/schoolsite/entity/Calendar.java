@@ -18,20 +18,17 @@ public class Calendar {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "SemesterID", nullable = false)
-    private Long semesterID;
-    @Column(name = "WeekDay", nullable = false)
+    @Column(name = "semesterID", nullable = false)
+    private int semesterID;
+    @Column(name = "weekDay", nullable = false)
     private int weekDay;
-    @Column(name = "WeekDayName", nullable = false)
-    private String weekDayName;
-    @Column(name = "LessonTime", nullable = false)
-    private String lessonTime;
+    @Column(name = "lessonNumber", nullable = false)
+    private int lessonNumber;
 
-    public Calendar(Long semesterID, int weekDay, String weekDayName, String lessonTime) {
+    public Calendar(int semesterID, int weekDay, int lessonNumber) {
         this.semesterID = semesterID;
         this.weekDay = weekDay;
-        this.weekDayName = weekDayName;
-        this.lessonTime = lessonTime;
+        this.lessonNumber = lessonNumber;
     }
 
     @Override
@@ -39,11 +36,11 @@ public class Calendar {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Calendar calendar = (Calendar) o;
-        return weekDay == calendar.weekDay && Objects.equals(id, calendar.id) && Objects.equals(semesterID, calendar.semesterID) && Objects.equals(weekDayName, calendar.weekDayName) && Objects.equals(lessonTime, calendar.lessonTime);
+        return weekDay == calendar.weekDay && lessonNumber == calendar.lessonNumber && Objects.equals(id, calendar.id) && Objects.equals(semesterID, calendar.semesterID);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, semesterID, weekDay, weekDayName, lessonTime);
+        return Objects.hash(id, semesterID, weekDay, lessonNumber);
     }
 }

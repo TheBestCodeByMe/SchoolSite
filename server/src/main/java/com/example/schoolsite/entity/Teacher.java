@@ -26,7 +26,7 @@ public class Teacher {
     private String lastName;
     @Column(name = "patronymic", nullable = false)
     private String patronymic;
-    @Column(name = "email", nullable = false)
+    @Column(name = "email")
     private String email;
     @Column(name = "qualification", nullable = false)
     private String qualification;

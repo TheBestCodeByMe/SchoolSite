@@ -1,7 +1,6 @@
 export class Calendar {
   id: number;
-  SemesterID: number;
-  WeekDay: number;
-  WeekDayName: string;
-  LessonTime: string;
+  semesterID: number;
+  weekDay: number;
+  lessonNumber: number;
 }

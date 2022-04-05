@@ -1,14 +1,10 @@
 package com.example.schoolsite.controllers;
 
 import com.example.schoolsite.dto.PupilDTO;
-import com.example.schoolsite.entity.Classroom;
-import com.example.schoolsite.entity.Parents;
-import com.example.schoolsite.entity.Pupil;
+import com.example.schoolsite.dto.SheduleDTO;
+import com.example.schoolsite.entity.*;
 import com.example.schoolsite.map.Mapper;
-import com.example.schoolsite.workWithDatabase.repo.ClassroomRepository;
-import com.example.schoolsite.workWithDatabase.repo.ParentsRepository;
-import com.example.schoolsite.workWithDatabase.repo.PupilRepository;
-import com.example.schoolsite.workWithDatabase.repo.UserRepository;
+import com.example.schoolsite.workWithDatabase.repo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +25,14 @@ public class EditUsersController {
     private ParentsRepository parentsRepository;
     @Autowired
     private ClassroomRepository classroomRepository;
+    @Autowired
+    private TeacherRepository teacherRepository;
+    @Autowired
+    private SubjectRepository subjectRepository;
+    @Autowired
+    private CalendarRepository calendarRepository;
+    @Autowired
+    private SheduleRepository sheduleRepository;
 
     //@GetMapping("/editUsers")
     //public List<User> getAllUsers() {
@@ -37,32 +41,26 @@ public class EditUsersController {
 
     @PostMapping("/createPupilDTO")
     public Pupil createPupil(@Validated @RequestBody PupilDTO pupilDTO) {
-        System.out.println(pupilDTO);
-        System.out.println("6");
         Pupil pupil = Mapper.mapPupilDTOToPupil(pupilDTO);
         Parents parents = Mapper.mapPupilDTOToParents(pupilDTO);
         Classroom classroom = Mapper.mapPupilDTOToClassroom(pupilDTO);
         Classroom classroom1 = classroomRepository.findClassroomByName(classroom.getName());
+
         if (classroom1 != null) {
-            System.out.println("1C");
             pupil.setClassroomId(classroom1.getId());
 
             Parents parent = parentsRepository.findByNameDadAndLastnameDadAndPatronymicDadAndNameMomAndLastnameMomAndPatronymicMom(parents.getNameDad(), parents.getLastnameDad(), parents.getPatronymicDad(), parents.getNameMom(), parents.getLastnameMom(), parents.getPatronymicMom());
-            System.out.println(parents);
 
             if (parent != null) {
-                System.out.println("1");
                 pupil.setParentsId(parent.getId());
             } else {
                 parentsRepository.save(parents);
-                System.out.println("2");
                 Parents newParents = parentsRepository.findByNameDadAndLastnameDadAndPatronymicDadAndNameMomAndLastnameMomAndPatronymicMom(parents.getNameDad(), parents.getLastnameDad(), parents.getPatronymicDad(), parents.getNameMom(), parents.getLastnameMom(), parents.getPatronymicMom());
                 pupil.setParentsId(newParents.getId());
             }
             return pupilRepository.save(pupil);
         }
 
-        System.out.println(pupil);
         Pupil pupil1 = new Pupil();
         return pupilRepository.save(pupil1);
     }
@@ -90,4 +88,51 @@ public class EditUsersController {
         return pupilDTOS;//userRepository.findAll();
     }
 
+    @PostMapping("/createTeacher")
+    public Teacher createTeacher(@Validated @RequestBody Teacher teacher) {
+        if (teacherRepository.findByNameAndLastNameAndPatronymic(teacher.getName(), teacher.getLastName(), teacher.getPatronymic()) == null) {
+            teacherRepository.save(teacher);
+            return teacher;
+        }
+        return null;
+    }
+
+    @PostMapping("/createSubject")
+    public Subject createSubject(@Validated @RequestBody Subject subject) {
+        if (subjectRepository.findBySubjectName(subject.getSubjectName()) == null) {
+            subjectRepository.save(subject);
+            return subject;
+        }
+        return null;
+    }
+
+    @PostMapping("/createSheduleDTO")
+    public SheduleDTO createSheduleDTO(@Validated @RequestBody SheduleDTO sheduleDTO) {
+        Classroom classroom = classroomRepository.findClassroomByName(sheduleDTO.getClassroomName());
+        Subject subject = subjectRepository.findBySubjectName(sheduleDTO.getSubjectName());
+        Teacher teacher = teacherRepository.findByNameAndLastNameAndPatronymic(sheduleDTO.getNameTeacher(), sheduleDTO.getLastnameTeacher(), sheduleDTO.getPatronymicTeacher());
+        Calendar calendar = calendarRepository.findByLessonNumberAndWeekDay(sheduleDTO.getLessonNumber(), sheduleDTO.getWeekDay());
+
+        if (classroom == null) {
+            sheduleDTO.setSubjectName("Такого класса не существует");
+        } else if (subject == null) {
+            sheduleDTO.setSubjectName("Такого предмета не существует");
+        } else if (teacher == null) {
+            sheduleDTO.setSubjectName("Такого преподавателя не существует");
+        } else if (calendar == null) {
+            sheduleDTO.setSubjectName("Такого времени урока не существует");
+        } else {
+            Shedule shedule = Mapper.mapSheduleDTOToShedule(sheduleDTO, calendar.getId(), teacher.getId(), subject.getId(), classroom.getId());
+
+            // TODO:
+            // Прописать здесь, если уже класс в это время занят
+            // Если уже учитель занят в это время
+            // Если такое занятие уже есть
+            // Тогда не сохранять
+            //if () {
+                sheduleRepository.save(shedule);
+            //}
+        }
+        return null;
+    }
 }

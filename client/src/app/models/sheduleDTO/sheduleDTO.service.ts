@@ -5,28 +5,28 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class TeacherService {
+export class SheduleDTOService {
   private baseUrl = 'http://localhost:8080/api/v1';
 
   constructor(private http: HttpClient) { }
 
-  getTeacher(id: number): Observable<any> {
+  getSheduleDTO(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/${id}`);
   }
 
-  createTeacher(teacher: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}/editUsers/createTeacher`, teacher);
+  createSheduleDTO(sheduleDTO: Object): Observable<Object> {
+    return this.http.post(`${this.baseUrl}/editUsers/createSheduleDTO`, sheduleDTO);
   }
 
-  updateTeacher(id: number, value: any): Observable<Object> {
+  updateSheduleDTO(id: number, value: any): Observable<Object> {
     return this.http.put(`${this.baseUrl}/${id}`, value);
   }
 
-  deleteTeacher(id: number): Observable<any> {
+  deleteSheduleDTO(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/${id}`, { responseType: 'text' });
   }
 
-  getTeachersList(): Observable<any> {
+  getSheduleDTOsList(): Observable<any> {
     return this.http.get(`${this.baseUrl}`);
   }
 }

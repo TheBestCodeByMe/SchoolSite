@@ -14,8 +14,8 @@ export class SheduleService {
     return this.http.get(`${this.baseUrl}/${id}`);
   }
 
-  createShedule(classroom: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}`, classroom);
+  createShedule(shedule: Object): Observable<Object> {
+    return this.http.post(`${this.baseUrl}`, shedule);
   }
 
   updateShedule(id: number, value: any): Observable<Object> {
@@ -26,7 +26,7 @@ export class SheduleService {
     return this.http.delete(`${this.baseUrl}/${id}`, { responseType: 'text' });
   }
 
-  getShedulsList(): Observable<any> {
+  getShedulesList(): Observable<any> {
     return this.http.get(`${this.baseUrl}`);
   }
 }

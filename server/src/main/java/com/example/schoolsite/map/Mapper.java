@@ -1,11 +1,9 @@
 package com.example.schoolsite.map;
 
 import com.example.schoolsite.dto.PupilDTO;
+import com.example.schoolsite.dto.SheduleDTO;
 import com.example.schoolsite.dto.UserDTO;
-import com.example.schoolsite.entity.Classroom;
-import com.example.schoolsite.entity.Parents;
-import com.example.schoolsite.entity.Pupil;
-import com.example.schoolsite.entity.User;
+import com.example.schoolsite.entity.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,12 +49,14 @@ public class Mapper {
         parent.setPatronymicDad(pupilDTOs.getPatronymicDad());
         parent.setLastnameMom(pupilDTOs.getLastnameMom());
         parent.setPatronymicMom(pupilDTOs.getPatronymicMom());
+
         return parent;
     }
 
     public static Classroom mapPupilDTOToClassroom(PupilDTO pupilDTOs) {
         Classroom classroom = new Classroom();
         classroom.setName(pupilDTOs.getClassName());
+
         return classroom;
     }
 
@@ -77,6 +77,7 @@ public class Mapper {
         pupil.setName(userDTO.getName());
         pupil.setLastname(userDTO.getLastname());
         pupil.setPatronymic(userDTO.getPatronymic());
+
         return pupil;
     }
 
@@ -91,6 +92,44 @@ public class Mapper {
         userDTO.setLastname(pupil.getLastname());
         userDTO.setName(pupil.getName());
         userDTO.setPatronymic(pupil.getPatronymic());
+
         return userDTO;
+    }
+
+    public static SheduleDTO mapSheduleToSheduleDTO(Shedule shedule, Calendar calendar, Subject subject, Teacher teacher, Classroom classroom) {
+        SheduleDTO sheduleDTO = new SheduleDTO();
+        sheduleDTO.setDate(shedule.getDate());
+        sheduleDTO.setHometask(shedule.getHometask());
+        sheduleDTO.setClassroomName(classroom.getName());
+        sheduleDTO.setLastnameTeacher(teacher.getLastName());
+        sheduleDTO.setNameTeacher(teacher.getName());
+        sheduleDTO.setPatronymicTeacher(teacher.getPatronymic());
+        sheduleDTO.setLessonNumber(calendar.getLessonNumber());
+        sheduleDTO.setSemestrId(calendar.getSemesterID());
+        sheduleDTO.setSubjectName(subject.getSubjectName());
+
+        return sheduleDTO;
+    }
+
+    public static Shedule mapSheduleDTOToShedule(SheduleDTO sheduleDTO, long calendarId, long teacherId, long subjectId, long classroomId) {
+        Shedule shedule = new Shedule();
+        shedule.setDate(sheduleDTO.getDate());
+        shedule.setHometask(sheduleDTO.getHometask());
+        shedule.setWeekDay(shedule.getWeekDay());
+        shedule.setCalendarId(calendarId);
+        shedule.setSubjectID(subjectId);
+        shedule.setTeacherID(teacherId);
+        shedule.setClassroomID(classroomId);
+
+        return shedule;
+    }
+
+    public static Calendar mapSheduleDTOToCalendar(SheduleDTO sheduleDTO) {
+        Calendar calendar = new Calendar();
+        calendar.setLessonNumber(sheduleDTO.getLessonNumber());
+        calendar.setWeekDay(sheduleDTO.getWeekDay());
+        calendar.setSemesterID(sheduleDTO.getSemestrId());
+
+        return calendar;
     }
 }
