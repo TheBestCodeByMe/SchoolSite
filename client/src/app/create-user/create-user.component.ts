@@ -3,6 +3,8 @@ import {User} from '../models/users/user';
 import {Router} from '@angular/router';
 import {UserService} from '../models/users/user.service';
 import {Pupil} from "../models/pupils/pupil";
+import {UserDTO} from "../models/userDTO/userDTO";
+import {UserDTOService} from "../models/userDTO/userDTO.service";
 
 @Component({
   selector: 'app-create-user',
@@ -18,9 +20,12 @@ export class CreateUserComponent implements OnInit {
   submitted = false;
   repeatPassword
   pupil: Pupil = new Pupil();
+  userDTO: UserDTO = new UserDTO();
   check
+  msgs
 
   constructor(private userService: UserService,
+              private userDTOService: UserDTOService,
               private router: Router) {
   }
 
@@ -30,25 +35,30 @@ export class CreateUserComponent implements OnInit {
   createUser(): void {
     this.submitted = false;
     this.user = new User();
+    this.userDTO = new UserDTO();
   }
 
   // дописать, если такой найден, то создать
   save() {
     if (this.check) {
-      this.user.role = "pupil";
+      this.userDTO.role = "pupil";
     } else {
-      this.user.role = "teacher";
+      this.userDTO.role = "teacher";
     }
-    this.user.status = "unBlock";
-    this.userService.createUser(this.user)
+    this.userDTO.status = "unBlock";
+    this.userDTOService.createUserDTO(this.userDTO)
       .subscribe(data => console.log(data), error => console.log(error));
-    this.user = new User();
+    this.userDTO = new UserDTO();
     this.gotoMain();
   }
 
   onSubmit() {
-    this.submitted = true;
-    this.save();
+    if (this.user.password == this.repeatPassword) {
+      this.submitted = true;
+      this.save();
+    } else {
+      this.msgs = "Пароли не совпадают";
+    }
   }
 
   gotoMain() {

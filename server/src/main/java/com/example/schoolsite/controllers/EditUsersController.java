@@ -4,7 +4,6 @@ import com.example.schoolsite.dto.PupilDTO;
 import com.example.schoolsite.entity.Classroom;
 import com.example.schoolsite.entity.Parents;
 import com.example.schoolsite.entity.Pupil;
-import com.example.schoolsite.entity.User;
 import com.example.schoolsite.map.Mapper;
 import com.example.schoolsite.workWithDatabase.repo.ClassroomRepository;
 import com.example.schoolsite.workWithDatabase.repo.ParentsRepository;
@@ -40,9 +39,9 @@ public class EditUsersController {
     public Pupil createPupil(@Validated @RequestBody PupilDTO pupilDTO) {
         System.out.println(pupilDTO);
         System.out.println("6");
-        Pupil pupil = Mapper.mapToPupil(pupilDTO);
-        Parents parents = Mapper.mapToParents(pupilDTO);
-        Classroom classroom = Mapper.mapToClassroom(pupilDTO);
+        Pupil pupil = Mapper.mapPupilDTOToPupil(pupilDTO);
+        Parents parents = Mapper.mapPupilDTOToParents(pupilDTO);
+        Classroom classroom = Mapper.mapPupilDTOToClassroom(pupilDTO);
         Classroom classroom1 = classroomRepository.findClassroomByName(classroom.getName());
         if (classroom1 != null) {
             System.out.println("1C");
