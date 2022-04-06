@@ -1,5 +1,6 @@
 package com.example.schoolsite.map;
 
+import com.example.schoolsite.dto.ClassroomDTO;
 import com.example.schoolsite.dto.PupilDTO;
 import com.example.schoolsite.dto.SheduleDTO;
 import com.example.schoolsite.dto.UserDTO;
@@ -115,7 +116,7 @@ public class Mapper {
         Shedule shedule = new Shedule();
         shedule.setDate(sheduleDTO.getDate());
         shedule.setHometask(sheduleDTO.getHometask());
-        shedule.setWeekDay(shedule.getWeekDay());
+        shedule.setWeekDay(sheduleDTO.getWeekDay());
         shedule.setCalendarId(calendarId);
         shedule.setSubjectID(subjectId);
         shedule.setTeacherID(teacherId);
@@ -131,5 +132,23 @@ public class Mapper {
         calendar.setSemesterID(sheduleDTO.getSemestrId());
 
         return calendar;
+    }
+
+    public static Classroom mapClassroomDTOToClassroom(ClassroomDTO classroomDTO, long teacherId) {
+        Classroom classroom = new Classroom();
+        classroom.setName(classroomDTO.getName());
+        classroom.setClassroomTeacherId(teacherId);
+
+        return classroom;
+    }
+
+    public static ClassroomDTO mapClassroomToClassroomDTO(Classroom classroom, Teacher teacher) {
+        ClassroomDTO classroomDTO = new ClassroomDTO();
+        classroomDTO.setName(classroom.getName());
+        classroomDTO.setClassroomTeacherName(teacher.getName());
+        classroomDTO.setClassroomTeacherLastname(teacher.getLastName());
+        classroomDTO.setClassroomTeacherPatronymic(teacher.getPatronymic());
+
+        return classroomDTO;
     }
 }

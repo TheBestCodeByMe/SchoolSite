@@ -19,6 +19,8 @@ import {Subject} from "../models/subjects/subject";
 import {SubjectService} from "../models/subjects/subject.service";
 import {SheduleDTO} from "../models/sheduleDTO/sheduleDTO";
 import {SheduleDTOService} from "../models/sheduleDTO/sheduleDTO.service";
+import {ClassroomDTO} from "../models/classroomDTO/classroomDTO";
+import {ClassroomDTOService} from "../models/classroomDTO/classroomDTO.service";
 
 
 @Component({
@@ -42,9 +44,10 @@ export class EditUsersComponent implements OnInit {
   parentForId: Observable<Parents[]>;
   pupilDToForReg: PupilDTO = new PupilDTO();
   teacher: Teacher = new Teacher();
-  classroom: Classroom = new Classroom();
+  classroomDTO: ClassroomDTO = new ClassroomDTO();
   subject: Subject = new Subject();
   sheduleDTO: SheduleDTO = new SheduleDTO();
+  loginForDel;
 
   constructor(private userService: UserService,
               private pupilDTOService: PupilDTOService,
@@ -54,6 +57,7 @@ export class EditUsersComponent implements OnInit {
               private classroomService: ClassroomService,
               private subjectService: SubjectService,
               private sheduleDTOService: SheduleDTOService,
+              private classroomDTOService: ClassroomDTOService,
               private router: Router) {
   }
 
@@ -127,9 +131,32 @@ export class EditUsersComponent implements OnInit {
     this.sheduleDTO.lastnameTeacher = tempTeacher[1];
     this.sheduleDTO.patronymicTeacher = tempTeacher[2];
 
-    // возвращает в имени сущности строку с комментарием ошибки, если что-то не так
+    // возвращает в имени предмета строку с комментарием ошибки, если что-то не так
     // возвращает сущность, если всё так
     this.sheduleDTOService.createSheduleDTO(this.sheduleDTO)
+      .subscribe(data => console.log(data), error => console.log(error));
+  }
+
+  createClassNameWithTeacher() {
+    // возвращает текст в имени класса, если такой класс уже есть или такого преподавателя нет
+    // возвращает сущность, если всё так
+    this.classroomDTOService.createClassroomDTO(this.classroomDTO)
+      .subscribe(data => console.log(data), error => console.log(error));
+  }
+
+  // В следующих 3 методах вся информация возвращается текстом
+  blockUser() {
+    this.userService.blockUser(this.loginForDel)
+      .subscribe(data => console.log(data), error => console.log(error));
+  }
+
+  unBlockUser() {
+    this.userService.unblockUser(this.loginForDel)
+      .subscribe(data => console.log(data), error => console.log(error));
+  }
+
+  deleteUser() {
+    this.userService.deleteUser(this.loginForDel)
       .subscribe(data => console.log(data), error => console.log(error));
   }
 }

@@ -26,7 +26,7 @@ export class UserListComponent implements OnInit {
   }
 
   deleteUser(id: number) {
-    this.userService.deleteUser(id)
+    this.userService.deleteUser(id.toString()) // исправить обратно на id
       .subscribe(
         data => {
           console.log(data);

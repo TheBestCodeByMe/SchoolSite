@@ -26,7 +26,7 @@ public class Shedule {
     @Column(name = "teacherID", nullable = false)
     private Long teacherID; // TODO: сделать внешним ключом
     @Column(name = "weekDay", nullable = false)
-    private Long weekDay;
+    private int weekDay;
     @Column(name = "date", nullable = false)
     private Date date;
     @Column(name = "calendarId", nullable = false)
@@ -34,7 +34,7 @@ public class Shedule {
     @Column(name = "hometask")
     private String hometask;
 
-    public Shedule(Long classroomID, Long subjectID, Long teacherID, Long weekDay, Date date, Long calendarId, String hometask) {
+    public Shedule(Long classroomID, Long subjectID, Long teacherID, int weekDay, Date date, Long calendarId, String hometask) {
         this.classroomID = classroomID;
         this.subjectID = subjectID;
         this.teacherID = teacherID;
