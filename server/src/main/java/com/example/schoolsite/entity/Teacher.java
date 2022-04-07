@@ -19,7 +19,7 @@ public class Teacher {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(name = "userId")
-    private Long userId; // TODO: сделать внешним ключом
+    private long userId; // TODO: сделать внешним ключом
     @Column(name = "name", nullable = false)
     private String name;
     @Column(name = "lastname", nullable = false)

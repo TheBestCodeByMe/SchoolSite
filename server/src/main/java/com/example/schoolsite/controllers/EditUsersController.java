@@ -19,7 +19,7 @@ import java.util.Map;
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/v1/editUsers")
-public class EditUsersController {
+public class EditUsersController { // TODO: убрать возможность нескольких добавлений пользователя к ученику/учителю
 
     @Autowired
     private UserRepository userRepository;
@@ -164,8 +164,15 @@ public class EditUsersController {
         if (user != null) {
             userRepository.delete(user);
             response.put("deleted", Boolean.TRUE);
-            // TODO: убрать возможность нескольких добавлений пользователя к ученику/учителю
-            // Перепроверить, чтобы было очищалось поле в ученике/учителе
+            Pupil pupil = pupilRepository.findByUserId(user.getId());
+            Teacher teacher = teacherRepository.findByUserId(user.getId());
+            if (pupil != null) {
+                pupil.setUserId(0);
+                pupilRepository.save(pupil);
+            } else if (teacher != null) {
+                teacher.setUserId(0);
+                teacherRepository.save(teacher);
+            }
         } else {
             response.put("notDeleted", Boolean.FALSE);
         }
