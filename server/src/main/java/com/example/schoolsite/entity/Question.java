@@ -20,9 +20,9 @@ public class Question {
     private Long id;
     @Column(name = "question", nullable = false)
     private String question;
-    @Column(name = "response", nullable = false)
+    @Column(name = "response")
     private String response;
-    @Column(name = "flag", nullable = false)
+    @Column(name = "flag", columnDefinition = "false")
     private boolean flag;
 
     public Question(String question, String response, boolean flag) {

@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {QuestionService} from "../models/questions/question.service";
+import {Question} from "../models/questions/question";
 
 
 @Component({
@@ -10,7 +12,17 @@ import {Component, OnInit} from '@angular/core';
 })
 export class AskQuestionComponent implements OnInit {
 
+  question: Question = new Question();
+
+  constructor(private questionService: QuestionService) {
+  }
+
   ngOnInit() {
+  }
+
+  addQuestion() {
+    this.questionService.createQuestion(this.question)
+      .subscribe(data => console.log(data), error => console.log(error));
   }
 
 }

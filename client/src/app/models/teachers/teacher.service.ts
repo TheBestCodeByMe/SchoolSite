@@ -27,6 +27,10 @@ export class TeacherService {
   }
 
   getTeachersList(): Observable<any> {
-    return this.http.get(`${this.baseUrl}`);
+    return this.http.get(`${this.baseUrl}/employee/getAll`);
+  }
+
+  getTeacherFIO(teacher: Object): Observable<any> {
+    return this.http.get(`${this.baseUrl}/employee/getByFIO`, teacher);
   }
 }

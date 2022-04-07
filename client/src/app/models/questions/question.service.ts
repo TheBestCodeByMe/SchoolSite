@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class QuestionService {
-  private baseUrl = 'http://localhost:8080/api/v1/users';
+  private baseUrl = 'http://localhost:8080/api/v1';
 
   constructor(private http: HttpClient) { }
 
@@ -15,7 +15,7 @@ export class QuestionService {
   }
 
   createQuestion(question: Object): Observable<Object> {
-    return this.http.post(`${this.baseUrl}`, question);
+    return this.http.post(`${this.baseUrl}/askQuestion/addQuestion`, question);
   }
 
   updateQuestion(id: number, value: any): Observable<Object> {
