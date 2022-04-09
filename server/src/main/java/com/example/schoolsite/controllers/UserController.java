@@ -54,8 +54,8 @@ public class UserController {
                 if (pupil != null) {
                     pupil.setEmail(userDTO.getEmail());
                     userRepository.save(user);
-                    User userForId = userRepository.findByLoginAndPasswordAndRole(user.getLogin(), user.getPassword(), user.getRole());
-                    pupil.setUserId(userForId.getId());
+                    //User userForId = userRepository.findByLoginAndPasswordAndRole(user.getLogin(), user.getPassword(), user.getRole());
+                    //pupil.setUserId(userForId.getId());
                     pupilRepository.save(pupil);
                     return userDTO;
                 }
@@ -64,8 +64,8 @@ public class UserController {
                 if (teacher != null) {
                     teacher.setEmail(userDTO.getEmail());
                     userRepository.save(user);
-                    User userForId = userRepository.findByLoginAndPasswordAndRole(user.getLogin(), user.getPassword(), user.getRole());
-                    teacher.setUserId(userForId.getId());
+                    //User userForId = userRepository.findByLoginAndPasswordAndRole(user.getLogin(), user.getPassword(), user.getRole());
+                    //teacher.setUserId(userForId.getId());
                     teacherRepository.save(teacher);
                     return userDTO;
                 }
@@ -98,7 +98,7 @@ public class UserController {
 
         user.setLogin(userDetails.getLogin());
         user.setPassword(userDetails.getPassword());
-        user.setRole(userDetails.getRole());
+        //user.setRole(userDetails.getRole());
 
         final User updatedUser = userRepository.save(user);
         return ResponseEntity.ok(updatedUser);

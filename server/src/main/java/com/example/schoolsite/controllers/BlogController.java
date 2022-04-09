@@ -72,7 +72,7 @@ public class BlogController {
         User user = userRepository.findById(id).orElseThrow(); // orElseThrow - если такого нет
         user.setLogin(login);
         user.setPassword(pass);
-        user.setRole(role);
+        //user.setRole(role);
         userRepository.save(user);
         return "redirect:/blog";
     }

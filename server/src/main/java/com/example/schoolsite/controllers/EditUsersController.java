@@ -159,7 +159,7 @@ public class EditUsersController { // TODO: убрать возможность 
     @DeleteMapping("/deleteUser/{login}")
     public Map<String, Boolean> deleteUser(@PathVariable(value = "login") String login)
             throws ResourceNotFoundException {
-        User user = userRepository.findByLogin(login);
+        User user = userRepository.findByLogin(login).orElseThrow(null);
         Map<String, Boolean> response = new HashMap<>();
         if (user != null) {
             userRepository.delete(user);
@@ -182,7 +182,7 @@ public class EditUsersController { // TODO: убрать возможность 
     @PostMapping("/blockUser/{login}")
     public Map<String, Boolean> blockUser(@PathVariable(value = "login") String login)
             throws ResourceNotFoundException {
-        User user = userRepository.findByLogin(login);
+        User user = userRepository.findByLogin(login).orElseThrow(null);
         Map<String, Boolean> response = new HashMap<>();
         if (user != null) {
             user.setStatus("block");
@@ -197,7 +197,7 @@ public class EditUsersController { // TODO: убрать возможность 
     @PostMapping("/unblockUser/{login}")
     public Map<String, Boolean> unblockUser(@PathVariable(value = "login") String login)
             throws ResourceNotFoundException {
-        User user = userRepository.findByLogin(login);
+        User user = userRepository.findByLogin(login).orElseThrow(null);
         Map<String, Boolean> response = new HashMap<>();
         if (user != null) {
             user.setStatus("unBlock");

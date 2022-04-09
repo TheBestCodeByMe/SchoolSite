@@ -64,7 +64,7 @@ public class Mapper {
     public static User mapUserDTOToUser(UserDTO userDTO) {
         User user = new User();
         user.setLogin(userDTO.getLogin());
-        user.setRole(userDTO.getRole());
+        //user.setRole(userDTO.getRole());
         user.setPassword(userDTO.getPassword());
         user.setStatus(userDTO.getStatus());
         user.setLink(userDTO.getLink());
@@ -85,7 +85,7 @@ public class Mapper {
     public static UserDTO mapUserToUserDTO(User user, Pupil pupil) {
         UserDTO userDTO = new UserDTO();
         userDTO.setLogin(user.getLogin());
-        userDTO.setRole(user.getRole());
+        //userDTO.setRole(user.getRole());
         userDTO.setPassword(user.getPassword());
         userDTO.setStatus(user.getStatus());
         userDTO.setLink(user.getLink());

@@ -14,9 +14,9 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "users",
-@UniqueConstraint(columnNames = "login",
-@UniqueConstraint(columnNames = "email")))
+@Table(name = "users", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "login")
+})
 @ToString
 public class User {
     @Id
@@ -38,8 +38,14 @@ public class User {
     @Column(name = "link", nullable = true)
     private String link;
 
-    public User(String login, String password, String status, String link) {
+    public User(String login, String password, String status) {
         super();
+        this.login = login;
+        this.password = password;
+        this.status = status;
+    }
+
+    public User(String login, String password, String status, String link) {
         this.login = login;
         this.password = password;
         this.status = status;
