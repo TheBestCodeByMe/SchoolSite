@@ -38,4 +38,5 @@ export class UserService {
   getUsersList(): Observable<any> {
     return this.http.get(`${this.baseUrl}/users`);
   }
+
 }

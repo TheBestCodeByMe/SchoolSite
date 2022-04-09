@@ -16,8 +16,20 @@
     <description>SchoolSite</description>
     <properties>
         <java.version>17</java.version>
-    </properties>
+            <org.springframework.security.version>RELEASE</org.springframework.security.version>
+            <org.springframework.version>RELEASE</org.springframework.version>
+            </properties>
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${org.springframework.security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${org.springframework.security.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
