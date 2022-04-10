@@ -8,8 +8,7 @@ import {Observable} from 'rxjs';
 export class UserService {
   private baseUrl = 'http://localhost:8080/api/v1';
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) { }
 
   getUser(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/${id}`);
