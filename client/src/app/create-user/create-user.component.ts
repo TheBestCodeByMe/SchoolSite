@@ -5,6 +5,7 @@ import {UserService} from '../models/users/user.service';
 import {Pupil} from "../models/pupils/pupil";
 import {UserDTO} from "../models/userDTO/userDTO";
 import {UserDTOService} from "../models/userDTO/userDTO.service";
+import {AuthService} from "../auth/auth.service";
 
 @Component({
   selector: 'app-create-user',
@@ -21,11 +22,14 @@ export class CreateUserComponent implements OnInit {
   repeatPassword
   pupil: Pupil = new Pupil();
   userDTO: UserDTO = new UserDTO();
-  check
-  msgs
+  check;
+  isSignedUp = false;
+  isSignUpFailed = false;
+  errorMessage = '';
 
   constructor(private userService: UserService,
               private userDTOService: UserDTOService,
+              private authService: AuthService,
               private router: Router) {
   }
 
@@ -40,27 +44,44 @@ export class CreateUserComponent implements OnInit {
 
   // дописать, если такой найден, то создать
   save() {
+    console.log("Я зашёл в функцию save");
     if (this.check) {
-      this.userDTO.role = "pupil";
+      this.userDTO.role = ['pupil'];
     } else {
-      this.userDTO.role = "teacher";
+      this.userDTO.role = ['teacher'];
     }
     this.userDTO.status = "unBlock";
 
     // возвращает в имени сущности строку с комментарием ошибки, если что-то не так
     // возвращает сущность, если всё так
-    this.userDTOService.createUserDTO(this.userDTO)
-      .subscribe(data => console.log(data), error => console.log(error));
+
+   console.log(this.userDTO);
+
+   this.authService.signUp(this.userDTO).subscribe(
+      data => {
+        console.log(data);
+        this.isSignedUp = true;
+        this.isSignUpFailed = false;
+      },
+      error => {
+        console.log(error);
+        this.errorMessage = error.error.message;
+        this.isSignUpFailed = true;
+      }
+    );
+
     this.userDTO = new UserDTO();
     this.gotoMain();
   }
 
   onSubmit() {
-    if (this.user.password == this.repeatPassword) {
+    console.log("я тут");
+    if (this.userDTO.password == this.repeatPassword) {
       this.submitted = true;
       this.save();
     } else {
-      this.msgs = "Пароли не совпадают";
+      console.log("Пароли не совпадают");
+      this.errorMessage = "Пароли не совпадают";
     }
   }
 

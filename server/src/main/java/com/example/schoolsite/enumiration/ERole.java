@@ -1,7 +1,7 @@
 package com.example.schoolsite.enumiration;
 
 public enum ERole {
-    PUPIL,
-    TEACHER,
-    DIRECTOR
+    ROLE_PUPIL,
+    ROLE_TEACHER,
+    ROLE_DIRECTOR
 }

@@ -26,12 +26,10 @@ public class User {
     private String login;
     @Column(name = "password", nullable = false)
     private String password;
-    @Column(name = "role", nullable = false)
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_roles",
+    @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    @ToString.Exclude
     private Set<Role> roles = new HashSet<>();
     @Column(name = "status", nullable = false)
     private String status;

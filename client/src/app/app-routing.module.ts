@@ -40,7 +40,7 @@ const routes: Routes = [
   {path: 'signIn', component: SignInComponent},
   {path: 'updateUsers', component: UpdateUsersComponent},
   {path: 'add', component: CreateUserComponent},
-  {path: 'shedule', component: SheduleComponent},
+  {path: 'schedule', component: SheduleComponent},
 
   {path: 'users', component: UserListComponent},
   {path: 'registration', component: RegistrationComponent},

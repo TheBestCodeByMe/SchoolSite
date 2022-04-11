@@ -22,6 +22,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +30,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/auth")
 public class AutorizationController {
     @Autowired
@@ -55,12 +56,12 @@ public class AutorizationController {
 
     @PostMapping("/signIn")
     public ResponseEntity<?> authUser(@RequestBody LoginRequest loginRequest) {
-
+        System.out.println("nen");
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(
-                        loginRequest.getLogin(),
+                        loginRequest.getUsername(),
                         loginRequest.getPassword()));
-
+        System.out.println("nenen");
         // формируем jwt токен
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
@@ -70,6 +71,8 @@ public class AutorizationController {
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
 
+        System.out.println(jwt + " " + userDetails + " " + roles);
+
         return ResponseEntity.ok(new JwtResponse(jwt,
                 userDetails.getId(),
                 userDetails.getUsername(),
@@ -78,6 +81,8 @@ public class AutorizationController {
 
     @PostMapping("/signUp")
     public ResponseEntity<?> registerUser(@RequestBody SignUpRequest signupRequest) {
+
+        System.out.println("Я тут, регистрация");
 
         if (userRespository.existsByLogin(signupRequest.getLogin())) {
             return ResponseEntity
@@ -103,8 +108,8 @@ public class AutorizationController {
         }
 
         User user = new User(signupRequest.getLogin(),
-                signupRequest.getStatus(),
-                passwordEncoder.encode(signupRequest.getPassword()));
+                passwordEncoder.encode(signupRequest.getPassword()),
+                signupRequest.getStatus());
 
         Set<String> reqRoles = signupRequest.getRole();
         Set<Role> roles = new HashSet<>();
@@ -122,13 +127,13 @@ public class AutorizationController {
                 switch (r) {
                     case "pupil" -> {
                         Role adminRole = roleRepository
-                                .findByName(ERole.PUPIL)
+                                .findByName(ERole.ROLE_PUPIL)
                                 .orElseThrow(() -> new RuntimeException("Error, Role Pupil is not found"));
                         roles.add(adminRole);
                     }
                     case "teacher" -> {
                         Role modRole = roleRepository
-                                .findByName(ERole.TEACHER)
+                                .findByName(ERole.ROLE_TEACHER)
                                 .orElseThrow(() -> new RuntimeException("Error, Role Teacher is not found"));
                         roles.add(modRole);
                     }
@@ -139,7 +144,7 @@ public class AutorizationController {
         userRespository.save(user);
         User userForId = userRespository.findByLogin(user.getLogin()).orElse(null);
 
-        if (user.getRoles().equals(ERole.PUPIL)) {
+        if (user.getRoles().equals(ERole.ROLE_PUPIL)) {
             pupil.setUserId(userForId.getId());
             pupil.setEmail(signupRequest.getEmail());
             pupilRepository.save(pupil);

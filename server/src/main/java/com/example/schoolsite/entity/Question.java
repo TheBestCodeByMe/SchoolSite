@@ -9,10 +9,10 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
+@Table(name = "questionFromUsers")
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "questions")
 @ToString
 public class Question {
     @Id
@@ -22,7 +22,7 @@ public class Question {
     private String question;
     @Column(name = "response")
     private String response;
-    @Column(name = "flag", columnDefinition = "false")
+    @Column(name = "flag")
     private boolean flag;
 
     public Question(String question, String response, boolean flag) {

@@ -45,9 +45,9 @@
     <form method="post" style="padding: 7px 60px;margin: 0;height: 658.4px;"> <!--NAME="form" (onSubmit)="onSubmit()"-->
       <h2 class="text-center" style="margin: 24px;padding: -52px;"><strong>Регистрация пользователя</strong></h2>
       <div class="mb-3"></div>
-      <input class="form-control" type="email" id="name" [(ngModel)]="userDTO.name" name="name" placeholder="Имя"
+      <input class="form-control" type="email" id="name" required [(ngModel)]="userDTO.name" name="name" placeholder="Имя"
              style="width: 349px;margin: 0px;padding: 14px 12px;margin-bottom: 12px;" minlength="1"
-             maxlength="20" required/>
+             maxlength="20"/>
       <input class="form-control" type="email" id="lastname" [(ngModel)]="userDTO.lastname"
              name="lastname" placeholder="Фамилия"
              style="width: 349px;margin-top: -51px;margin-left: 420px;margin-right: 0px;"

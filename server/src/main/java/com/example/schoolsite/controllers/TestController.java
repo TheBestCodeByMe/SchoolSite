@@ -27,20 +27,20 @@ public class TestController {
     @GetMapping("/pupil")
     @PreAuthorize("hasRole('PUPIL')")
     public String pupilAccess() {
-        return "user API";
+        return "pupil API";
     }
 
     // Только учителя могут
     @GetMapping("/teacher")
     @PreAuthorize("hasRole('TEACHER')")
     public String teacherAccess() {
-        return "moderator API";
+        return "teacher API";
     }
 
     // Только директор может
     @GetMapping("/director")
     @PreAuthorize("hasRole('DIRECTOR')")
     public String directorAccess() {
-        return "admin API";
+        return "director API";
     }
 }

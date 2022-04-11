@@ -27,15 +27,15 @@ export class UserService {
   }
 
   unblockUser(login: string): Observable<any> {
-    return this.http.post(`${this.baseUrl}/editUsers/unblockUser/${login}`, {responseType: 'text'});
+    return this.http.post(`${this.baseUrl}/v1/editUsers/unblockUser/${login}`, {responseType: 'text'});
   }
 
   deleteUser(login: string): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/editUsers/deleteUser/${login}`, {responseType: 'text'});
+    return this.http.delete(`${this.baseUrl}/v1/editUsers/deleteUser/${login}`, {responseType: 'text'});
   }
 
   getUsersList(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/users`);
+    return this.http.get(`${this.baseUrl}/v1/users`);
   }
 
 }

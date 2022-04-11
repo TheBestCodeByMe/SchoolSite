@@ -1,12 +1,11 @@
 /*import * as url from 'url';*/
 
 export class LoginInfo {
-    login: string;
+    username: string;
     password: string;
 
-
-  constructor(login: string, password: string) {
-    this.login = login;
+  constructor(username: string, password: string) {
+    this.username = username;
     this.password = password;
   }
 }

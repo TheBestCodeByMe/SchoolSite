@@ -11,8 +11,7 @@ export class UserDTO {
     status: string;
     link: string; //url
 
-
-  constructor(name: string, lastname: string, patronymic: string, email: string, login: string, password: string, role: string[], status: string, link: string) {
+/*  constructor(name: string, lastname: string, patronymic: string, email: string, login: string, password: string, role: string[], status: string, link: string) {
     this.name = name;
     this.lastname = lastname;
     this.patronymic = patronymic;
@@ -22,5 +21,5 @@ export class UserDTO {
     this.role = role; // = ['role'];
     this.status = status;
     this.link = link;
-  }
+  }*/
 }
