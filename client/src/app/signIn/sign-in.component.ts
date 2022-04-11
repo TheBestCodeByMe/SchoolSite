@@ -13,7 +13,7 @@ import {Router} from "@angular/router";
   ]
 })
 export class SignInComponent implements OnInit {
-  autorization(){
+  autorization() {
 
   }
 
@@ -24,7 +24,10 @@ export class SignInComponent implements OnInit {
   roles: string[] = [];
   private loginInfo: LoginInfo;
 
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private router: Router) { }
+  constructor(private authService: AuthService,
+              private tokenStorage: TokenStorageService,
+              private router: Router) {
+  }
 
   ngOnInit() {
     if (this.tokenStorage.getToken()) {
@@ -48,14 +51,25 @@ export class SignInComponent implements OnInit {
         console.log(data.token);
         console.log(data.login);
         console.log(data.roles);
+        console.log(data.id);
         this.tokenStorage.saveToken(data.token);
         this.tokenStorage.saveUsername(data.login);
         this.tokenStorage.saveAuthorities(data.roles);
+        this.tokenStorage.saveIdUser(data.id.toString());
 
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getAuthorities();
-        this.reloadPage();
+
+        if (this.roles.toString() == "ROLE_TEACHER") {
+          this.gotoMenuTeacher()
+        } else if (this.roles.toString() == "ROLE_PUPIL") {
+          this.gotoMenuTeacher()
+        } else if (this.roles.toString() == "ROLE_DIRECTOR") {
+          this.gotoMenuTeacher()
+        } else {
+          this.reloadPage();
+        }
       },
       error => {
         console.log(error);
@@ -65,11 +79,11 @@ export class SignInComponent implements OnInit {
     );
 
     // Не работает
-    if(this.roles == ["ROLE_TEACHER"]){
+    if (this.roles == ["ROLE_TEACHER"]) {
       this.gotoMenuTeacher()
-    } else if(this.roles == ["ROLE_PUPIL"]){
+    } else if (this.roles == ["ROLE_PUPIL"]) {
       this.gotoMenuTeacher()
-    } else if(this.roles == ["ROLE_DIRECTOR"]){
+    } else if (this.roles == ["ROLE_DIRECTOR"]) {
       this.gotoMenuTeacher()
     }
   }

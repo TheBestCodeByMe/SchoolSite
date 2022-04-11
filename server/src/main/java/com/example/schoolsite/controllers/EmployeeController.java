@@ -27,8 +27,14 @@ public class EmployeeController {
     }
 
     @GetMapping("/getByFIO")
-    public Teacher getTeacherByFIO(Teacher teacher) {
+    public Teacher getTeacherByFIO(@Validated @RequestBody Teacher teacher) {
         System.out.println(teacher);
         return teacherRepository.findByNameAndLastNameAndPatronymic(teacher.getName(), teacher.getLastName(), teacher.getPatronymic());
+    }
+
+    @PostMapping("/getByUserId")
+    public Teacher getTeacherByFIO(@RequestBody String userId) {
+        System.out.println(userId);
+        return teacherRepository.findByUserId(Long.parseLong(userId));
     }
 }

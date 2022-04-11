@@ -34,7 +34,11 @@ export class EmployeeComponent implements OnInit {
       this.teacher.name = tempTeacher[1];
       this.teacher.lastName = tempTeacher[0];
       this.teacher.patronymic = tempTeacher[2];
-      this.teachers = this.teacherService.getTeacherFIO(this.teacher);
+      this.teacherService.getTeacherFIO(this.teacher)
+        .subscribe(data => {
+          console.log(data);
+          this.teacher = data
+        });
     }
 
     this.teacher = new Teacher();

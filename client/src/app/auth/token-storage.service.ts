@@ -8,6 +8,7 @@ import {UserDTO} from "../models/userDTO/userDTO";
 const TOKEN_KEY = 'AuthToken';
 const USERNAME_KEY = 'AuthUsername';
 const AUTHORITIES_KEY = 'AuthAuthorities';
+const ID_USER_KEY ='AutIdUser';
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +37,15 @@ export class TokenStorageService {
 
   public getUsername(): string {
     return sessionStorage.getItem(USERNAME_KEY);
+  }
+
+  public saveIdUser(idUser: string) {
+    window.sessionStorage.removeItem(ID_USER_KEY);
+    window.sessionStorage.setItem(ID_USER_KEY, idUser);
+  }
+
+  public getIdUser(): string {
+    return sessionStorage.getItem(ID_USER_KEY);
   }
 
   public saveAuthorities(authorities: string) {

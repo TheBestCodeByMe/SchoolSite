@@ -56,12 +56,11 @@ public class AutorizationController {
 
     @PostMapping("/signIn")
     public ResponseEntity<?> authUser(@RequestBody LoginRequest loginRequest) {
-        System.out.println("nen");
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(
                         loginRequest.getUsername(),
                         loginRequest.getPassword()));
-        System.out.println("nenen");
+
         // формируем jwt токен
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
@@ -71,12 +70,14 @@ public class AutorizationController {
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
 
-        System.out.println(jwt + " " + userDetails + " " + roles);
-
-        return ResponseEntity.ok(new JwtResponse(jwt,
-                userDetails.getId(),
-                userDetails.getUsername(),
-                roles));
+        if (userDetails.getId() != null) {
+            return ResponseEntity.ok(new JwtResponse(jwt,
+                    userDetails.getId(),
+                    userDetails.getUsername(),
+                    roles));
+        } else {
+            return ResponseEntity.badRequest().body("Your login or password are invalid");
+        }
     }
 
     @PostMapping("/signUp")

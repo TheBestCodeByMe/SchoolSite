@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {Teacher} from "./teacher";
 
 @Injectable({
   providedIn: 'root'
@@ -32,5 +33,9 @@ export class TeacherService {
 
   getTeacherFIO(teacher: Object): Observable<any> {
     return this.http.get(`${this.baseUrl}/employee/getByFIO`, teacher);
+  }
+
+  getTeachersByUserId(userId: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/employee/getByUserId`, userId);
   }
 }
