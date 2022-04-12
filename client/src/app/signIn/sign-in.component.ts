@@ -64,9 +64,9 @@ export class SignInComponent implements OnInit {
         if (this.roles.toString() == "ROLE_TEACHER") {
           this.gotoMenuTeacher()
         } else if (this.roles.toString() == "ROLE_PUPIL") {
-          this.gotoMenuTeacher()
+          this.gotoMenuPupil()
         } else if (this.roles.toString() == "ROLE_DIRECTOR") {
-          this.gotoMenuTeacher()
+          this.gotoMenuDirector()
         } else {
           this.reloadPage();
         }
@@ -77,15 +77,6 @@ export class SignInComponent implements OnInit {
         this.isLoginFailed = true;
       }
     );
-
-    // Не работает
-    if (this.roles == ["ROLE_TEACHER"]) {
-      this.gotoMenuTeacher()
-    } else if (this.roles == ["ROLE_PUPIL"]) {
-      this.gotoMenuTeacher()
-    } else if (this.roles == ["ROLE_DIRECTOR"]) {
-      this.gotoMenuTeacher()
-    }
   }
 
   reloadPage() {
@@ -97,7 +88,7 @@ export class SignInComponent implements OnInit {
   }
 
   gotoMenuPupil() {
-    this.router.navigate(['/menuPupil']);
+    this.router.navigate(['/menuStudent']);
   }
 
   gotoMenuDirector() {

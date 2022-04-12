@@ -27,6 +27,6 @@ export class ClassroomDTOService {
   }
 
   getClassroomDTOsList(): Observable<any> {
-    return this.http.get(`${this.baseUrl}`);
+    return this.http.get(`${this.baseUrl}/classroomDTO`);
   }
 }

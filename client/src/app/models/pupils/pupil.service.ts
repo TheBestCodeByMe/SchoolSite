@@ -7,7 +7,7 @@ import {Parents} from "../parents/parents";
   providedIn: 'root'
 })
 export class PupilService {
-  private baseUrl = 'http://localhost:8080/api/v1/editUsers';
+  private baseUrl = 'http://localhost:8080/api/v1';
 
   constructor(private http: HttpClient) { }
 
@@ -17,7 +17,7 @@ export class PupilService {
 // parentsId: number
   createPupil(pupil: Object): Observable<Object> {
     // @ts-ignore
-    return this.http.post(`${this.baseUrl}/createPupil`, pupil);
+    return this.http.post(`${this.baseUrl}/editUsers/createPupil`, pupil);
   }
 
   updatePupil(id: number, value: any): Observable<Object> {

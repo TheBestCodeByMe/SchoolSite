@@ -30,7 +30,7 @@
         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link text-center py-3 px-0 px-lg-3 rounded"
                                              data-bs-target="editUsers" href="editUsers"
                                              style="font-size: 12px;width: 156.262px;">Редактирование<br>Пользователей и
-          расписания</a><a class="nav-link text-center py-3 px-0 px-lg-3 rounded" data-bs-target="editUsers" href="main"
+          расписания</a><a class="nav-link text-center py-3 px-0 px-lg-3 rounded" data-bs-target="editUsers" (click)="exit()"
                            style="font-size: 12px;width: 156.262px;">выход</a></li>
         <li class="nav-item mx-0 mx-lg-1"></li>
       </ul>
@@ -39,8 +39,9 @@
 </nav>
 <header class="text-center text-white bg-primary masthead" style="background: url(&quot;assets/img/fone.jpg&quot;);">
   <div class="container"><img class="img-fluid d-block mx-auto mb-5 pt-5" src="profile.png">
-    <h1>ФИО директора</h1>
+    <h1>{{fioTeacher}}</h1>
     <hr class="star-light">
+    <h2 class="font-weight-light mb-0">{{qualification}}</h2>
     <h2 class="font-weight-light mb-0">Директор</h2>
   </div>
 </header>
@@ -58,9 +59,9 @@
       </tr>
       </thead>
       <tbody>
-      <tr>
-        <td>Cell 1</td>
-        <td>Cell 2</td>
+      <tr *ngFor="let classes of classrooms | async">
+        <td>{{classes.name}}</td>
+        <td>{{classes.classroomTeacherName}} {{classes.classroomTeacherLastname}} {{classes.classroomTeacherPatronymic}}</td>
       </tr>
       <tr></tr>
       </tbody>

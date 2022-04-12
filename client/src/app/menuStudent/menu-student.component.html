@@ -17,17 +17,17 @@
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link text-center py-3 px-0 px-lg-3 rounded" href="updateUsers" style="font-size: 12px;line-height: 18px;">Редактировать<br>Личные данные</a></li>
-        <li class="nav-item mx-0 mx-lg-1" style="font-size: 12px;line-height: 18px;"><a class="nav-link text-center py-3 px-0 px-lg-3 rounded" href="diary">Дневник</a><a class="nav-link text-center py-3 px-0 px-lg-3 rounded" href="main">Выход</a></li>
+        <li class="nav-item mx-0 mx-lg-1" style="font-size: 12px;line-height: 18px;"><a class="nav-link text-center py-3 px-0 px-lg-3 rounded" href="diary">Дневник</a><a class="nav-link text-center py-3 px-0 px-lg-3 rounded" (click)="exit()">Выход</a></li>
         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link text-center py-3 px-0 px-lg-3 rounded" href="schedule" style="font-size: 12px;line-height: 18px;">Расписание</a><a class="nav-link py-3 px-0 px-lg-3 rounded" href="dataAnalytics" style="font-size: 12px;line-height: 18px;">Аналитика данных</a></li>
       </ul>
     </div>
   </div>
 </nav>
-<header class="text-center text-white bg-primary masthead" style="background: url(&quot;assets/img/fone.jpg&quot;);height: 663.6px;">
+<header class="imgSt text-center text-white bg-primary masthead">
   <div class="container"><img class="img-fluid d-block mx-auto mb-5" src="assets/img/profile.png">
-    <h1 style="height: 39px;">ФИО ученика</h1>
+    <h1 style="height: 39px;">{{fioPupil}}</h1>
     <hr class="star-light">
-    <h2 class="font-weight-light mb-0" style="height: 17.6px;margin: -24px;">Ученик *** класса</h2>
+    <h2 class="font-weight-light mb-0" style="height: 17.6px;margin: -24px;">Ученик {{className}} класса</h2>
   </div>
 </header>
 <section id="portfolio" class="portfolio">
@@ -35,32 +35,32 @@
     <h2 class="text-uppercase text-center text-secondary">Кружки</h2>
     <hr class="star-dark mb-5">
     <div class="row">
-      <div class="col-md-6 col-lg-4"><a class="d-block mx-auto portfolio-item" href="#portfolio-modal-1" data-bs-toggle="modal">
+      <div class="col-md-6 col-lg-4"><a class="d-block mx-auto portfolio-item" data-bs-toggle="modal">
         <div class="d-flex portfolio-item-caption position-absolute h-100 w-100">
           <div class="text-center text-white my-auto portfolio-item-caption-content w-100"><i class="fa fa-search-plus fa-3x"></i></div>
-        </div><img class="img-fluid" src="assets/img/portfolio/cabin.png">
+        </div><img class="img1 img-fluid" src="assets/img/portfolio/cabin.png">
       </a></div>
-      <div class="col-md-6 col-lg-4"><a class="d-block mx-auto portfolio-item" href="#portfolio-modal-2" data-bs-toggle="modal">
+      <div class="col-md-6 col-lg-4"><a class="d-block mx-auto portfolio-item" data-bs-toggle="modal">
         <div class="d-flex portfolio-item-caption position-absolute h-100 w-100">
           <div class="text-center text-white my-auto portfolio-item-caption-content w-100"><i class="fa fa-search-plus fa-3x"></i></div>
         </div><img class="img-fluid" src="assets/img/portfolio/cake.png">
       </a></div>
-      <div class="col-md-6 col-lg-4"><a class="d-block mx-auto portfolio-item" href="#portfolio-modal-3" data-bs-toggle="modal">
+      <div class="col-md-6 col-lg-4"><a class="d-block mx-auto portfolio-item" data-bs-toggle="modal">
         <div class="d-flex portfolio-item-caption position-absolute h-100 w-100">
           <div class="text-center text-white my-auto portfolio-item-caption-content w-100"><i class="fa fa-search-plus fa-3x"></i></div>
         </div><img class="img-fluid" src="assets/img/portfolio/circus.png">
       </a></div>
-      <div class="col-md-6 col-lg-4"><a class="d-block mx-auto portfolio-item" href="#portfolio-modal-4" data-bs-toggle="modal">
+      <div class="col-md-6 col-lg-4"><a class="d-block mx-auto portfolio-item" data-bs-toggle="modal">
         <div class="d-flex portfolio-item-caption position-absolute h-100 w-100">
           <div class="text-center text-white my-auto portfolio-item-caption-content w-100"><i class="fa fa-search-plus fa-3x"></i></div>
         </div><img class="img-fluid" src="assets/img/portfolio/game.png">
       </a></div>
-      <div class="col-md-6 col-lg-4"><a class="d-block mx-auto portfolio-item" href="#portfolio-modal-5" data-bs-toggle="modal">
+      <div class="col-md-6 col-lg-4"><a class="d-block mx-auto portfolio-item" data-bs-toggle="modal">
         <div class="d-flex portfolio-item-caption position-absolute h-100 w-100">
           <div class="text-center text-white my-auto portfolio-item-caption-content w-100"><i class="fa fa-search-plus fa-3x"></i></div>
         </div><img class="img-fluid" src="assets/img/portfolio/safe.png">
       </a></div>
-      <div class="col-md-6 col-lg-4"><a class="d-block mx-auto portfolio-item" href="#portfolio-modal-6" data-bs-toggle="modal">
+      <div class="col-md-6 col-lg-4"><a class="d-block mx-auto portfolio-item" data-bs-toggle="modal">
         <div class="d-flex portfolio-item-caption position-absolute h-100 w-100">
           <div class="text-center text-white my-auto portfolio-item-caption-content w-100"><i class="fa fa-search-plus fa-3x"></i></div>
         </div><img class="img-fluid" src="assets/img/portfolio/submarine.png">
@@ -70,7 +70,7 @@
 </section>
 <section id="contact">
   <div class="container">
-    <h2 class="text-uppercase text-center text-secondary mb-0">Классный руководитель</h2>
+    <h2 class="text-uppercase text-center text-secondary mb-0">Родители</h2>
     <hr class="star-dark mb-5">
     <h2 class="font-weight-light mb-0"></h2>
   </div>
@@ -78,15 +78,17 @@
     <table class="table">
       <thead>
       <tr>
-        <th>ФИО классного руководителя</th>
-        <th>Связь с руководителем</th>
+        <th>ФИО мамы</th>
+        <th>ФИО папы</th>
+        <th>Email ученика</th>
       </tr>
       </thead>
       <tbody>
       <tr></tr>
       <tr>
-        <td>Cell 3</td>
-        <td>Cell 4</td>
+        <td>{{fioMom}}</td>
+        <td>{{fioDad}}</td>
+        <td>{{email}}</td>
       </tr>
       </tbody>
     </table>

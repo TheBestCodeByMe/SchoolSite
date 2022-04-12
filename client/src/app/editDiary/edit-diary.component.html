@@ -42,8 +42,8 @@
         </div>
         <div class="row">
           <div class="col">
-            <p style="margin: -1px;width: 701.6px;padding: -7px;">Введите дату для поиска дня для просмотра ваших оценок
-              и домашнего задания.</p><input type="date" name="dataForTable">
+            <p style="margin: -1px;width: 701.6px;padding: -7px;">Выберите дату, на которую нужно выставить оценку
+              и домашнее задание.</p><input type="date" required [(ngModel)]="diaryDTO.dateLesson" name="dataForTable">
             <button class="btn btn-primary" type="button" data-bs-target="search" style="margin: 39px;">Поиск</button>
           </div>
         </div>
@@ -62,15 +62,16 @@
                 </thead>
                 <tbody>
                 <tr>
-                  <td>ФИО</td>
-                  <td><input type="text" placeholder="Введите предмет" name="subject" minlength="1" maxlength="60"></td>
-                  <td><input type="text" name="homework" placeholder="Введите домашнее задание"></td>
-                  <td><input type="number" min="1" max="10"></td>
-                  <td><small>Был&nbsp;&nbsp;</small><input type="checkbox" name="attendance" checked=""></td>
+                  <td><input type="text" placeholder="Введите ФИО ученика через пробел" required [(ngModel)]="fioPupil" name="fioPupil" minlength="1" maxlength="60"></td>
+                  <td><input type="text" placeholder="Введите предмет" required [(ngModel)]="diaryDTO.subject" name="subject" minlength="1" maxlength="60"></td>
+                  <td><input type="text" required [(ngModel)]="diaryDTO.homework" name="homework" placeholder="Введите домашнее задание"></td>
+                  <td><input type="number" required [(ngModel)]="diaryDTO.grade" min="1" max="10"></td>
+                  <td><small>Был&nbsp;&nbsp;</small><input type="checkbox" name="attendance" checked="" [(ngModel)]="check"></td>
                 </tr>
                 <tr></tr>
                 </tbody>
               </table>
+              <button class="btn btn-primary" type="button" data-bs-target="search" style="margin: 39px;" (click)="addGradle()">Выставить оценку и пропуск</button>
             </div>
           </div>
         </div>

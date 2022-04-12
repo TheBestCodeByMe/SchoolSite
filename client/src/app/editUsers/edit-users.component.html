@@ -190,16 +190,12 @@
           <thead>
           <tr>
             <th>Логин пользователя</th>
-            <th>Пароль пользователя</th>
-            <th>Роль</th>
             <th>Статус</th>
           </tr>
           </thead>
           <tbody>
           <tr *ngFor="let user of users | async">
             <td>{{user.login}}</td>
-            <td>{{user.password}}</td>
-            <td>{{user.role}}</td>
             <td>{{user.status}}</td>
           </tr>
           </tbody>

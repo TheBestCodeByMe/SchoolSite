@@ -39,7 +39,7 @@ export class MenuTeacherComponent implements OnInit {
   }
 
   reloadData() {
-    this.teacherService.getTeachersByUserId(this.tokenStorage.getIdUser())
+    this.teacherService.getTeacherByUserId(this.tokenStorage.getIdUser())
       .subscribe(data => {
         this.fioTeacher = data.name + " " + data.lastName + " " + data.patronymic;
         this.qualification = data.qualification

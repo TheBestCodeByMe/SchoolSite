@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PupilDTOService {
-  private baseUrl = 'http://localhost:8080/api/v1/editUsers';
+  private baseUrl = 'http://localhost:8080/api/v1';
 
   constructor(private http: HttpClient) { }
 
@@ -15,7 +15,7 @@ export class PupilDTOService {
   }
 
   createPupilDTO(pupilDTO: Object): Observable<any> {
-    return this.http.post(`${this.baseUrl}/createPupilDTO`, pupilDTO);
+    return this.http.post(`${this.baseUrl}/editUsers/createPupilDTO`, pupilDTO);
   }
 
   updatePupilDTO(id: number, value: any): Observable<Object> {
@@ -27,6 +27,10 @@ export class PupilDTOService {
   }
 
   getPupilDTOsList(): Observable<any> {
-    return this.http.get(`${this.baseUrl}`);
+    return this.http.get(`${this.baseUrl}/editUsers`);
+  }
+
+  getPupilDTOByUserId(userId: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/pupil/getByUserId`, userId);
   }
 }

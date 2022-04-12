@@ -82,10 +82,7 @@ public class AutorizationController {
 
     @PostMapping("/signUp")
     public ResponseEntity<?> registerUser(@RequestBody SignUpRequest signupRequest) {
-
-        System.out.println("Я тут, регистрация");
-
-        if (userRespository.existsByLogin(signupRequest.getLogin())) {
+                if (userRespository.existsByLogin(signupRequest.getLogin())) {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: Username is exist"));
