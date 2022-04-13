@@ -14,10 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -36,13 +33,21 @@ public class UserController {
         return userRepository.findAll();
     }
 
-
     @GetMapping("/users/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable(value = "id") Long employeeId)
+    public ResponseEntity<UserDTO> getUserById(@PathVariable(value = "id") Long userId)
             throws ResourceNotFoundException {
-        User user = userRepository.findById(employeeId)
-                .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + employeeId));
-        return ResponseEntity.ok().body(user);
+        Optional<User> user = Optional.ofNullable(userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + userId)));
+        Pupil pupil = pupilRepository.findByUserId(userId);
+        Teacher teacher = teacherRepository.findByUserId(userId);
+        UserDTO userDTO;
+        if(pupil != null){
+            userDTO = Mapper.mapUserToUserDTO(user.get(), pupil);
+        } else {
+            userDTO = Mapper.mapUserTeacherToUserDTO(user.get(), teacher);
+        }
+
+        return ResponseEntity.ok().body(userDTO);
     }
 
     @PostMapping("/createUserDTO")
@@ -90,17 +95,33 @@ public class UserController {
         return response;
     }
 
-    @PutMapping("/users/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable(value = "id") Long userId,
-                                           @Validated @RequestBody User userDetails) throws ResourceNotFoundException {
+    @PutMapping("/{id}")
+    public ResponseEntity<UserDTO> updateUser(@PathVariable(value = "id") Long userId,
+                                           @Validated @RequestBody UserDTO userDetails) throws ResourceNotFoundException {
+        System.out.println("Я тут");
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + userId));
 
-        user.setLogin(userDetails.getLogin());
-        user.setPassword(userDetails.getPassword());
-        //user.setRole(userDetails.getRole());
+        Pupil pupil = pupilRepository.findByUserId(userId);
+        Teacher teacher = teacherRepository.findByUserId(userId);
 
-        final User updatedUser = userRepository.save(user);
-        return ResponseEntity.ok(updatedUser);
+        if(pupil != null){
+            pupil.setEmail(userDetails.getEmail());
+            pupil.setName(userDetails.getName());
+            pupil.setLastname(userDetails.getLastname());
+            pupil.setPatronymic(userDetails.getPatronymic());
+            pupilRepository.save(pupil);
+        } else {
+            teacher.setEmail(userDetails.getEmail());
+            teacher.setName(userDetails.getName());
+            teacher.setLastName(userDetails.getLastname());
+            teacher.setPatronymic(userDetails.getPatronymic());
+            teacherRepository.save(teacher);
+        }
+
+        user.setLogin(userDetails.getLogin());
+
+        userRepository.save(user);
+        return ResponseEntity.ok(userDetails);
     }
 }

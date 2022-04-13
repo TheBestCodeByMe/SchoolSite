@@ -75,7 +75,6 @@ export class CreateUserComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log("я тут");
     if (this.userDTO.password == this.repeatPassword) {
       this.submitted = true;
       this.save();

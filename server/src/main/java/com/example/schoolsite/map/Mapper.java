@@ -2,9 +2,12 @@ package com.example.schoolsite.map;
 
 import com.example.schoolsite.dto.*;
 import com.example.schoolsite.entity.*;
+import com.example.schoolsite.enumiration.ERole;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Mapper {
     public static PupilDTO mapToPupilDTO(Pupil pupils, Parents parents, Classroom classrooms) {
@@ -61,7 +64,10 @@ public class Mapper {
     public static User mapUserDTOToUser(UserDTO userDTO) {
         User user = new User();
         user.setLogin(userDTO.getLogin());
-        //user.setRole(userDTO.getRole());
+        // TODO: переделать
+        Set<Role> role = new HashSet<>();
+        role.add(new Role(ERole.ROLE_PUPIL));
+        user.setRoles(role);
         user.setPassword(userDTO.getPassword());
         user.setStatus(userDTO.getStatus());
         user.setLink(userDTO.getLink());
@@ -82,7 +88,7 @@ public class Mapper {
     public static UserDTO mapUserToUserDTO(User user, Pupil pupil) {
         UserDTO userDTO = new UserDTO();
         userDTO.setLogin(user.getLogin());
-        //userDTO.setRole(user.getRole());
+        userDTO.setRole(user.getRoles().toString());
         userDTO.setPassword(user.getPassword());
         userDTO.setStatus(user.getStatus());
         userDTO.setLink(user.getLink());
@@ -90,6 +96,21 @@ public class Mapper {
         userDTO.setLastname(pupil.getLastname());
         userDTO.setName(pupil.getName());
         userDTO.setPatronymic(pupil.getPatronymic());
+
+        return userDTO;
+    }
+
+    public static UserDTO mapUserTeacherToUserDTO(User user, Teacher teacher) {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setLogin(user.getLogin());
+        userDTO.setRole(user.getRoles().toString());
+        userDTO.setPassword(user.getPassword());
+        userDTO.setStatus(user.getStatus());
+        userDTO.setLink(user.getLink());
+        userDTO.setEmail(teacher.getEmail());
+        userDTO.setLastname(teacher.getLastName());
+        userDTO.setName(teacher.getName());
+        userDTO.setPatronymic(teacher.getPatronymic());
 
         return userDTO;
     }

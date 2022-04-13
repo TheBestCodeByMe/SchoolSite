@@ -11,16 +11,16 @@ export class UserDTOService {
   constructor(private http: HttpClient) {
   }
 
-  getUserDTO(id: number): Observable<any> {
-    return this.http.get(`${this.baseUrl}/${id}`);
+  getUserDTO(id: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/users/${id}`);
   }
 
   createUserDTO(user: Object): Observable<Object> {
     return this.http.post(`${this.baseUrl}/createUserDTO`, user);
   }
 
-  updateUserDTO(id: number, value: Object): Observable<Object> {
-    return this.http.put(`${this.baseUrl}/updateUsers/${id}`, value);
+  updateUserDTO(id: string, value: Object): Observable<Object> {
+    return this.http.put(`${this.baseUrl}/${id}`, value);
   }
 
   deleteUserDTO(id: number): Observable<any> {
