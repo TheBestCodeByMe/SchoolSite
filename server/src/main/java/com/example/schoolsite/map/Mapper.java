@@ -1,9 +1,6 @@
 package com.example.schoolsite.map;
 
-import com.example.schoolsite.dto.ClassroomDTO;
-import com.example.schoolsite.dto.PupilDTO;
-import com.example.schoolsite.dto.SheduleDTO;
-import com.example.schoolsite.dto.UserDTO;
+import com.example.schoolsite.dto.*;
 import com.example.schoolsite.entity.*;
 
 import java.util.ArrayList;
@@ -150,5 +147,20 @@ public class Mapper {
         classroomDTO.setClassroomTeacherPatronymic(teacher.getPatronymic());
 
         return classroomDTO;
+    }
+
+    public static DiaryDTO mapToDiaryDTO(Shedule shedule, Pupil pupil, Classroom classroom, boolean attendance, String grade, Subject subject) {
+        DiaryDTO diaryDTO = new DiaryDTO();
+        diaryDTO.setNamePupil(pupil.getName());
+        diaryDTO.setLastnamePupil(pupil.getLastname());
+        diaryDTO.setPatronymicPupil(pupil.getPatronymic());
+        diaryDTO.setSubject(subject.getSubjectName());
+        diaryDTO.setHomework(shedule.getHometask());
+        diaryDTO.setGrade(grade);
+        diaryDTO.setAttendance(attendance);
+        diaryDTO.setDateLesson(shedule.getDate());
+        diaryDTO.setClassName(classroom.getName());
+
+        return diaryDTO;
     }
 }

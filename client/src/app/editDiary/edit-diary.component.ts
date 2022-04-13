@@ -49,7 +49,7 @@ export class EditDiaryComponent implements OnInit {
     this.diaryDTO.namePupil = "";
     this.diaryDTO.lastnamePupil = "";
     this.diaryDTO.patronymicPupil = "";
-    this.diaryDTO.grade = 0;
+    this.diaryDTO.grade = "";
     this.diaryDTO.attendance = false;
 
     this.diaryDTOService.createAttendanceAndAcademicPerfomance(this.diaryDTO)

@@ -2,10 +2,15 @@ package com.example.schoolsite.controllers;
 
 import com.example.schoolsite.dto.DiaryDTO;
 import com.example.schoolsite.entity.*;
+import com.example.schoolsite.map.Mapper;
 import com.example.schoolsite.services.DiaryServiceImpl;
 import com.example.schoolsite.workWithDatabase.repo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -55,6 +60,16 @@ public class DiaryController {
         return diaryDTO;
     }
 
+    @PostMapping("/getByUserId")
+    public List<DiaryDTO> getDiaryByUser(@RequestBody String userId) {
+        return getDiaryDTOByUser(Long.parseLong(userId));
+    }
+
+    @PostMapping("/getNumbAttendance")
+    public String getNumberAttendance(@RequestBody String userId) {
+        return String.valueOf(getNumbAttendance(Long.parseLong(userId)));
+    }
+
     public DiaryDTO addAcademicPerfomance(DiaryDTO diaryDTO) {
         AcademicPerfomance academicPerfomance = new AcademicPerfomance();
         Pupil pupil = pupilRepository.findByNameAndLastnameAndPatronymic(diaryDTO.getNamePupil(), diaryDTO.getLastnamePupil(), diaryDTO.getPatronymicPupil());
@@ -78,7 +93,7 @@ public class DiaryController {
         academicPerfomance.setClassID(pupil.getClassroomId());
         academicPerfomance.setLessonID(shedule.getId());
         academicPerfomance.setPupilID(pupil.getId());
-        academicPerfomance.setGrade(diaryDTO.getGrade());
+        academicPerfomance.setGrade(Integer.parseInt(diaryDTO.getGrade()));
         academicPerfomanceRepository.save(academicPerfomance);
 
         return diaryDTO;
@@ -156,7 +171,7 @@ public class DiaryController {
     }
 
     public boolean getAcademicPerfomance(DiaryDTO diaryDTO) {
-        System.out.println("в проверке"+diaryDTO);
+        System.out.println("в проверке" + diaryDTO);
         Pupil pupil = pupilRepository.findByNameAndLastnameAndPatronymic(diaryDTO.getNamePupil(), diaryDTO.getLastnamePupil(), diaryDTO.getPatronymicPupil());
         Subject subject = subjectRepository.findBySubjectName(diaryDTO.getSubject());
 
@@ -175,5 +190,56 @@ public class DiaryController {
             return false;
         }
         return academicPerfomanceRepository.existsByClassIDAndLessonIDAndPupilID(pupil.getClassroomId(), shedule.getId(), pupil.getId());
+    }
+
+    public List<DiaryDTO> getDiaryDTOByUser(Long id) {
+        Pupil pupil = pupilRepository.findByUserId(id);
+        List<Shedule> shedules = sheduleRepository.findAllByClassroomID(pupil.getClassroomId());
+        List<Subject> subjects = subjectRepository.findAll();
+        List<Attendance> attendances = attendanceRepository.findAllByPupilID(pupil.getId());
+        List<AcademicPerfomance> academicPerfomances = academicPerfomanceRepository.findAllByPupilID(pupil.getId());
+
+        List<DiaryDTO> diaryDTOList = new ArrayList<>();
+
+        boolean attendanceBoolean = false;
+        String grade = "";
+
+        for (Shedule shedule : shedules) {
+            DiaryDTO diaryDTO = new DiaryDTO();
+            for (Subject subject : subjects) {
+                if (Objects.equals(shedule.getSubjectID(), subject.getId())) {
+                    if (academicPerfomances == null) {
+                        grade = "";
+                    } else {
+                        for (AcademicPerfomance academicPerfomance : academicPerfomances) {
+                            if (Objects.equals(academicPerfomance.getLessonID(), shedule.getId())) {
+                                grade = String.valueOf(academicPerfomance.getGrade());
+                            } else {
+                                grade = "";
+                            }
+                        }
+                    }
+                    if (attendances != null) {
+                        for (Attendance attendance : attendances) {
+                            attendanceBoolean = Objects.equals(shedule.getId(), attendance.getLessonID());
+                        }
+                    } else {
+                        attendanceBoolean = false;
+                    }
+                    diaryDTO = Mapper.mapToDiaryDTO(shedule, pupil, classroomRepository.getById(pupil.getClassroomId()), attendanceBoolean, grade, subject);
+                }
+            }
+            diaryDTOList.add(diaryDTO);
+        }
+
+        System.out.println(diaryDTOList);
+
+        return diaryDTOList;
+    }
+
+    public int getNumbAttendance(Long id) {
+        Pupil pupil = pupilRepository.findByUserId(id);
+        List<Attendance> attendance = attendanceRepository.findAllByPupilID(pupil.getId());
+        return attendance.size();
     }
 }

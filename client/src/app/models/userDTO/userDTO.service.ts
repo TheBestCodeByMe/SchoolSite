@@ -19,8 +19,8 @@ export class UserDTOService {
     return this.http.post(`${this.baseUrl}/createUserDTO`, user);
   }
 
-  updateUserDTO(id: number, value: any): Observable<Object> {
-    return this.http.put(`${this.baseUrl}/${id}`, value);
+  updateUserDTO(id: number, value: Object): Observable<Object> {
+    return this.http.put(`${this.baseUrl}/updateUsers/${id}`, value);
   }
 
   deleteUserDTO(id: number): Observable<any> {

@@ -77,6 +77,8 @@ export class EditUsersComponent implements OnInit {
     this.pupilDToForReg.lastnameDad = tempDad[1];
     this.pupilDToForReg.patronymicDad = tempDad[2];
 
+    this.pupilDToForReg.email = "";
+
     // возвращает null, если не сохранено
     // сущность, если сохранено
     this.pupilDTOService.createPupilDTO(this.pupilDToForReg)

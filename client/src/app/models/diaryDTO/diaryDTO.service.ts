@@ -14,4 +14,12 @@ export class DiaryDTOService {
   createAttendanceAndAcademicPerfomance(attendance: Object): Observable<Object> {
     return this.http.post(`${this.baseUrl}/addAttendanceAndAcademicPerfomance`, attendance);
   }
+
+  getDiaryPupil(userId: string): Observable<any> {
+    return this.http.post(`${this.baseUrl}/getByUserId`, userId);
+  }
+
+  getAttendance(userId: string): Observable<string> {
+    return this.http.post(`${this.baseUrl}/getNumbAttendance`, userId, {responseType: "text"});
+  }
 }

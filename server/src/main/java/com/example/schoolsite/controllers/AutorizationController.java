@@ -142,7 +142,10 @@ public class AutorizationController {
         userRespository.save(user);
         User userForId = userRespository.findByLogin(user.getLogin()).orElse(null);
 
-        if (user.getRoles().equals(ERole.ROLE_PUPIL)) {
+        Set<Role> role = new HashSet<>();
+        role.add(new Role(ERole.ROLE_PUPIL));
+
+        if (userForId.getRoles().equals(role)) {
             pupil.setUserId(userForId.getId());
             pupil.setEmail(signupRequest.getEmail());
             pupilRepository.save(pupil);

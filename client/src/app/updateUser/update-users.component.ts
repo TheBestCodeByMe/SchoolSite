@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {UserDTO} from "../models/userDTO/userDTO";
 
 
 @Component({
@@ -12,7 +13,13 @@ import {Component, OnInit} from '@angular/core';
 })
 export class UpdateUsersComponent implements OnInit {
 
+  userDTO: UserDTO = new UserDTO();
+
   ngOnInit() {
+  }
+
+  updateUser() {
+
   }
 
 }

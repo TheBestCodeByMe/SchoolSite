@@ -49,7 +49,7 @@ public class DiaryServiceImpl implements DiaryService {
         academicPerfomance.setClassID(pupil.getClassroomId());
         academicPerfomance.setLessonID(shedule.getId());
         academicPerfomance.setPupilID(pupil.getId());
-        academicPerfomance.setGrade(diaryDTO.getGrade());
+        academicPerfomance.setGrade(Integer.parseInt(diaryDTO.getGrade()));
         academicPerfomanceRepository.save(academicPerfomance);
 
         return diaryDTO;

@@ -24,7 +24,7 @@
         <li class="nav-item"><a class="nav-link active" href="diary"><i class="fas fa-tachometer-alt"></i><span>Дневник</span></a></li>
         <li class="nav-item"><a class="nav-link" href="menuStudent"><i class="fas fa-user"></i><span>Личный кабинет</span></a></li>
         <li class="nav-item"><a class="nav-link" href="dataAnalytics"><i class="fas fa-table"></i><span>Доска для анализа данных</span></a></li>
-        <li class="nav-item"><a class="nav-link" href="main"><i class="far fa-user-circle"></i><span>Выход</span></a></li>
+        <li class="nav-item"><a class="nav-link"(click)="exit()"><i class="far fa-user-circle"></i><span>Выход</span></a></li>
         <li class="nav-item"></li>
       </ul>
     </div>
@@ -52,10 +52,10 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td>Cell 1</td>
-                  <td>Cell 2</td>
-                  <td>Cell 2</td>
+                <tr *ngFor="let diaryDTO of diaryDTOs | async">
+                  <td>{{diaryDTO.subject}}</td>
+                  <td>{{diaryDTO.homework}}</td>
+                  <td>{{diaryDTO.grade}}</td>
                 </tr>
                 <tr></tr>
                 </tbody>
@@ -64,7 +64,7 @@
           </div>
         </div>
       </div>
-      <p style="width: 778.6px;margin: 21px;height: 17px;">Количество пропущенных уроков - ***</p>
+      <p style="width: 778.6px;margin: 21px;height: 17px;">Количество пропущенных уроков - {{numberAttendance}}</p>
     </div>
     <footer class="bg-white sticky-footer">
       <div class="container my-auto">

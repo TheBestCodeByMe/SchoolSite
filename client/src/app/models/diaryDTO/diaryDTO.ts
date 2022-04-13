@@ -5,7 +5,7 @@ export class DiaryDTO {
   patronymicPupil: string;
   subject: string;
   homework: string;
-  grade: number;
+  grade: string;
   attendance: boolean;
   dateLesson: string;
   className: string;
