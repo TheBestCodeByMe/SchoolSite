@@ -4,4 +4,5 @@ import com.example.schoolsite.entity.Attendance;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AttendanceRepository extends JpaRepository<Attendance, Long> {
+    boolean existsByClassIDAndLessonIDAndPupilID(Long classId, Long lessonId, Long pupilId);
 }

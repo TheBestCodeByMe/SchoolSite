@@ -8,4 +8,5 @@ export class DiaryDTO {
   grade: number;
   attendance: boolean;
   dateLesson: string;
+  className: string;
 }

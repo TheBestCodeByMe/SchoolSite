@@ -22,8 +22,9 @@ public class DiaryDTO {
     private int grade;
     private boolean attendance;
     private Date dateLesson;
+    private String className;
 
-    public DiaryDTO(String namePupil, String lastnamePupil, String patronymicPupil, String subject, String homework, int grade, boolean attendance, Date dateLesson) {
+    public DiaryDTO(String namePupil, String lastnamePupil, String patronymicPupil, String subject, String homework, int grade, boolean attendance, Date dateLesson, String className) {
         this.namePupil = namePupil;
         this.lastnamePupil = lastnamePupil;
         this.patronymicPupil = patronymicPupil;
@@ -32,6 +33,7 @@ public class DiaryDTO {
         this.grade = grade;
         this.attendance = attendance;
         this.dateLesson = dateLesson;
+        this.className = className;
     }
 
     @Override
@@ -39,11 +41,11 @@ public class DiaryDTO {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DiaryDTO diaryDTO = (DiaryDTO) o;
-        return grade == diaryDTO.grade && attendance == diaryDTO.attendance && Objects.equals(id, diaryDTO.id) && Objects.equals(namePupil, diaryDTO.namePupil) && Objects.equals(lastnamePupil, diaryDTO.lastnamePupil) && Objects.equals(patronymicPupil, diaryDTO.patronymicPupil) && Objects.equals(subject, diaryDTO.subject) && Objects.equals(homework, diaryDTO.homework) && Objects.equals(dateLesson, diaryDTO.dateLesson);
+        return grade == diaryDTO.grade && attendance == diaryDTO.attendance && Objects.equals(id, diaryDTO.id) && Objects.equals(namePupil, diaryDTO.namePupil) && Objects.equals(lastnamePupil, diaryDTO.lastnamePupil) && Objects.equals(patronymicPupil, diaryDTO.patronymicPupil) && Objects.equals(subject, diaryDTO.subject) && Objects.equals(homework, diaryDTO.homework) && Objects.equals(dateLesson, diaryDTO.dateLesson) && Objects.equals(className, diaryDTO.className);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, namePupil, lastnamePupil, patronymicPupil, subject, homework, grade, attendance, dateLesson);
+        return Objects.hash(id, namePupil, lastnamePupil, patronymicPupil, subject, homework, grade, attendance, dateLesson, className);
     }
 }

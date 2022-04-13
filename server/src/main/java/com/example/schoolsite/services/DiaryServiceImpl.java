@@ -1,17 +1,13 @@
-package com.example.schoolsite.controllers;
+package com.example.schoolsite.services;
 
 import com.example.schoolsite.dto.DiaryDTO;
 import com.example.schoolsite.entity.*;
-import com.example.schoolsite.services.DiaryServiceImpl;
 import com.example.schoolsite.workWithDatabase.repo.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Service;
 
-@RestController
-@CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/api/v1/diary")
-public class DiaryController {
-
+@Service
+public class DiaryServiceImpl implements DiaryService {
     @Autowired
     private AttendanceRepository attendanceRepository;
 
@@ -29,31 +25,6 @@ public class DiaryController {
 
     @Autowired
     private ClassroomRepository classroomRepository;
-
-    private final DiaryServiceImpl diaryServiceImpl = new DiaryServiceImpl();
-
-    @PostMapping("/addAttendanceAndAcademicPerfomance")
-    public DiaryDTO addAttendanceAndAcademicPerfomance(@RequestBody DiaryDTO diaryDTO) {
-        if (diaryDTO.isAttendance()) {
-            System.out.println("ne" + diaryDTO);
-            if (!getAcademicPerfomance(diaryDTO)) {
-                System.out.println("nene");
-                diaryDTO = addAttendance(diaryDTO);
-            } else {
-                diaryDTO.setNamePupil("Оценка у ученика уже выставлена, то есть он был в этот день");
-            }
-        } else if (diaryDTO.getClassName().equals("")) {
-            if (!getAttendance(diaryDTO)) {
-                diaryDTO = addAcademicPerfomance(diaryDTO);
-            } else {
-                diaryDTO.setNamePupil("Этого ученика не было в этот день");
-            }
-        } else {
-            diaryDTO = addSubject(diaryDTO);
-        }
-
-        return diaryDTO;
-    }
 
     public DiaryDTO addAcademicPerfomance(DiaryDTO diaryDTO) {
         AcademicPerfomance academicPerfomance = new AcademicPerfomance();

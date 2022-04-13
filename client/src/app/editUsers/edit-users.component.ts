@@ -124,8 +124,8 @@ export class EditUsersComponent implements OnInit {
 
   createShedule() {
     const tempTeacher = this.fioTeacher.split(" ");
-    this.sheduleDTO.nameTeacher = tempTeacher[0];
-    this.sheduleDTO.lastnameTeacher = tempTeacher[1];
+    this.sheduleDTO.nameTeacher = tempTeacher[1];
+    this.sheduleDTO.lastnameTeacher = tempTeacher[0];
     this.sheduleDTO.patronymicTeacher = tempTeacher[2];
 
     // возвращает в имени предмета строку с комментарием ошибки, если что-то не так

@@ -28,7 +28,7 @@
         <li class="nav-item"><a class="nav-link" href="menuTeacher"><i
           class="fas fa-user"></i><span>Личный кабинет</span></a></li>
         <li class="nav-item"></li>
-        <li class="nav-item"><a class="nav-link" href="main"><i class="far fa-user-circle"></i><span>Выход</span></a>
+        <li class="nav-item"><a class="nav-link" (click)="exit()"><i class="far fa-user-circle"></i><span>Выход</span></a>
         </li>
         <li class="nav-item"></li>
       </ul>
@@ -44,7 +44,6 @@
           <div class="col">
             <p style="margin: -1px;width: 701.6px;padding: -7px;">Выберите дату, на которую нужно выставить оценку
               и домашнее задание.</p><input type="date" required [(ngModel)]="diaryDTO.dateLesson" name="dataForTable">
-            <button class="btn btn-primary" type="button" data-bs-target="search" style="margin: 39px;">Поиск</button>
           </div>
         </div>
         <div class="row">
@@ -55,7 +54,6 @@
                 <tr>
                   <th>ФИО ученика</th>
                   <th>Предмет</th>
-                  <th>Домашнее задание</th>
                   <th>Отметка</th>
                   <th>Был/не был</th>
                 </tr>
@@ -64,14 +62,37 @@
                 <tr>
                   <td><input type="text" placeholder="Введите ФИО ученика через пробел" required [(ngModel)]="fioPupil" name="fioPupil" minlength="1" maxlength="60"></td>
                   <td><input type="text" placeholder="Введите предмет" required [(ngModel)]="diaryDTO.subject" name="subject" minlength="1" maxlength="60"></td>
-                  <td><input type="text" required [(ngModel)]="diaryDTO.homework" name="homework" placeholder="Введите домашнее задание"></td>
                   <td><input type="number" required [(ngModel)]="diaryDTO.grade" min="1" max="10"></td>
-                  <td><small>Был&nbsp;&nbsp;</small><input type="checkbox" name="attendance" checked="" [(ngModel)]="check"></td>
+                  <td><small>Не был&nbsp;&nbsp;</small><input type="checkbox" name="attendance" checked="" [(ngModel)]="diaryDTO.attendance"></td>
                 </tr>
                 <tr></tr>
                 </tbody>
               </table>
               <button class="btn btn-primary" type="button" data-bs-target="search" style="margin: 39px;" (click)="addGradle()">Выставить оценку и пропуск</button>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th>Класс</th>
+                  <th>Предмет</th>
+                  <th>Домашнее задание</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td><input type="text" placeholder="Введите класс" required [(ngModel)]="diaryDTO.className" name="className" minlength="1" maxlength="60"></td>
+                  <td><input type="text" placeholder="Введите предмет" required [(ngModel)]="diaryDTO.subject" name="subject" minlength="1" maxlength="60"></td>
+                  <td><input type="text" required [(ngModel)]="diaryDTO.homework" name="homework" placeholder="Введите домашнее задание"></td>
+                  </tr>
+                <tr></tr>
+                </tbody>
+              </table>
+              <button class="btn btn-primary" type="button" data-bs-target="search" style="margin: 39px;" (click)="addHomework()">Выставить домашнее задание</button>
             </div>
           </div>
         </div>
