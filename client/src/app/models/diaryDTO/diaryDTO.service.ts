@@ -19,6 +19,10 @@ export class DiaryDTOService {
     return this.http.post(`${this.baseUrl}/getByUserId`, userId);
   }
 
+  getInfoPupil(classForSearch: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/getAllAboutPupil/${classForSearch}`);
+  }
+
   getAttendance(userId: string): Observable<string> {
     return this.http.post(`${this.baseUrl}/getNumbAttendance`, userId, {responseType: "text"});
   }

@@ -29,4 +29,8 @@ export class SheduleDTOService {
   getSheduleDTOsList(): Observable<any> {
     return this.http.get(`${this.baseUrl}`);
   }
+
+  getSchedulePupil(userId: string, date: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/getScheduleDTOPupil/${userId}/${date}`);
+  }
 }

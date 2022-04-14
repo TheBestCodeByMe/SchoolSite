@@ -20,13 +20,9 @@
     </a>
       <hr class="sidebar-divider my-0">
       <ul class="navbar-nav text-light" id="accordionSidebar">
-        <li class="nav-item"></li>
         <li class="nav-item"><a class="nav-link" href="menuDirector"><i class="fas fa-user"></i><span>Личный кабинет</span></a></li>
-        <li class="nav-item"></li>
         <li class="nav-item"><a class="nav-link" href="main"><i class="far fa-user-circle"></i><span>Выход</span></a></li>
-        <li class="nav-item"></li>
       </ul>
-      <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button" data-bs-target="menuStudent"></button></div>
     </div>
   </nav>
   <div class="d-flex flex-column" id="content-wrapper">
@@ -37,7 +33,7 @@
         </div>
         <div class="row">
           <div class="col">
-            <p style="margin: -1px;width: 701.6px;padding: -7px;"></p><input type="text" name="nameClass" placeholder="Введите класс в формате &quot;11 А&quot;" style="width: 253.6px;" minlength="3" maxlength="4"><button class="btn btn-primary" type="button" data-bs-target="search" style="margin: 39px;">Поиск</button>
+            <p style="margin: -1px;width: 701.6px;padding: -7px;"></p><input type="text" [(ngModel)]="classForSearch" name="nameClass" placeholder="Введите класс в формате &quot;11 А&quot;" style="width: 253.6px;" minlength="3" maxlength="4"><button class="btn btn-primary" type="button" data-bs-target="search" style="margin: 39px;" (click)="search()">Поиск</button>
           </div>
         </div>
         <div class="row">
@@ -49,17 +45,17 @@
                   <th>ФИО ученика</th>
                   <th>Предмет</th>
                   <th>Оценка</th>
-                  <th>ФИО преподавателя</th>
+                  <th>Домашнее задание</th>
                   <th>Дата</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td>Cell 1</td>
-                  <td>Cell 1</td>
-                  <td>Cell 2</td>
-                  <td>Cell 2</td>
-                  <td>Cell 2</td>
+                <tr *ngFor="let st of students | async">
+                  <td>{{st.lastnamePupil}} {{st.namePupil}} {{st.patronymicPupil}}</td>
+                  <td>{{st.subject}}</td>
+                  <td>{{st.grade}}</td>
+                  <td>{{st.homework}}</td>
+                  <td>{{st.dateLesson}}</td>
                 </tr>
                 <tr></tr>
                 </tbody>

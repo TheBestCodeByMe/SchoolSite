@@ -12,4 +12,5 @@ public interface SheduleRepository extends JpaRepository<Shedule, Long> {
     Shedule findByCalendarIdAndClassroomIDAndDate(Long calendarId, Long classroomId, Date date);
     Shedule findByDateAndClassroomIDAndSubjectID(Date date, Long classroomId, Long subjectId);
     List<Shedule> findAllByClassroomID(Long classroomId);
+    List<Shedule> findAllByClassroomIDAndDate(Long classroomId, Date date);
 }
