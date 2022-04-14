@@ -45,6 +45,7 @@
               <table class="table">
                 <thead>
                 <tr>
+                  <th>Номер урока</th>
                   <th>Предмет</th>
                   <th>Домашнее задание</th>
                   <th>ФИО преподавателя</th>
@@ -52,8 +53,9 @@
                 </thead>
                 <tbody>
                 <tr *ngFor="let schdl of schedule | async">
-                  <td>{{schdl.subject}}</td>
-                  <td>{{schdl.homework}}</td>
+                  <td>{{schdl.lessonNumber}}</td>
+                  <td>{{schdl.subjectName}}</td>
+                  <td>{{schdl.hometask}}</td>
                   <td>{{schdl.lastnameTeacher}} {{schdl.nameTeacher}} {{schdl.patronymicTeacher}}</td>
                 </tr>
                 <tr></tr>

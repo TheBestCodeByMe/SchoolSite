@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -20,9 +21,11 @@ public class EmployeeController {
         return teacherRepository.findAll();
     }
 
-    @GetMapping("/getByFIO")
-    public Teacher getTeacherByFIO(@Validated @RequestBody Teacher teacher) {
-        return teacherRepository.findByNameAndLastNameAndPatronymic(teacher.getName(), teacher.getLastName(), teacher.getPatronymic());
+    @PostMapping("/getByFIO")
+    public List<Teacher> getTeacherByFIO(@Validated @RequestBody Teacher teacher) {
+        List<Teacher> teacherList = new ArrayList<>();
+        teacherList.add(teacherRepository.findByNameAndLastNameAndPatronymic(teacher.getName(), teacher.getLastName(), teacher.getPatronymic()));
+        return teacherList;
     }
 
     @PostMapping("/getByUserId")

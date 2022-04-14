@@ -32,7 +32,7 @@ export class TeacherService {
   }
 
   getTeacherFIO(teacher: Object): Observable<any> {
-    return this.http.get(`${this.baseUrl}/employee/getByFIO`, teacher);
+    return this.http.post(`${this.baseUrl}/employee/getByFIO`, teacher);
   }
 
   getTeacherByUserId(userId: string): Observable<any> {

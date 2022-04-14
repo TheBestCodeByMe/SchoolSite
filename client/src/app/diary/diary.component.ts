@@ -35,7 +35,6 @@ export class DiaryComponent implements OnInit {
     this.diaryDTOs = this.diaryDTOService.getDiaryPupil(this.tokenStorage.getIdUser());
     this.diaryDTOService.getAttendance(this.tokenStorage.getIdUser())
       .subscribe(data => {
-        console.log("пришло это " + data.toString());
         this.numberAttendance = data;
       });
   }

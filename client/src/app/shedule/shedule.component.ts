@@ -30,5 +30,6 @@ export class SheduleComponent implements OnInit {
 
   search() {
     this.schedule = this.scheduleDTOService.getSchedulePupil(this.tokenStorageService.getIdUser(), this.dateForSchedule);
+    console.log(this.schedule);
   }
 }

@@ -26,4 +26,12 @@ export class DiaryDTOService {
   getAttendance(userId: string): Observable<string> {
     return this.http.post(`${this.baseUrl}/getNumbAttendance`, userId, {responseType: "text"});
   }
+
+  getAverageGrade(userId: string): Observable<string> {
+    return this.http.post(`${this.baseUrl}/getAverageGrade`, userId, {responseType: "text"});
+  }
+
+  getSaveGrades(userId: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/getSaveGrades/${userId}`);
+  }
 }

@@ -65,7 +65,9 @@ public class SchedulController {
             Teacher teacher = teacherRepository.getById(shedule.getTeacherID());
             Calendar calendar = calendarRepository.getById(shedule.getCalendarId());
 
+            System.out.println(subject + " " + teacher + " " + calendar);
             SheduleDTO sheduleDTO = Mapper.mapSheduleToSheduleDTO(shedule, calendar, subject, teacher, classroom);
+            System.out.println(sheduleDTO);
             sheduleDTOList.add(sheduleDTO);
         }
         return sheduleDTOList;

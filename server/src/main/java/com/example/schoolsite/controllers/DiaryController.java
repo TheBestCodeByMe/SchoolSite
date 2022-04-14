@@ -7,10 +7,17 @@ import com.example.schoolsite.exception.ResourceNotFoundException;
 import com.example.schoolsite.map.Mapper;
 import com.example.schoolsite.services.DiaryServiceImpl;
 import com.example.schoolsite.workWithDatabase.repo.*;
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -74,11 +81,29 @@ public class DiaryController {
         return String.valueOf(getNumbAttendance(Long.parseLong(userId)));
     }
 
+    @PostMapping("/getAverageGrade")
+    public String getAvrgGrade(@RequestBody String userId) {
+        double avGrade = getAverageGrade(Long.parseLong(userId));
+        if (avGrade != 0) {
+            return String.valueOf(avGrade);
+        } else {
+            return "У ученика ещё нет оценок";
+        }
+    }
+
     @GetMapping("/getAllAboutPupil/{classForSearch}")
     public ResponseEntity<List<DiaryDTO>> getUserById(@PathVariable(value = "classForSearch") String classForSearch)
             throws ResourceNotFoundException {
         return ResponseEntity.ok().body(getDiaryDTOByClass(classForSearch));
     }
+
+    @GetMapping("/getSaveGrades/{userId}")
+    public ResponseEntity<String> getSaveDiary(@PathVariable(value = "userId") Long userId)
+            throws ResourceNotFoundException {
+       saveGradesByUserId(userId);
+        return ResponseEntity.ok().body("okeyy");
+    }
+
 
     public DiaryDTO addAcademicPerfomance(DiaryDTO diaryDTO) {
         AcademicPerfomance academicPerfomance = new AcademicPerfomance();
@@ -302,5 +327,31 @@ public class DiaryController {
         }
 
         return diaryDTOList;
+    }
+
+    public double getAverageGrade(Long id) {
+        Pupil pupil = pupilRepository.findByUserId(id);
+        List<AcademicPerfomance> academicPerfomanceList = academicPerfomanceRepository.findAllByPupilID(pupil.getId());
+
+        double sumGrade = 0;
+        for (AcademicPerfomance academicPerfomance : academicPerfomanceList) {
+            sumGrade += academicPerfomance.getGrade();
+        }
+        if (sumGrade != 0) {
+            return sumGrade / academicPerfomanceList.size();
+        } else {
+            return 0;
+        }
+    }
+
+    public void saveGradesByUserId(Long userId) {
+        List<DiaryDTO> diaryDTOList = getDiaryDTOByUser(userId);
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            ObjectWriter objectWriter = objectMapper.writer(new DefaultPrettyPrinter());
+            objectWriter.writeValue(new File("D:\\BSUIR\\6semestr\\CourseWork\\Programm\\SchoolSite\\server\\src\\main\\resources\\" + diaryDTOList.get(0).getLastnamePupil() + "diary.json"), diaryDTOList);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }
