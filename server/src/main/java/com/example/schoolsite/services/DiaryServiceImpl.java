@@ -3,28 +3,25 @@ package com.example.schoolsite.services;
 import com.example.schoolsite.dto.DiaryDTO;
 import com.example.schoolsite.entity.*;
 import com.example.schoolsite.workWithDatabase.repo.*;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class DiaryServiceImpl implements DiaryService {
-    @Autowired
-    private AttendanceRepository attendanceRepository;
 
-    @Autowired
-    private AcademicPerfomanceRepository academicPerfomanceRepository;
+    private final AttendanceRepository attendanceRepository;
 
-    @Autowired
-    private PupilRepository pupilRepository;
+    private final AcademicPerfomanceRepository academicPerfomanceRepository;
 
-    @Autowired
-    private SheduleRepository sheduleRepository;
+    private final PupilRepository pupilRepository;
 
-    @Autowired
-    private SubjectRepository subjectRepository;
+    private final SheduleRepository sheduleRepository;
 
-    @Autowired
-    private ClassroomRepository classroomRepository;
+    private final SubjectRepository subjectRepository;
+
+    private final ClassroomRepository classroomRepository;
 
     public DiaryDTO addAcademicPerfomance(DiaryDTO diaryDTO) {
         AcademicPerfomance academicPerfomance = new AcademicPerfomance();

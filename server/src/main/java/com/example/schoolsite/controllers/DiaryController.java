@@ -46,8 +46,6 @@ public class DiaryController {
     @Autowired
     private ClassroomRepository classroomRepository;
 
-    private final DiaryServiceImpl diaryServiceImpl = new DiaryServiceImpl();
-
     @PostMapping("/addAttendanceAndAcademicPerfomance")
     public DiaryDTO addAttendanceAndAcademicPerfomance(@RequestBody DiaryDTO diaryDTO) {
         if (diaryDTO.isAttendance()) {
