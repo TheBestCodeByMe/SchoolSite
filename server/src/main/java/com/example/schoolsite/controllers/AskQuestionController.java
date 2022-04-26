@@ -20,10 +20,19 @@ public class AskQuestionController {
 
     @PostMapping("/addQuestion")
     public Question createQuestion(@Validated @RequestBody Question question) {
+        System.out.println(question);
         Question questionFromRepo = questionRepository.findByQuestion(question.getQuestion());
         if (questionFromRepo == null) {
             questionRepository.save(question);
         }
         return question;
     }
+    /*{
+"Question":{
+  "id": 0,
+  "question": "test",
+  "response": "test",
+  "flag": false
+  }
+}*/
 }

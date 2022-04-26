@@ -29,7 +29,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/getByUserId")
-    public Teacher getTeacherByFIO(@RequestBody String userId) {
+    public Teacher getTeacherByUserId(@RequestBody String userId) {
         return teacherRepository.findByUserId(Long.parseLong(userId));
     }
 }

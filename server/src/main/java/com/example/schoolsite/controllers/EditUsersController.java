@@ -38,11 +38,6 @@ public class EditUsersController { // TODO: убрать возможность 
     @Autowired
     private SheduleRepository sheduleRepository;
 
-    //@GetMapping("/editUsers")
-    //public List<User> getAllUsers() {
-    //    return userRepository.findAll();
-    //}
-
     @PostMapping("/createPupilDTO")
     public Pupil createPupil(@Validated @RequestBody PupilDTO pupilDTO) {
         Pupil pupil = Mapper.mapPupilDTOToPupil(pupilDTO);
@@ -107,7 +102,8 @@ public class EditUsersController { // TODO: убрать возможность 
             subjectRepository.save(subject);
             return subject;
         }
-        return null;
+        subject.setSubjectName("Такой предмет уже есть");
+        return subject;
     }
 
     @PostMapping("/createSheduleDTO")
@@ -195,8 +191,7 @@ public class EditUsersController { // TODO: убрать возможность 
     }
 
     @PostMapping("/unblockUser/{login}")
-    public Map<String, Boolean> unblockUser(@PathVariable(value = "login") String login)
-            throws ResourceNotFoundException {
+    public Map<String, Boolean> unblockUser(@PathVariable(value = "login") String login) {
         User user = userRepository.findByLogin(login).orElseThrow(null);
         Map<String, Boolean> response = new HashMap<>();
         if (user != null) {

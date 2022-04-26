@@ -1,11 +1,9 @@
 package com.example.schoolsite.controllers;
 
 import com.example.schoolsite.dto.DiaryDTO;
-import com.example.schoolsite.dto.UserDTO;
 import com.example.schoolsite.entity.*;
 import com.example.schoolsite.exception.ResourceNotFoundException;
 import com.example.schoolsite.map.Mapper;
-import com.example.schoolsite.services.DiaryServiceImpl;
 import com.example.schoolsite.workWithDatabase.repo.*;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,13 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.File;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -49,9 +43,7 @@ public class DiaryController {
     @PostMapping("/addAttendanceAndAcademicPerfomance")
     public DiaryDTO addAttendanceAndAcademicPerfomance(@RequestBody DiaryDTO diaryDTO) {
         if (diaryDTO.isAttendance()) {
-            System.out.println("ne" + diaryDTO);
             if (!getAcademicPerfomance(diaryDTO)) {
-                System.out.println("nene");
                 diaryDTO = addAttendance(diaryDTO);
             } else {
                 diaryDTO.setNamePupil("Оценка у ученика уже выставлена, то есть он был в этот день");

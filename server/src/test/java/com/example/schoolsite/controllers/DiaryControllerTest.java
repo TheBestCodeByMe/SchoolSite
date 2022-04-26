@@ -25,7 +25,7 @@ import java.util.Set;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-@RunWith(Spring.runner)
+//@RunWith(Spring.runner)
 class DiaryControllerTest {
 
     /*class SQLUsersTest {

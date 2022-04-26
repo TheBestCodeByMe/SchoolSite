@@ -27,9 +27,9 @@ public class Pupil {
     private String lastname;
     @Column(name = "patronymic", nullable = false)
     private String patronymic;
-    @Column(name = "dateOfBirthday", nullable = false)
+    @Column(name = "dateOfBirthday")
     private Date dateOfBirthday;
-    @Column(name = "email", nullable = false)
+    @Column(name = "email")
     private String email;
     @Column(name = "personalCheck", nullable = false)
     private String personalCheck;
