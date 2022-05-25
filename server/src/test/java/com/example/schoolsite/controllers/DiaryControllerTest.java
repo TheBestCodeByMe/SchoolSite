@@ -112,7 +112,7 @@ class UserServiceTest {
     }
 }
     * */
-
+/*
     DiaryController diaryController;
     List<DiaryDTO> dtoList;
 
@@ -166,5 +166,5 @@ class UserServiceTest {
 
     @Test
     void getSaveDiary() {
-    }
+    }*/
 }

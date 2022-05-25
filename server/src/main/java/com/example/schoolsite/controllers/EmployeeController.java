@@ -1,35 +1,33 @@
 package com.example.schoolsite.controllers;
 
 import com.example.schoolsite.entity.Teacher;
-import com.example.schoolsite.workWithDatabase.repo.TeacherRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.schoolsite.services.EmployeeService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/v1/employee")
+@RequiredArgsConstructor
 public class EmployeeController {
-    @Autowired
-    private TeacherRepository teacherRepository;
+
+    private final EmployeeService employeeService;
 
     @GetMapping("/getAll")
     public List<Teacher> getAllTeacher() {
-        return teacherRepository.findAll();
+        return employeeService.getAllTeacher();
     }
 
     @PostMapping("/getByFIO")
     public List<Teacher> getTeacherByFIO(@Validated @RequestBody Teacher teacher) {
-        List<Teacher> teacherList = new ArrayList<>();
-        teacherList.add(teacherRepository.findByNameAndLastNameAndPatronymic(teacher.getName(), teacher.getLastName(), teacher.getPatronymic()));
-        return teacherList;
+        return employeeService.getTeacherByFIO(teacher);
     }
 
     @PostMapping("/getByUserId")
     public Teacher getTeacherByUserId(@RequestBody String userId) {
-        return teacherRepository.findByUserId(Long.parseLong(userId));
+        return employeeService.getTeacherByUserId(userId);
     }
 }

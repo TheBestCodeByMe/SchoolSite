@@ -3,6 +3,7 @@ import {DiaryDTO} from "../models/diaryDTO/diaryDTO";
 import {DiaryDTOService} from "../models/diaryDTO/diaryDTO.service";
 import {TokenStorageService} from "../auth/token-storage.service";
 import {Router} from "@angular/router";
+import {LoginInfo} from "../models/login-info/login-info";
 
 
 @Component({
@@ -21,6 +22,10 @@ export class EditDiaryComponent implements OnInit {
   fioPupil;
   check;
   className;
+  isLoggedIn = false;
+  isLoginFailed = false;
+  errorMessage = '';
+  isSignUpFailed = false;
 
   ngOnInit() {
   }
@@ -39,7 +44,13 @@ export class EditDiaryComponent implements OnInit {
     this.diaryDTO.className = "";
 
     this.diaryDTOService.createAttendanceAndAcademicPerfomance(this.diaryDTO)
-      .subscribe(data => console.log(data), error => console.log(error));
+      .subscribe(data => {
+        console.log(data);
+      }, error => {
+        console.log(error);
+        this.errorMessage = error.error.message;
+        this.isSignUpFailed = true;
+      });
 
     this.diaryDTO = new DiaryDTO();
     this.fioPupil = "";
@@ -53,7 +64,15 @@ export class EditDiaryComponent implements OnInit {
     this.diaryDTO.attendance = false;
 
     this.diaryDTOService.createAttendanceAndAcademicPerfomance(this.diaryDTO)
-      .subscribe(data => console.log(data), error => console.log(error));
+      .subscribe(data => {
+        console.log(data);
+        this.errorMessage = data;
+        this.isSignUpFailed = true;
+      }, error => {
+        console.log(error);
+        this.errorMessage = error.error.message;
+        this.isSignUpFailed = true;
+      });
 
     this.diaryDTO = new DiaryDTO();
   }

@@ -1,58 +1,47 @@
-package com.example.schoolsite.controllers;
+package com.example.schoolsite.services;
 
-import com.example.schoolsite.dto.DiaryDTO;
+
 import com.example.schoolsite.dto.SheduleDTO;
 import com.example.schoolsite.entity.*;
 import com.example.schoolsite.exception.ResourceNotFoundException;
 import com.example.schoolsite.map.Mapper;
-import com.example.schoolsite.services.DiaryServiceImpl;
 import com.example.schoolsite.workWithDatabase.repo.*;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.sql.Date;
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 
-@RestController
-@CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/api/v1")
-public class SchedulController {
+@Service
+@RequiredArgsConstructor
+public class SheduleServiceImpl implements SheduleService {
 
-    @Autowired
-    private AttendanceRepository attendanceRepository;
+    private final AttendanceRepository attendanceRepository;
 
-    @Autowired
-    private AcademicPerfomanceRepository academicPerfomanceRepository;
+    private final AcademicPerfomanceRepository academicPerfomanceRepository;
 
-    @Autowired
-    private PupilRepository pupilRepository;
+    private final PupilRepository pupilRepository;
 
-    @Autowired
-    private SheduleRepository sheduleRepository;
+    private final SheduleRepository sheduleRepository;
 
-    @Autowired
-    private SubjectRepository subjectRepository;
+    private final SubjectRepository subjectRepository;
 
-    @Autowired
-    private ClassroomRepository classroomRepository;
+    private final ClassroomRepository classroomRepository;
 
-    @Autowired
-    private TeacherRepository teacherRepository;
+    private final TeacherRepository teacherRepository;
 
-    @Autowired
-    private CalendarRepository calendarRepository;
+    private final CalendarRepository calendarRepository;
 
-    @GetMapping("/getScheduleDTOPupil/{userId}/{date}")
+    @Override
     public ResponseEntity<List<SheduleDTO>> getScheduleByIdAndDate(@PathVariable(value = "userId") Long userId, @PathVariable(value = "date") String date)
             throws ResourceNotFoundException {
         return ResponseEntity.ok().body(getScheduleDTOByIdAndDate(userId, date));
     }
 
+    @Override
     public List<SheduleDTO> getScheduleDTOByIdAndDate(Long userId, String date) {
         Pupil pupil = pupilRepository.findByUserId(userId);
         List<Shedule> sheduleList = sheduleRepository.findAllByClassroomIDAndDate(pupil.getClassroomId(), Date.valueOf(date));
@@ -72,4 +61,5 @@ public class SchedulController {
         }
         return sheduleDTOList;
     }
+
 }
