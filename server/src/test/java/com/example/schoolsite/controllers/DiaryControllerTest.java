@@ -1,28 +1,6 @@
 package com.example.schoolsite.controllers;
 
-import com.example.schoolsite.dto.DiaryDTO;
-import com.example.schoolsite.entity.Role;
-import com.example.schoolsite.entity.User;
-import com.example.schoolsite.enumiration.ERole;
-import com.example.schoolsite.pojo.JwtResponse;
-import com.example.schoolsite.pojo.LoginRequest;
-import com.example.schoolsite.pojo.SignUpRequest;
-import com.example.schoolsite.services.DiaryServiceImpl;
-import com.example.schoolsite.workWithDatabase.repo.PupilRepository;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.stereotype.Service;
-
-import javax.swing.*;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 //@RunWith(Spring.runner)

@@ -1,8 +1,7 @@
 package com.example.schoolsite.jwt;
 
-import com.example.schoolsite.services.UserDetailsServiceImpl;
+import com.example.schoolsite.services.impl.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;

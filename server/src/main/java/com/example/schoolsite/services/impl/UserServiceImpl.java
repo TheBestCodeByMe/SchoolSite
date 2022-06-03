@@ -1,4 +1,4 @@
-package com.example.schoolsite.services;
+package com.example.schoolsite.services.impl;
 
 import com.example.schoolsite.dto.UserDTO;
 import com.example.schoolsite.entity.Pupil;
@@ -6,6 +6,7 @@ import com.example.schoolsite.entity.Teacher;
 import com.example.schoolsite.entity.User;
 import com.example.schoolsite.exception.ResourceNotFoundException;
 import com.example.schoolsite.map.Mapper;
+import com.example.schoolsite.services.UserService;
 import com.example.schoolsite.workWithDatabase.repo.PupilRepository;
 import com.example.schoolsite.workWithDatabase.repo.TeacherRepository;
 import com.example.schoolsite.workWithDatabase.repo.UserRepository;

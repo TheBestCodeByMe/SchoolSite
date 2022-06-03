@@ -1,4 +1,4 @@
-package com.example.schoolsite.services;
+package com.example.schoolsite.services.impl;
 
 import com.example.schoolsite.entity.Pupil;
 import com.example.schoolsite.entity.Role;
@@ -10,12 +10,12 @@ import com.example.schoolsite.pojo.JwtResponse;
 import com.example.schoolsite.pojo.LoginRequest;
 import com.example.schoolsite.pojo.MessageResponse;
 import com.example.schoolsite.pojo.SignUpRequest;
+import com.example.schoolsite.services.AuthorizationService;
 import com.example.schoolsite.workWithDatabase.repo.PupilRepository;
 import com.example.schoolsite.workWithDatabase.repo.RoleRepository;
 import com.example.schoolsite.workWithDatabase.repo.TeacherRepository;
 import com.example.schoolsite.workWithDatabase.repo.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -37,7 +37,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     // не работает
     private final AuthenticationManager authenticationManager;
 
-    private final UserRepository userRespository;
+    private final UserRepository userRepository;
 
     private final PupilRepository pupilRepository;
 
@@ -77,7 +77,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 
     @Override
     public ResponseEntity<?> registerUser(SignUpRequest signupRequest) {
-        if (userRespository.existsByLogin(signupRequest.getLogin())) {
+        if (userRepository.existsByLogin(signupRequest.getLogin())) {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: Username is exist"));
@@ -134,8 +134,8 @@ public class AuthorizationServiceImpl implements AuthorizationService {
             });
         }
         user.setRoles(roles);
-        userRespository.save(user);
-        User userForId = userRespository.findByLogin(user.getLogin()).orElse(null);
+        userRepository.save(user);
+        User userForId = userRepository.findByLogin(user.getLogin()).orElse(null);
 
         Set<Role> role = new HashSet<>();
         role.add(new Role(ERole.ROLE_PUPIL));

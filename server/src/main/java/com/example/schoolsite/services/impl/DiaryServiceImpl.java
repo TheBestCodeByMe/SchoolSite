@@ -1,8 +1,9 @@
-package com.example.schoolsite.services;
+package com.example.schoolsite.services.impl;
 
 import com.example.schoolsite.dto.DiaryDTO;
 import com.example.schoolsite.entity.*;
 import com.example.schoolsite.map.Mapper;
+import com.example.schoolsite.services.DiaryService;
 import com.example.schoolsite.workWithDatabase.repo.*;
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;

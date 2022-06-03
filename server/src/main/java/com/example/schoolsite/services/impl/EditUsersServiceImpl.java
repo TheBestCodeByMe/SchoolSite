@@ -1,11 +1,13 @@
-package com.example.schoolsite.services;
+package com.example.schoolsite.services.impl;
 
 import com.example.schoolsite.dto.ClassroomDTO;
 import com.example.schoolsite.dto.PupilDTO;
 import com.example.schoolsite.dto.SheduleDTO;
 import com.example.schoolsite.entity.*;
+import com.example.schoolsite.entity.Pupil;
 import com.example.schoolsite.exception.ResourceNotFoundException;
 import com.example.schoolsite.map.Mapper;
+import com.example.schoolsite.services.EditUsersService;
 import com.example.schoolsite.workWithDatabase.repo.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

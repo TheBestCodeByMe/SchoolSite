@@ -1,4 +1,4 @@
-package com.example.schoolsite.services;
+package com.example.schoolsite.services.impl;
 
 import com.example.schoolsite.entity.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;

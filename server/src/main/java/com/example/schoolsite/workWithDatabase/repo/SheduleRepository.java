@@ -5,7 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Date;
 import java.util.List;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface SheduleRepository extends JpaRepository<Shedule, Long> {
     Shedule findByCalendarIdAndClassroomIDAndDateAndSubjectIDAndTeacherIDAndWeekDay(Long calendarId, Long classroomID, Date date, Long subjectID, Long teacherID, int weekDay);
     Shedule findByTeacherIDAndCalendarIdAndDate(Long teacherId, Long calendarId, Date date);

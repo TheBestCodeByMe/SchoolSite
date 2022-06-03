@@ -1,6 +1,7 @@
-package com.example.schoolsite.services;
+package com.example.schoolsite.services.impl;
 
 import com.example.schoolsite.entity.Teacher;
+import com.example.schoolsite.services.EmployeeService;
 import com.example.schoolsite.workWithDatabase.repo.TeacherRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

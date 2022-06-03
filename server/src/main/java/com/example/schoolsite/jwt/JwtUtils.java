@@ -1,6 +1,6 @@
 package com.example.schoolsite.jwt;
 
-import com.example.schoolsite.services.UserDetailsImpl;
+import com.example.schoolsite.services.impl.UserDetailsImpl;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;

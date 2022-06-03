@@ -1,10 +1,11 @@
-package com.example.schoolsite.services;
+package com.example.schoolsite.services.impl;
 
 import com.example.schoolsite.dto.PupilDTO;
 import com.example.schoolsite.entity.Classroom;
 import com.example.schoolsite.entity.Parents;
 import com.example.schoolsite.entity.Pupil;
 import com.example.schoolsite.map.Mapper;
+import com.example.schoolsite.services.PupilService;
 import com.example.schoolsite.workWithDatabase.repo.ClassroomRepository;
 import com.example.schoolsite.workWithDatabase.repo.ParentsRepository;
 import com.example.schoolsite.workWithDatabase.repo.PupilRepository;

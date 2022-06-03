@@ -1,10 +1,11 @@
-package com.example.schoolsite.services;
+package com.example.schoolsite.services.impl;
 
 
 import com.example.schoolsite.dto.SheduleDTO;
 import com.example.schoolsite.entity.*;
 import com.example.schoolsite.exception.ResourceNotFoundException;
 import com.example.schoolsite.map.Mapper;
+import com.example.schoolsite.services.SheduleService;
 import com.example.schoolsite.workWithDatabase.repo.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
