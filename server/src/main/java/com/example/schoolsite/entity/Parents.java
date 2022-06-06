@@ -30,6 +30,8 @@ public class Parents {
     private String lastnameDad;
     @Column(name = "patronymicDad", nullable = false)
     private String patronymicDad;
+    @OneToMany (mappedBy="parentsId", fetch=FetchType.EAGER)
+    private Pupil pupils;
 
     public Parents(String nameMom, String lastnameMom, String patronymicMom, String nameDad, String lastnameDad, String patronymicDad) {
         this.nameMom = nameMom;

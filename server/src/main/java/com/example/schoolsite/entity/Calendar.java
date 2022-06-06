@@ -20,10 +20,12 @@ public class Calendar {
     private Long id;
     @Column(name = "semesterID", nullable = false)
     private int semesterID;
-    @Column(name = "weekDay", nullable = false)
+    @Column(name = "week_day", nullable = false)
     private int weekDay;
-    @Column(name = "lessonNumber", nullable = false)
+    @Column(name = "lesson_number", nullable = false)
     private int lessonNumber;
+    @OneToOne (optional=false, mappedBy="calendarId")
+    private Shedule shedule;
 
     public Calendar(int semesterID, int weekDay, int lessonNumber) {
         this.semesterID = semesterID;

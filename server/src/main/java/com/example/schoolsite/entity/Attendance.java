@@ -18,14 +18,17 @@ public class Attendance {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "pupilID", nullable = false)
-    private Long pupilID; // TODO: сделать внешним ключом
-    @Column(name = "classID", nullable = false)
-    private Long classID; // TODO: сделать внешним ключом
-    @Column(name = "lessonID", nullable = false)
-    private Long lessonID; // TODO: сделать внешним ключом
+    @OneToOne (optional=false, cascade=CascadeType.ALL)
+    @JoinColumn (name="pupil_id", nullable = false)
+    private Pupil pupilID;
+    @OneToOne (optional=false, cascade=CascadeType.ALL)
+    @JoinColumn (name="class_id", nullable = false)
+    private Classroom classID;
+    @OneToOne (optional=false, cascade=CascadeType.ALL)
+    @JoinColumn (name="lesson_id", nullable = false)
+    private Shedule lessonID;
 
-    public Attendance(Long pupilID, Long classID, Long lessonID) {
+    public Attendance(Pupil pupilID, Classroom classID, Shedule lessonID) {
         this.pupilID = pupilID;
         this.classID = classID;
         this.lessonID = lessonID;

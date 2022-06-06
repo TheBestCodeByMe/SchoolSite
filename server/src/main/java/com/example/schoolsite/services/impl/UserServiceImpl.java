@@ -12,6 +12,7 @@ import com.example.schoolsite.workWithDatabase.repo.TeacherRepository;
 import com.example.schoolsite.workWithDatabase.repo.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,7 +34,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResponseEntity<UserDTO> getUserById(Long userId)
+    public UserDTO getUserById(Long userId)
             throws ResourceNotFoundException {
         Optional<User> user = Optional.ofNullable(userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + userId)));
@@ -46,12 +47,12 @@ public class UserServiceImpl implements UserService {
             userDTO = Mapper.mapUserTeacherToUserDTO(user.get(), teacher);
         }
 
-        return ResponseEntity.ok().body(userDTO);
+        return userDTO;
     }
 
     @Override
-    public ResponseEntity<UserDTO> updateUser(Long userId,
-                                              UserDTO userDetails) throws ResourceNotFoundException {
+    public UserDTO updateUser(Long userId,
+                                  UserDTO userDetails) throws ResourceNotFoundException {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + userId));
 
@@ -75,6 +76,6 @@ public class UserServiceImpl implements UserService {
         user.setLogin(userDetails.getLogin());
 
         userRepository.save(user);
-        return ResponseEntity.ok(userDetails);
+        return userDetails;
     }
 }

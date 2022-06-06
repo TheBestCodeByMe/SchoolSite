@@ -20,6 +20,6 @@ public class ScheduleController {
     @GetMapping("/getScheduleDTOPupil/{userId}/{date}")
     public ResponseEntity<List<SheduleDTO>> getScheduleByIdAndDate(@PathVariable(value = "userId") Long userId, @PathVariable(value = "date") String date)
             throws ResourceNotFoundException {
-        return sheduleService.getScheduleByIdAndDate(userId, date);
+        return ResponseEntity.ok().body(sheduleService.getScheduleByIdAndDate(userId, date));
     }
 }

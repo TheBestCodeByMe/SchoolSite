@@ -27,12 +27,12 @@ public class UserController {
     @GetMapping("/users/{id}")
     public ResponseEntity<UserDTO> getUserById(@PathVariable(value = "id") Long userId)
             throws ResourceNotFoundException {
-        return userService.getUserById(userId);
+        return ResponseEntity.ok(userService.getUserById(userId));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<UserDTO> updateUser(@PathVariable(value = "id") Long userId,
                                            @Validated @RequestBody UserDTO userDetails) throws ResourceNotFoundException {
-        return userService.updateUser(userId, userDetails);
+        return ResponseEntity.ok(userService.updateUser(userId, userDetails));
     }
 }

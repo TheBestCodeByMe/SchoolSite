@@ -35,6 +35,10 @@ public class User {
     private String status;
     @Column(name = "link", nullable = true)
     private String link;
+    @OneToOne (optional=false, mappedBy="userId")
+    private Teacher teacher;
+    @OneToOne (optional=false, mappedBy="userId")
+    private Pupil pupil;
 
     public User(String login, String password, String status) {
         super();

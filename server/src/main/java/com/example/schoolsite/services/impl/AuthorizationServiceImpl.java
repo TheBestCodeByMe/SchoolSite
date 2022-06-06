@@ -34,7 +34,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AuthorizationServiceImpl implements AuthorizationService {
 
-    // не работает
     private final AuthenticationManager authenticationManager;
 
     private final UserRepository userRepository;
@@ -50,7 +49,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
     private final JwtUtils jwtUtils;
 
     @Override
-    public ResponseEntity<?> authUser(LoginRequest loginRequest) {
+    public JwtResponse authUser(LoginRequest loginRequest) {
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(
                         loginRequest.getUsername(),
@@ -66,21 +65,19 @@ public class AuthorizationServiceImpl implements AuthorizationService {
                 .collect(Collectors.toList());
 
         if (userDetails.getId() != null) {
-            return ResponseEntity.ok(new JwtResponse(jwt,
+            return  new JwtResponse(jwt,
                     userDetails.getId(),
                     userDetails.getUsername(),
-                    roles));
+                    roles);
         } else {
-            return ResponseEntity.badRequest().body("Your login or password are invalid");
+            return null;
         }
     }
 
     @Override
-    public ResponseEntity<?> registerUser(SignUpRequest signupRequest) {
+    public String registerUser(SignUpRequest signupRequest) {
         if (userRepository.existsByLogin(signupRequest.getLogin())) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: Username is exist"));
+            return "Error: Username is exist";
         }
 
         Pupil pupil = pupilRepository.findByNameAndLastnameAndPatronymic(signupRequest.getName(), signupRequest.getLastname(), signupRequest.getPatronymic());
@@ -88,15 +85,11 @@ public class AuthorizationServiceImpl implements AuthorizationService {
 
         if (signupRequest.getRole().equals("pupil")) {
             if (pupil == null) {
-                return ResponseEntity
-                        .badRequest()
-                        .body(new MessageResponse("Error: Pupil is not exist"));
+                return "Error: Pupil is not exist";
             }
         } else if (signupRequest.getRole().equals("teacher") || signupRequest.getRole().equals("Director")) {
             if (teacher == null) {
-                return ResponseEntity
-                        .badRequest()
-                        .body(new MessageResponse("Error: Teacher is not exist"));
+                return "Error: Teacher is not exist";
             }
         }
 
@@ -108,9 +101,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
         Set<Role> roles = new HashSet<>();
 
         if (reqRoles == null) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(new MessageResponse("Error: Your role is null"));
+            return "Error: Your role is null";
 /*            Role userRole = roleRepository
                     .findByName(ERole.ROLE_USER)
                     .orElseThrow(() -> new RuntimeException("Error, Role USER is not found"));
@@ -149,6 +140,6 @@ public class AuthorizationServiceImpl implements AuthorizationService {
             teacher.setEmail(signupRequest.getEmail());
             teacherRepository.save(teacher);
         }
-        return ResponseEntity.ok(new MessageResponse("User CREATED"));
+        return "User CREATED";
     }
 }

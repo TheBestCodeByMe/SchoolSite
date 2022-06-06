@@ -19,22 +19,30 @@ public class Shedule {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "classroomID", nullable = false)
-    private Long classroomID; // TODO: сделать внешним ключом
-    @Column(name = "subjectID", nullable = false)
-    private Long subjectID; // TODO: сделать внешним ключом
-    @Column(name = "teacherID", nullable = false)
-    private Long teacherID; // TODO: сделать внешним ключом
-    @Column(name = "weekDay", nullable = false)
+    @OneToOne (optional=false, cascade=CascadeType.ALL)
+    @JoinColumn (name="classroom_id", nullable = false)
+    private Classroom classroomID;
+    @OneToOne (optional=false, cascade=CascadeType.ALL) // спросить, может множество расписаний с одним предметом
+    @JoinColumn (name="subject_id", nullable = false)
+    private Subject subjectID;
+    @OneToOne (optional=false, cascade=CascadeType.ALL)
+    @JoinColumn (name="teacher_id", nullable = false)
+    private Teacher teacherID;
+    @Column(name = "week_day", nullable = false)
     private int weekDay;
     @Column(name = "date", nullable = false)
     private Date date;
-    @Column(name = "calendarId", nullable = false)
-    private Long calendarId;
+    @OneToOne (optional=false, cascade=CascadeType.ALL)
+    @JoinColumn (name="calendar_id", nullable = false)
+    private Calendar calendarId;
     @Column(name = "hometask")
     private String hometask;
+    @OneToOne (optional=false, mappedBy="lessonID")
+    private Attendance attendance;
+    @OneToOne (optional=false, mappedBy="lessonID")
+    private AcademicPerfomance academicPerfomance;
 
-    public Shedule(Long classroomID, Long subjectID, Long teacherID, int weekDay, Date date, Long calendarId, String hometask) {
+    public Shedule(Classroom classroomID, Subject subjectID, Teacher teacherID, int weekDay, Date date, Calendar calendarId, String hometask) {
         this.classroomID = classroomID;
         this.subjectID = subjectID;
         this.teacherID = teacherID;

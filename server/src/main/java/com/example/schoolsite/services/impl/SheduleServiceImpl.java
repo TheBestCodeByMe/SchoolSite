@@ -37,9 +37,8 @@ public class SheduleServiceImpl implements SheduleService {
     private final CalendarRepository calendarRepository;
 
     @Override
-    public ResponseEntity<List<SheduleDTO>> getScheduleByIdAndDate(@PathVariable(value = "userId") Long userId, @PathVariable(value = "date") String date)
-            throws ResourceNotFoundException {
-        return ResponseEntity.ok().body(getScheduleDTOByIdAndDate(userId, date));
+    public List<SheduleDTO> getScheduleByIdAndDate(@PathVariable(value = "userId") Long userId, @PathVariable(value = "date") String date) {
+        return getScheduleDTOByIdAndDate(userId, date);
     }
 
     @Override

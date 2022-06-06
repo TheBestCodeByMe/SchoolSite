@@ -19,26 +19,33 @@ public class Pupil {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "userId")
-    private long userId; // TODO: сделать внешним ключом
+    @OneToOne (optional=false, cascade=CascadeType.ALL)
+    @JoinColumn (name="user_id")
+    private User userId;
     @Column(name = "name", nullable = false)
     private String name;
     @Column(name = "lastname", nullable = false)
     private String lastname;
     @Column(name = "patronymic", nullable = false)
     private String patronymic;
-    @Column(name = "dateOfBirthday")
+    @Column(name = "date_of_birthday")
     private Date dateOfBirthday;
     @Column(name = "email")
     private String email;
-    @Column(name = "personalCheck", nullable = false)
+    @Column(name = "personal_check", nullable = false)
     private String personalCheck;
-    @Column(name = "classroomId", nullable = false)
-    private long classroomId; // TODO: сделать внешним ключом
-    @Column(name = "parentsId", nullable = false)
-    private long parentsId; // TODO: сделать внешним ключом
+    @OneToOne (optional=false, cascade=CascadeType.ALL)
+    @JoinColumn (name="classroom_id", nullable = false)
+    private Classroom classroomId;
+    @ManyToOne (optional=false, cascade=CascadeType.ALL)
+    @JoinColumn (name="parents_id", nullable = false)
+    private Parents parentsId;
+    @OneToOne (optional=false, mappedBy="pupilID")
+    private Attendance attendance;
+    @OneToOne (optional=false, mappedBy="pupilID")
+    private AcademicPerfomance academicPerfomance;
 
-    public Pupil(long userId, String name, String lastname, String patronymic, Date dateOfBirthday, String email, String personalCheck, long classroomId, long parentsId) {
+    public Pupil(User userId, String name, String lastname, String patronymic, Date dateOfBirthday, String email, String personalCheck, Classroom classroomId, Parents parentsId) {
         this.userId = userId;
         this.name = name;
         this.lastname = lastname;

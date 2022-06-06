@@ -13,7 +13,6 @@ public class AskQuestionServiceImpl implements AskQuestionService {
     private final QuestionRepository questionRepository;
 
     public Question createQuestion(Question question) {
-        System.out.println(question);
         Question questionFromRepo = questionRepository.findByQuestion(question.getQuestion());
         if (questionFromRepo == null) {
             questionRepository.save(question);

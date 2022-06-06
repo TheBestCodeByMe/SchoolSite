@@ -18,8 +18,9 @@ public class Teacher {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "userId")
-    private long userId; // TODO: сделать внешним ключом
+    @OneToOne (optional=false, cascade=CascadeType.ALL)
+    @JoinColumn (name="user_id")
+    private User userId;
     @Column(name = "name", nullable = false)
     private String name;
     @Column(name = "lastname", nullable = false)
@@ -32,8 +33,12 @@ public class Teacher {
     private String qualification;
     @Column(name = "position", nullable = false)
     private String position;
+    @OneToOne (optional=false, mappedBy="classroomTeacherId")
+    private Classroom classroom;
+    @OneToOne (optional=false, mappedBy="teacherID")
+    private Shedule shedule;
 
-    public Teacher(Long userId, String name, String lastName, String patronymic, String email, String qualification, String position) {
+    public Teacher(User userId, String name, String lastName, String patronymic, String email, String qualification, String position) {
         this.userId = userId;
         this.name = name;
         this.lastName = lastName;

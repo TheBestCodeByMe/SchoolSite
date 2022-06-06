@@ -18,8 +18,10 @@ public class Subject {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "subjectName", nullable = false)
+    @Column(name = "subject_name", nullable = false)
     private String subjectName;
+    @OneToOne (optional=false, mappedBy="subjectID")
+    private Shedule shedule;
 
     public Subject(String subjectName) {
         this.subjectName = subjectName;
