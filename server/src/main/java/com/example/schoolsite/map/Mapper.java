@@ -130,7 +130,7 @@ public class Mapper {
         return sheduleDTO;
     }
 
-    public static Shedule mapSheduleDTOToShedule(SheduleDTO sheduleDTO, long calendarId, long teacherId, long subjectId, long classroomId) {
+    public static Shedule mapSheduleDTOToShedule(SheduleDTO sheduleDTO, Calendar calendarId, Teacher teacherId, Subject subjectId, Classroom classroomId) {
         Shedule shedule = new Shedule();
         shedule.setDate(sheduleDTO.getDate());
         shedule.setHometask(sheduleDTO.getHometask());
@@ -152,7 +152,7 @@ public class Mapper {
         return calendar;
     }
 
-    public static Classroom mapClassroomDTOToClassroom(ClassroomDTO classroomDTO, long teacherId) {
+    public static Classroom mapClassroomDTOToClassroom(ClassroomDTO classroomDTO, Teacher teacherId) {
         Classroom classroom = new Classroom();
         classroom.setName(classroomDTO.getName());
         classroom.setClassroomTeacherId(teacherId);

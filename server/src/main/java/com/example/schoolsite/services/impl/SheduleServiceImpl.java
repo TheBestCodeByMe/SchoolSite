@@ -44,19 +44,16 @@ public class SheduleServiceImpl implements SheduleService {
     @Override
     public List<SheduleDTO> getScheduleDTOByIdAndDate(Long userId, String date) {
         Pupil pupil = pupilRepository.findByUserId(userId);
-        List<Shedule> sheduleList = sheduleRepository.findAllByClassroomIDAndDate(pupil.getClassroomId(), Date.valueOf(date));
+        List<Shedule> sheduleList = sheduleRepository.findAllByClassroomIDAndDate(pupil.getClassroomId().getId(), Date.valueOf(date));
         List<SheduleDTO> sheduleDTOList = new ArrayList<>();
 
-        Classroom classroom = classroomRepository.getById(pupil.getClassroomId());
+        Classroom classroom = classroomRepository.getById(pupil.getClassroomId().getId());
 
         for (Shedule shedule : sheduleList) {
-            Subject subject = subjectRepository.getById(shedule.getSubjectID());
-            Teacher teacher = teacherRepository.getById(shedule.getTeacherID());
-            Calendar calendar = calendarRepository.getById(shedule.getCalendarId());
-
-            System.out.println(subject + " " + teacher + " " + calendar);
+            Subject subject = subjectRepository.getById(shedule.getSubjectID().getId());
+            Teacher teacher = teacherRepository.getById(shedule.getTeacherID().getId());
+            Calendar calendar = calendarRepository.getById(shedule.getCalendarId().getId());
             SheduleDTO sheduleDTO = Mapper.mapSheduleToSheduleDTO(shedule, calendar, subject, teacher, classroom);
-            System.out.println(sheduleDTO);
             sheduleDTOList.add(sheduleDTO);
         }
         return sheduleDTOList;

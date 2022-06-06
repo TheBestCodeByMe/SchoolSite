@@ -31,7 +31,7 @@ public class DirectorServiceImpl implements DirectorService {
 
         for (Classroom value : classroom) {
             for (Teacher teacher : teachers) {
-                if(Objects.equals(value.getClassroomTeacherId(), teacher.getId())){
+                if(Objects.equals(value.getClassroomTeacherId().getId(), teacher.getId())){
                     classroomDTOList.add(Mapper.mapClassroomToClassroomDTO(value, teacher));}
             }
         }

@@ -48,7 +48,7 @@ public class DiaryServiceImpl implements DiaryService {
             return diaryDTO;
         }
 
-        Shedule shedule = sheduleRepository.findByDateAndClassroomIDAndSubjectID(diaryDTO.getDateLesson(), pupil.getClassroomId(), subject.getId());
+        Shedule shedule = sheduleRepository.findByDateAndClassroomIDAndSubjectID(diaryDTO.getDateLesson(), pupil.getClassroomId().getId(), subject.getId());
 
         if (shedule == null) {
             diaryDTO.setNamePupil("Ошибка в дате");
@@ -56,8 +56,8 @@ public class DiaryServiceImpl implements DiaryService {
         }
 
         academicPerfomance.setClassID(pupil.getClassroomId());
-        academicPerfomance.setLessonID(shedule.getId());
-        academicPerfomance.setPupilID(pupil.getId());
+        academicPerfomance.setLessonID(sheduleRepository.findById(shedule.getId()).get());
+        academicPerfomance.setPupilID(pupilRepository.findById(pupil.getId()).get());
         academicPerfomance.setGrade(Integer.parseInt(diaryDTO.getGrade()));
         academicPerfomanceRepository.save(academicPerfomance);
 
@@ -79,16 +79,16 @@ public class DiaryServiceImpl implements DiaryService {
             return diaryDTO;
         }
 
-        Shedule shedule = sheduleRepository.findByDateAndClassroomIDAndSubjectID(diaryDTO.getDateLesson(), pupil.getClassroomId(), subject.getId());
+        Shedule shedule = sheduleRepository.findByDateAndClassroomIDAndSubjectID(diaryDTO.getDateLesson(), pupil.getClassroomId().getId(), subject.getId());
 
         if (shedule == null) {
             diaryDTO.setNamePupil("Ошибка в дате");
             return diaryDTO;
         }
 
-        attendance.setPupilID(pupil.getId());
+        attendance.setPupilID(pupilRepository.findById(pupil.getId()).get());
         attendance.setClassID(pupil.getClassroomId());
-        attendance.setLessonID(shedule.getId());
+        attendance.setLessonID(sheduleRepository.findById(shedule.getId()).get());
         attendanceRepository.save(attendance);
 
         diaryDTO.setNamePupil("ок");
@@ -132,12 +132,12 @@ public class DiaryServiceImpl implements DiaryService {
             diaryDTO.setNamePupil("Ошибка в названии предмета");
             return false;
         }
-        Shedule shedule = sheduleRepository.findByDateAndClassroomIDAndSubjectID(diaryDTO.getDateLesson(), pupil.getClassroomId(), subject.getId());
+        Shedule shedule = sheduleRepository.findByDateAndClassroomIDAndSubjectID(diaryDTO.getDateLesson(), pupil.getClassroomId().getId(), subject.getId());
         if (shedule == null) {
             diaryDTO.setNamePupil("Ошибка в дате");
             return false;
         }
-        return attendanceRepository.existsByClassIDAndLessonIDAndPupilID(pupil.getClassroomId(), shedule.getId(), pupil.getId());
+        return attendanceRepository.existsByClassIDAndLessonIDAndPupilID(pupil.getClassroomId().getId(), shedule.getId(), pupil.getId());
     }
 
     @Override
@@ -154,19 +154,19 @@ public class DiaryServiceImpl implements DiaryService {
             return false;
         }
 
-        Shedule shedule = sheduleRepository.findByDateAndClassroomIDAndSubjectID(diaryDTO.getDateLesson(), pupil.getClassroomId(), subject.getId());
+        Shedule shedule = sheduleRepository.findByDateAndClassroomIDAndSubjectID(diaryDTO.getDateLesson(), pupil.getClassroomId().getId(), subject.getId());
 
         if (shedule == null) {
             diaryDTO.setNamePupil("Ошибка в дате");
             return false;
         }
-        return academicPerfomanceRepository.existsByClassIDAndLessonIDAndPupilID(pupil.getClassroomId(), shedule.getId(), pupil.getId());
+        return academicPerfomanceRepository.existsByClassIDAndLessonIDAndPupilID(pupil.getClassroomId().getId(), shedule.getId(), pupil.getId());
     }
 
     @Override
     public List<DiaryDTO> getDiaryDTOByUser(Long id) {
         Pupil pupil = pupilRepository.findByUserId(id);
-        List<Shedule> shedules = sheduleRepository.findAllByClassroomID(pupil.getClassroomId());
+        List<Shedule> shedules = sheduleRepository.findAllByClassroomID(pupil.getClassroomId().getId());
         List<Subject> subjects = subjectRepository.findAll();
         List<Attendance> attendances = attendanceRepository.findAllByPupilID(pupil.getId());
         List<AcademicPerfomance> academicPerfomances = academicPerfomanceRepository.findAllByPupilID(pupil.getId());
@@ -179,12 +179,12 @@ public class DiaryServiceImpl implements DiaryService {
         for (Shedule shedule : shedules) {
             DiaryDTO diaryDTO = new DiaryDTO();
             for (Subject subject : subjects) {
-                if (Objects.equals(shedule.getSubjectID(), subject.getId())) {
+                if (Objects.equals(shedule.getSubjectID().getId(), subject.getId())) {
                     if (academicPerfomances == null) {
                         grade = "";
                     } else {
                         for (AcademicPerfomance academicPerfomance : academicPerfomances) {
-                            if (Objects.equals(academicPerfomance.getLessonID(), shedule.getId())) {
+                            if (Objects.equals(academicPerfomance.getLessonID().getId(), shedule.getId())) {
                                 grade = String.valueOf(academicPerfomance.getGrade());
                             } else {
                                 grade = "";
@@ -193,12 +193,12 @@ public class DiaryServiceImpl implements DiaryService {
                     }
                     if (attendances != null) {
                         for (Attendance attendance : attendances) {
-                            attendanceBoolean = Objects.equals(shedule.getId(), attendance.getLessonID());
+                            attendanceBoolean = Objects.equals(shedule.getId(), attendance.getLessonID().getId());
                         }
                     } else {
                         attendanceBoolean = false;
                     }
-                    diaryDTO = Mapper.mapToDiaryDTO(shedule, pupil, classroomRepository.getById(pupil.getClassroomId()), attendanceBoolean, grade, subject);
+                    diaryDTO = Mapper.mapToDiaryDTO(shedule, pupil, classroomRepository.getById(pupil.getClassroomId().getId()), attendanceBoolean, grade, subject);
                 }
             }
             diaryDTOList.add(diaryDTO);
@@ -239,12 +239,12 @@ public class DiaryServiceImpl implements DiaryService {
             for (Shedule shedule : shedules) {
                 diaryDTO = new DiaryDTO();
                 for (Subject subject : subjects) {
-                    if (Objects.equals(shedule.getSubjectID(), subject.getId())) {
+                    if (Objects.equals(shedule.getSubjectID().getId(), subject.getId())) {
                         if (academicPerfomances == null) {
                             grade = "";
                         } else {
                             for (AcademicPerfomance academicPerfomance : academicPerfomances) {
-                                if (Objects.equals(academicPerfomance.getLessonID(), shedule.getId())) {
+                                if (Objects.equals(academicPerfomance.getLessonID().getId(), shedule.getId())) {
                                     grade = String.valueOf(academicPerfomance.getGrade());
                                 } else {
                                     grade = "";
@@ -253,12 +253,12 @@ public class DiaryServiceImpl implements DiaryService {
                         }
                         if (attendances != null) {
                             for (Attendance attendance : attendances) {
-                                attendanceBoolean = Objects.equals(shedule.getId(), attendance.getLessonID());
+                                attendanceBoolean = Objects.equals(shedule.getId(), attendance.getLessonID().getId());
                             }
                         } else {
                             attendanceBoolean = false;
                         }
-                        diaryDTO = Mapper.mapToDiaryDTO(shedule, pupil, classroomRepository.getById(pupil.getClassroomId()), attendanceBoolean, grade, subject);
+                        diaryDTO = Mapper.mapToDiaryDTO(shedule, pupil, classroomRepository.getById(pupil.getClassroomId().getId()), attendanceBoolean, grade, subject);
                     }
                 }
                 diaryDTOList.add(diaryDTO);

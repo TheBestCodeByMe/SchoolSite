@@ -25,8 +25,8 @@ public class PupilServiceImpl implements PupilService {
     @Override
     public PupilDTO getPupilByFIO(String userId) {
         Pupil pupil = pupilRepository.findByUserId(Long.parseLong(userId));
-        Parents parents = parentsRepository.getById(pupil.getParentsId());
-        Classroom classroom = classroomRepository.getById(pupil.getClassroomId());
+        Parents parents = parentsRepository.getById(pupil.getParentsId().getId());
+        Classroom classroom = classroomRepository.getById(pupil.getClassroomId().getId());
         return Mapper.mapToPupilDTO(pupil, parents, classroom);
     }
 }

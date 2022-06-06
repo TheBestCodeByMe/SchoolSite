@@ -132,11 +132,11 @@ public class AuthorizationServiceImpl implements AuthorizationService {
         role.add(new Role(ERole.ROLE_PUPIL));
 
         if (userForId.getRoles().equals(role)) {
-            pupil.setUserId(userForId.getId());
+            pupil.setUserId(userRepository.getById(userForId.getId()));
             pupil.setEmail(signupRequest.getEmail());
             pupilRepository.save(pupil);
         } else {
-            teacher.setUserId(userForId.getId());
+            teacher.setUserId(userRepository.getById(userForId.getId()));
             teacher.setEmail(signupRequest.getEmail());
             teacherRepository.save(teacher);
         }

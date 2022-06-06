@@ -45,16 +45,16 @@ public class EditUsersServiceImpl implements EditUsersService {
         Classroom classroom1 = classroomRepository.findClassroomByName(classroom.getName());
 
         if (classroom1 != null) {
-            pupil.setClassroomId(classroom1.getId());
+            pupil.setClassroomId(classroomRepository.getById(classroom1.getId()));
 
             Parents parent = parentsRepository.findByNameDadAndLastnameDadAndPatronymicDadAndNameMomAndLastnameMomAndPatronymicMom(parents.getNameDad(), parents.getLastnameDad(), parents.getPatronymicDad(), parents.getNameMom(), parents.getLastnameMom(), parents.getPatronymicMom());
 
             if (parent != null) {
-                pupil.setParentsId(parent.getId());
+                pupil.setParentsId(parentsRepository.getById(parent.getId()));
             } else {
                 parentsRepository.save(parents);
                 Parents newParents = parentsRepository.findByNameDadAndLastnameDadAndPatronymicDadAndNameMomAndLastnameMomAndPatronymicMom(parents.getNameDad(), parents.getLastnameDad(), parents.getPatronymicDad(), parents.getNameMom(), parents.getLastnameMom(), parents.getPatronymicMom());
-                pupil.setParentsId(newParents.getId());
+                pupil.setParentsId(parentsRepository.getById(newParents.getId()));
             }
             return pupilRepository.save(pupil);
         }
@@ -73,9 +73,9 @@ public class EditUsersServiceImpl implements EditUsersService {
 
         for (Pupil pupil : pupils) {
             for (Parents parent : parents) {
-                if (pupil.getParentsId() == parent.getId()) {
+                if (pupil.getParentsId().getId() == parent.getId()) {
                     for (Classroom classroom : classrooms) {
-                        if (pupil.getClassroomId() == classroom.getId()) {
+                        if (pupil.getClassroomId().getId() == classroom.getId()) {
                             Mapper.mapToPupilDTO(pupil, parent, classroom);
                         }
                     }
@@ -121,13 +121,13 @@ public class EditUsersServiceImpl implements EditUsersService {
         } else if (calendar == null) {
             sheduleDTO.setSubjectName("Такого времени урока не существует");
         } else {
-            Shedule shedule = Mapper.mapSheduleDTOToShedule(sheduleDTO, calendar.getId(), teacher.getId(), subject.getId(), classroom.getId());
+            Shedule shedule = Mapper.mapSheduleDTOToShedule(sheduleDTO, calendarRepository.getById(calendar.getId()), teacherRepository.getById(teacher.getId()), subjectRepository.getById(subject.getId()), classroomRepository.getById(classroom.getId()));
 
-            if (sheduleRepository.findByCalendarIdAndClassroomIDAndDateAndSubjectIDAndTeacherIDAndWeekDay(shedule.getCalendarId(), shedule.getClassroomID(), shedule.getDate(), shedule.getSubjectID(), shedule.getTeacherID(), shedule.getWeekDay()) != null) {
+            if (sheduleRepository.findByCalendarIdAndClassroomIDAndDateAndSubjectIDAndTeacherIDAndWeekDay(shedule.getCalendarId().getId(), shedule.getClassroomID().getId(), shedule.getDate(), shedule.getSubjectID().getId(), shedule.getTeacherID().getId(), shedule.getWeekDay()) != null) {
                 sheduleDTO.setSubjectName("Такое расписание уже есть");
-            } else if (sheduleRepository.findByTeacherIDAndCalendarIdAndDate(shedule.getTeacherID(), shedule.getCalendarId(), shedule.getDate()) != null) {
+            } else if (sheduleRepository.findByTeacherIDAndCalendarIdAndDate(shedule.getTeacherID().getId(), shedule.getCalendarId().getId(), shedule.getDate()) != null) {
                 sheduleDTO.setSubjectName("Учитель занят в это время");
-            } else if (sheduleRepository.findByCalendarIdAndClassroomIDAndDate(shedule.getCalendarId(), shedule.getClassroomID(), shedule.getDate()) != null) {
+            } else if (sheduleRepository.findByCalendarIdAndClassroomIDAndDate(shedule.getCalendarId().getId(), shedule.getClassroomID().getId(), shedule.getDate()) != null) {
                 sheduleDTO.setSubjectName("У класса уже есть занятие в это время");
             } else {
                 sheduleRepository.save(shedule);
@@ -145,7 +145,7 @@ public class EditUsersServiceImpl implements EditUsersService {
         } else if (teacher == null) {
             classroomDTO.setName("Такого преподавателя нет");
         } else {
-            Classroom classroom = Mapper.mapClassroomDTOToClassroom(classroomDTO, teacher.getId());
+            Classroom classroom = Mapper.mapClassroomDTOToClassroom(classroomDTO, teacherRepository.getById(teacher.getId()));
             classroomRepository.save(classroom);
         }
         return classroomDTO;
@@ -162,10 +162,10 @@ public class EditUsersServiceImpl implements EditUsersService {
             Pupil pupil = pupilRepository.findByUserId(user.getId());
             Teacher teacher = teacherRepository.findByUserId(user.getId());
             if (pupil != null) {
-                pupil.setUserId(0);
+                pupil.setUserId(null);
                 pupilRepository.save(pupil);
             } else if (teacher != null) {
-                teacher.setUserId(0);
+                teacher.setUserId(null);
                 teacherRepository.save(teacher);
             }
         } else {
