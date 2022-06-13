@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -18,20 +19,20 @@ public class Parents {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name = "nameMom", nullable = false)
+    @Column(name = "name_mom", nullable = false)
     private String nameMom;
-    @Column(name = "lastnameMom", nullable = false)
+    @Column(name = "lastname_mom", nullable = false)
     private String lastnameMom;
-    @Column(name = "patronymicMom", nullable = false)
+    @Column(name = "patronymic_mom", nullable = false)
     private String patronymicMom;
-    @Column(name = "nameDad", nullable = false)
+    @Column(name = "name_dad", nullable = false)
     private String nameDad;
-    @Column(name = "lastnameDad", nullable = false)
+    @Column(name = "lastname_dad", nullable = false)
     private String lastnameDad;
-    @Column(name = "patronymicDad", nullable = false)
+    @Column(name = "patronymic_dad", nullable = false)
     private String patronymicDad;
     @OneToMany (mappedBy="parentsId", fetch=FetchType.EAGER)
-    private Pupil pupils;
+    private List<Pupil> pupils;
 
     public Parents(String nameMom, String lastnameMom, String patronymicMom, String nameDad, String lastnameDad, String patronymicDad) {
         this.nameMom = nameMom;

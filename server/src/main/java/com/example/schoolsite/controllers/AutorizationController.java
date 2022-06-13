@@ -21,7 +21,7 @@ public class AutorizationController {
     public ResponseEntity<?> authUser(@RequestBody LoginRequest loginRequest) {
         JwtResponse response = authorizationService.authUser(loginRequest);
         if(response!=null) {
-            return ResponseEntity.ok(new MessageResponse());
+            return ResponseEntity.ok(response);
         } else {
             return ResponseEntity
                     .badRequest()

@@ -65,7 +65,7 @@ public class AuthorizationServiceImpl implements AuthorizationService {
                 .collect(Collectors.toList());
 
         if (userDetails.getId() != null) {
-            return  new JwtResponse(jwt,
+            return new JwtResponse(jwt,
                     userDetails.getId(),
                     userDetails.getUsername(),
                     roles);

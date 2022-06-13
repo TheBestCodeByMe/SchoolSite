@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class JunitLifecycleExample {
-
+/*
     Long counter;
 
     @BeforeAll
@@ -43,17 +43,16 @@ class JunitLifecycleExample {
     static void cleanUp() {
         System.out.println("@AfterAll annotated method");
     }
-
-    @Nested
-    class Calculator {
-
-        @RepeatedTest(5)
-        void calculateTestOne() {
-            System.out.println("@Test annotated method");
-            Long expected = 156L;
-            Long actual = counter + 1;
-            assertEquals(expected, actual);
-        }
-    }
+*/
+    //@Nested
+    //class Calculator {
+    //    @RepeatedTest(5)
+    //    void calculateTestOne() {
+    //        System.out.println("@Test annotated method");
+    //        Long expected = 156L;
+    //        Long actual = counter + 1;
+    //        assertEquals(expected, actual);
+    //    }
+    //}
 
 }
