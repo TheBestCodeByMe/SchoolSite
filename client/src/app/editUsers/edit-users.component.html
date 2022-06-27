@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <title>RegPupil</title>
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/Registration-Form-with-Photo.css">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+<section class="register-photo">
+  <div class="form-container">
+    <form method="post" style="padding: 7px 60px;margin: 0px;height: 658.4px;">
+      <h2 class="text-center" style="margin: 24px;padding: -52px;"><strong>Регистрация ученика</strong></h2>
+      <div class="mb-3"></div>
+      <input class="form-control" id="name" required [(ngModel)]="pupilDToForReg.name" type="text" name="name"
+             placeholder="Имя"
+             style="width: 349px;margin: 0px;padding: 14px 12px;margin-bottom: 12px;" minlength="1"
+             maxlength="20">
+      <input class="form-control" id="lastname" required [(ngModel)]="pupilDToForReg.lastname" type="text"
+             name="lastname" placeholder="Фамилия"
+             style="width: 349px;margin-top: -51px;margin-left: 420px;margin-right: 0px;"
+             minlength="1" maxlength="20">
+      <input class="form-control" id="patronymic" required [(ngModel)]="pupilDToForReg.patronymic" type="text"
+             name="patronymic" placeholder="Отчество"
+             style="margin-top: 19px;width: 349.0px;" minlength="1" maxlength="20">
+      <input class="form-control" id="classroomName" required [(ngModel)]="pupilDToForReg.className" type="text"
+             name="classroomName" placeholder="Класс в формате 11 А"
+             style="margin-top: 19px;width: 349.0px;" minlength="1" maxlength="20"><small
+      style="margin-top: 0px;margin-right: 0px;height: 0px;padding: 0px;width: 0px;">Введите дату рождения</small><input
+      class="form-control" id="dateOfBirthday" required [(ngModel)]="pupilDToForReg.dateOfBirthday" type="date"
+      style="margin-top: 17px;" name="dateOfBirth">
+      <input class="form-control" id="personalCheck" required [(ngModel)]="pupilDToForReg.personalCheck" type="text"
+             name="personalCheck"
+             style="margin-top: 19px;"
+             minlength="1" maxlength="25"
+             placeholder="Введите номер личного счета">
+      <input
+        class="form-control" id="fioMom" required [(ngModel)]="fioMom" type="text"
+        style="padding-top: 6px;margin-top: 13px;padding-left: 12px;" name="txtFIOMom"
+        placeholder="Введите ФИО мамы через пробел" minlength="3" maxlength="245">
+      <input class="form-control" id="fioDad" required [(ngModel)]="fioDad" type="text"
+             style="margin-top: 18px;"
+             name="txtFIODad"
+             placeholder="Введите ФИО папы через пробел"
+             minlength="3" maxlength="245">
+      <button class="btn btn-primary d-block w-100" type="submit" data-bs-target="registrationStudent"
+              (click)="savePupil()">Зарегистрировать
+        ученика
+      </button>
+    </form>
+  </div>
+</section>
+<section class="register-photo">
+  <div class="form-container">
+    <form method="post" style="padding: 7px 60px;margin: 0px;height: 408.4px;">
+      <h2 class="text-center" style="margin: 24px;padding: -52px;"><strong>Регистрация учителя</strong></h2>
+      <div class="mb-3"></div>
+      <input class="form-control" [(ngModel)]="teacher.name" type="text" name="nameTeacher" placeholder="Имя"
+             style="width: 349px;margin: 0px;padding: 14px 12px;margin-bottom: 12px;" minlength="1"
+             maxlength="20" required>
+      <input class="form-control" [(ngModel)]="teacher.lastName" type="text" name="lastnameTeacher"
+             placeholder="Фамилия"
+             style="width: 349px;margin-top: -51px;margin-left: 420px;margin-right: 0px;"
+             minlength="1" maxlength="20" required>
+      <input class="form-control" [(ngModel)]="teacher.patronymic" type="text"
+             name="patronymicTeacher" placeholder="Отчество"
+             style="margin-top: 19px;width: 349.0px;"
+             minlength="1" maxlength="20" required>
+      <input class="form-control" [(ngModel)]="teacher.qualification" type="text"
+             style="padding-top: 6px;margin-top: 13px;padding-left: 12px;"
+             name="txtQualification" placeholder="Введите квалификацию преподавателя"
+             minlength="3" maxlength="245" required>
+      <input class="form-control" [(ngModel)]="teacher.position" type="text"
+             style="margin-top: 18px;"
+             name="txtPosition"
+             placeholder="Введите должность: учитель, директор, зам.директора"
+             minlength="3" maxlength="245" required>
+      <button class="btn btn-primary d-block w-100" type="submit" data-bs-target="registrationTeacher"
+              (click)="createTeacher()">Зарегистрировать
+        учителя
+      </button>
+    </form>
+  </div>
+</section>
+<section class="register-photo">
+  <div class="form-container">
+    <form method="post" style="padding: 7px 60px;margin: 0px;height: 286.4px;">
+      <h2 class="text-center" style="margin: 24px;padding: -52px;"><strong>Добавление новых предметов</strong></h2>
+      <div class="mb-3"></div>
+      <input class="form-control" [(ngModel)]="subject.subjectName" type="text" name="subjectForAdd"
+             placeholder="Укажите предмет для добавления"
+             style="width: 349px;margin: 0px;padding: 14px 12px;margin-bottom: 12px;" minlength="1" maxlength="20"
+             required>
+      <button class="btn btn-primary d-block w-100" type="submit" data-bs-target="addSubject" (click)="createSubject()">
+        Добавить предмет
+      </button>
+    </form>
+  </div>
+</section>
+<section class="register-photo">
+  <div class="form-container">
+    <form method="post" style="padding: 7px 60px;margin: 0px;height: 658.4px;">
+      <h2 class="text-center" style="margin: 24px;padding: -52px;"><strong>Расписание</strong></h2>
+      <div class="mb-3"></div>
+      <input class="form-control" [(ngModel)]="sheduleDTO.classroomName" type="text" name="classForShedule"
+             placeholder="Введите класс в формате &quot;11 А&quot;"
+             style="width: 349px;margin: 0px;padding: 14px 12px;margin-bottom: 12px;" minlength="3" maxlength="4"
+             required>
+      <input
+        class="form-control" [(ngModel)]="sheduleDTO.subjectName" type="text" name="subjectForShedule"
+        placeholder="Введите предмет"
+        style="margin-top: 5px;width: 349.0px;" minlength="1" maxlength="20" required><small class="form-text">Введите
+      дату
+      занятия.</small>
+      <input class="form-control" [(ngModel)]="sheduleDTO.date" type="date" name="dateSubject" style="margin-top: 4px;"
+             required>
+      <input class="form-control" [(ngModel)]="sheduleDTO.lessonNumber" type="number" name="lessonID" min="1" max="11"
+             placeholder="Введите номер урока в расписании" style="margin-top: 12px;" required>
+      <input
+        class="form-control" [(ngModel)]="sheduleDTO.weekDay" type="number" name="weekDay"
+        placeholder="Введите день недели по счёту" min="1" max="6"
+        style="margin-top: 11px;" required>
+      <input class="form-control" [(ngModel)]="fioTeacher"
+             type="text"
+             style="margin-top: 14px;"
+             placeholder="Введите ФИО преподавателя через пробел"
+             name="FIOTeacherForShedule" required>
+      <button class="btn btn-primary d-block w-100" type="submit" data-bs-target="addShedule" (click)="createShedule()">
+        Добавление расписания
+      </button>
+    </form>
+  </div>
+</section>
+<section class="register-photo">
+  <div class="form-container">
+    <form method="post" style="padding: 7px 60px;margin: 0px;height: 464.4px;">
+      <h2 class="text-center" style="margin: 24px;padding: -52px;"><strong>Регистрация классов и закрепление
+        преподавателей за ними</strong></h2>
+      <div class="mb-3"></div>
+      <input class="form-control" [(ngModel)]="classroomDTO.classroomTeacherName" type="text" name="classForRegistrationForClass" placeholder="Имя преподавателя"
+             style="width: 349px;margin: 0px;padding: 14px 12px;margin-bottom: 12px;" minlength="1"
+             maxlength="20" required>
+      <input class="form-control" [(ngModel)]="classroomDTO.classroomTeacherLastname" type="text" name="lastnameTeacherForClass"
+             placeholder="Фамилия преподавателя"
+             style="width: 349px;margin-top: -51px;margin-left: 420px;margin-right: 0px;"
+             minlength="1" maxlength="20" required>
+      <input class="form-control" [(ngModel)]="classroomDTO.classroomTeacherPatronymic" type="text"
+             name="patronymicTeacherForClass"
+             placeholder="Отчество преподавателя"
+             style="margin-top: 19px;width: 349.0px;"
+             minlength="1" maxlength="20" required>
+      <input class="form-control" [(ngModel)]="classroomDTO.name" type="text" name="classForAdd" style="margin-top: 19px;" minlength="1" maxlength="25"
+      placeholder="Введите класс в формате &quot;11 А&quot;" required>
+      <button class="btn btn-primary d-block w-100" type="submit" data-bs-target="registrationClass" (click)="createClassNameWithTeacher()">Зарегистрировать
+        класс
+      </button>
+    </form>
+  </div>
+</section>
+<section class="register-photo">
+  <div class="form-container">
+    <form method="post" style="padding: 7px 60px;margin: 0px;height: 464.4px;">
+      <h2 class="text-center" style="margin: 24px;padding: -52px;"><strong>Блокировка и удаление
+        пользователей</strong></h2>
+      <div class="mb-3"></div>
+      <input class="form-control" [(ngModel)]="loginForDel" type="text" name="login" placeholder="Введите логин пользователя"
+             style="width: 349px;margin: 0px;padding: 14px 12px;margin-bottom: 12px;" minlength="1"
+             maxlength="20" required>
+      <button class="btn btn-primary d-block w-100" type="submit" data-bs-target="blockUser" (click)="blockUser()">Заблокировать
+        пользователя
+      </button>
+      <button class="btn btn-primary d-block w-100" type="submit" data-bs-target="unblockUser" (click)="unBlockUser()">Разблокировать
+        пользователя
+      </button>
+      <button class="btn btn-primary d-block w-100" type="submit" data-bs-target="deleteUser" (click)="deleteUser()">Удалить пользователя
+      </button>
+    </form>
+  </div>
+</section>
+<section class="register-photo">
+  <div class="form-container">
+    <form method="post" style="padding: 7px 60px;margin: 0px;height: 464.4px;">
+      <h2 class="text-center" style="margin: 24px;padding: -52px;"><strong>Просмотр пользователей</strong></h2>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Логин пользователя</th>
+            <th>Статус</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let user of users | async">
+            <td>{{user.login}}</td>
+            <td>{{user.status}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="mb-3"></div>
+      <button (click)="reloadData()" class="btn btn-primary d-block w-100" type="submit"
+              data-bs-target="updateTableUser">Обновить
+      </button>
+    </form>
+  </div>
+</section>
+<!-- <section class="register-photo">
+   <div class="form-container">
+     <form method="post" style="padding: 7px 60px;margin: 0px;height: 464.4px;">
+       <h2 class="text-center" style="margin: 24px;padding: -52px;"><strong>Просмотр учеников</strong></h2>
+       <div class="table-responsive">
+         <table class="table">
+           <thead>
+           <tr>
+             <th>ФИО</th>
+             <th>ФИО родителей</th>
+             <th>Класс</th>
+             <th>День рождения</th>
+             <th>email</th>
+             <th>Персональный счет</th>
+           </tr>
+           </thead>
+           <tbody>
+           <tr *ngFor="let studentDTO of pupilDTOs | async">
+             <td>{{studentDTO.lastname}} {{studentDTO.name}} {{studentDTO.patronymic}}</td>
+             <td>{{studentDTO.nameMom}} {{studentDTO.lastnameMom}} {{studentDTO.patronymicMom}}, {{studentDTO.nameDad}} {{studentDTO.lastnameDad}} {{studentDTO.patronymicDad}}</td>
+             <td>{{studentDTO.className}}</td>
+             <td>{{studentDTO.dateOfBirthday}}</td>
+             <td>{{studentDTO.email}}</td>
+             <td>{{studentDTO.personalCheck}}</td>
+           </tr>
+           <tr>
+             <td>Cell 3</td>
+             <td>Cell 4</td>
+             <td>Cell 4</td>
+             <td>Cell 4</td>
+             <td>Cell 4</td>
+             <td>Cell 4</td>
+           </tr>
+           </tbody>
+         </table>
+       </div>
+       <div class="mb-3"></div>
+       <button class="btn btn-primary d-block w-100" type="submit" data-bs-target="updateTableStudent">Обновить
+       </button>
+     </form>
+   </div>
+ </section>
+ <section class="register-photo">
+   <div class="form-container">
+     <form method="post" style="padding: 7px 60px;margin: 0px;height: 464.4px;">
+       <h2 class="text-center" style="margin: 24px;padding: -52px;"><strong>Просмотр учителей</strong></h2>
+       <div class="table-responsive">
+         <table class="table">
+           <thead>
+           <tr>
+             <th>ФИО</th>
+             <th>email</th>
+             <th>Специализация</th>
+             <th>Должность</th>
+           </tr>
+           </thead>
+           <tbody>
+           <tr>
+             <td>Cell 1</td>
+             <td>Cell 2</td>
+             <td>Cell 2</td>
+             <td>Cell 2</td>
+           </tr>
+           <tr>
+             <td>Cell 3</td>
+             <td>Cell 4</td>
+             <td>Cell 4</td>
+             <td>Cell 4</td>
+           </tr>
+           </tbody>
+         </table>
+       </div>
+       <div class="mb-3"></div>
+       <button class="btn btn-primary d-block w-100" type="submit" data-bs-target="updateTableTeacher">Обновить
+       </button>
+     </form>
+   </div>
+ </section>-->
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

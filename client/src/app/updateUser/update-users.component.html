@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <title>RegPupil</title>
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/Registration-Form-with-Photo.css">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+<section class="register-photo">
+  <div class="form-container">
+    <form method="post" style="padding: 7px 60px;margin: 0px;height: 400.4px;">
+      <h2 class="text-center" style="margin: 24px;padding: -52px;"><strong>Редактирование данных пользователя</strong>
+      </h2>
+      <div class="mb-3"></div>
+      <input class="form-control" type="text" [(ngModel)]="userDTO.name" name="name" placeholder="Имя"
+             style="width: 349px;margin: 0px;padding: 14px 12px;margin-bottom: 12px;" minlength="1"
+             maxlength="20">
+      <input class="form-control" type="text" [(ngModel)]="userDTO.lastname" name="lastname" placeholder="Фамилия"
+             style="width: 349px;margin-top: -51px;margin-left: 420px;margin-right: 0px;"
+             minlength="1" maxlength="20">
+      <input class="form-control" type="text" [(ngModel)]="userDTO.patronymic"
+             name="patronymic" placeholder="Отчество"
+             style="margin-top: 19px;width: 349.0px;"
+             minlength="1" maxlength="20">
+      <input
+        class="form-control" type="text" [(ngModel)]="userDTO.login" name="login" placeholder="Логин"
+        style="margin-top: 19px;" minlength="1"
+        maxlength="25">
+      <input class="form-control" type="email" [(ngModel)]="userDTO.email" name="email"
+             placeholder="Email (school_name@mail.ru)"
+             style="margin-top: 19px;" inputmode="email" minlength="9" maxlength="30">
+      <button class="btn btn-primary d-block w-100" type="submit" data-bs-target="update" (click)="reloadData()">
+        Вывести мои данные
+      </button>
+      <button class="btn btn-primary d-block w-100" type="submit" data-bs-target="update" (click)="updateUser()">
+        Редактировать данные
+      </button>
+    </form>
+  </div>
+</section>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>
