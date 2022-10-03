@@ -5851,6 +5851,8 @@
   font-style: normal;
   font-weight: normal;
   font-display: auto;
+  src: url(../fonts/fa-brands-400-ed.eot);
+  src: url(../fonts/fa-brands-400-ed.eot?#iefix) format("embedded-opentype"), url(src/app/editDiary/assets/fonts/fa-brands-400-ed.svg#fontawesome) format("svg")
 }
 
 .fab {
@@ -5861,7 +5863,7 @@
   font-family: "Font Awesome 5 Free";
   font-style: normal;
   font-weight: 400;
-  font-display: auto;
+  font-display: auto
 }
 
 .far {
@@ -5872,7 +5874,7 @@
   font-family: "Font Awesome 5 Free";
   font-style: normal;
   font-weight: 900;
-  font-display: auto;
+  font-display: auto, url(../fonts/fa-solid-900-ed.ttf) format("truetype"),url(../fonts/fa-solid-900-ed.svg#fontawesome) format("svg")
 }
 
 .fa, .far, .fas {

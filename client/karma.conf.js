@@ -37,8 +37,15 @@ module.exports = function (config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome'],
+    browsers: ['Firefox'],
     singleRun: false,
     restartOnFileChange: true
+/*
+    chainWebpack(chain) {
+      chain.module.rule('fa-brands-400')
+        .use('url-loader')
+        .loader('url-loader')
+        .options({ esModule: false, limit: 0, name: 'fonts/[hash].[ext]' })
+    }*/
   });
 };
