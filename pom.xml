@@ -14,7 +14,7 @@
     <packaging>war</packaging>
     <name>SchoolSite</name>
     <description>SchoolSite</description>
-    <properties>
+        <properties>
         <java.version>17</java.version>
             <org.springframework.security.version>RELEASE</org.springframework.security.version>
             <org.springframework.version>RELEASE</org.springframework.version>
@@ -42,7 +42,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -93,6 +92,11 @@
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
             <version>0.9.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.firebase</groupId>
+            <artifactId>firebase-admin</artifactId>
+            <version>6.11.0</version>
         </dependency>
     </dependencies>
 

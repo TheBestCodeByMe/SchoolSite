@@ -8,6 +8,56 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.util.Objects;
 
+public class Question {
+    private String code;
+    private String question;
+    private String response;
+    private boolean flag;
+
+    public Question(String code, String question, String response, boolean flag) {
+        this.code = code;
+        this.question = question;
+        this.response = response;
+        this.flag = flag;
+    }
+
+    public Question() {
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
+    }
+
+    public String getResponse() {
+        return response;
+    }
+
+    public void setResponse(String response) {
+        this.response = response;
+    }
+
+    public boolean isFlag() {
+        return flag;
+    }
+
+    public void setFlag(boolean flag) {
+        this.flag = flag;
+    }
+}
+
+/*
 @Entity
 @Table(name = "questionFromUsers")
 @Getter
@@ -44,3 +94,4 @@ public class Question {
         return Objects.hash(id, question, response, flag);
     }
 }
+*/

@@ -1,15 +1,13 @@
 package com.example.schoolsite.controllers;
 
-import com.example.schoolsite.entity.Pupil;
-import com.example.schoolsite.entity.Role;
-import com.example.schoolsite.entity.Teacher;
-import com.example.schoolsite.entity.User;
+import com.example.schoolsite.entity.*;
 import com.example.schoolsite.enumiration.ERole;
 import com.example.schoolsite.jwt.JwtUtils;
 import com.example.schoolsite.pojo.JwtResponse;
 import com.example.schoolsite.pojo.LoginRequest;
 import com.example.schoolsite.pojo.MessageResponse;
 import com.example.schoolsite.pojo.SignUpRequest;
+import com.example.schoolsite.services.QuestionService;
 import com.example.schoolsite.services.UserDetailsImpl;
 import com.example.schoolsite.workWithDatabase.repo.PupilRepository;
 import com.example.schoolsite.workWithDatabase.repo.RoleRepository;
@@ -27,6 +25,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
+import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
 @RestController
@@ -54,8 +53,11 @@ public class AutorizationController {
     @Autowired
     JwtUtils jwtUtils;
 
+    @Autowired
+    private QuestionService questionService;
+
     @PostMapping("/signIn")
-    public ResponseEntity<?> authUser(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<?> authUser(@RequestBody LoginRequest loginRequest) throws ExecutionException, InterruptedException {
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(
                         loginRequest.getUsername(),
@@ -69,7 +71,13 @@ public class AutorizationController {
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
-
+/*
+        Question question = new Question();
+        question.setQuestion("myquestionforschool");
+        question.setFlag(true);
+        question.setCode(question.getQuestion().substring(10, 15).concat("question" + Math.random()));
+        questionService.saveQuestion(question);
+*/
         if (userDetails.getId() != null) {
             return ResponseEntity.ok(new JwtResponse(jwt,
                     userDetails.getId(),
