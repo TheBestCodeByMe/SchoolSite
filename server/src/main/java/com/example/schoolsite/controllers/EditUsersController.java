@@ -6,7 +6,9 @@ import com.example.schoolsite.dto.SheduleDTO;
 import com.example.schoolsite.entity.*;
 import com.example.schoolsite.exception.ResourceNotFoundException;
 import com.example.schoolsite.map.Mapper;
+import com.example.schoolsite.services.SubjectService;
 import com.example.schoolsite.workWithDatabase.repo.*;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +21,7 @@ import java.util.Map;
 @RestController
 @CrossOrigin(origins = "http://localhost:4200") // убрать)))
 @RequestMapping("/api/v1/editUsers")
+@RequiredArgsConstructor
 public class EditUsersController { // TODO: убрать возможность нескольких добавлений пользователя к ученику/учителю
 
     @Autowired
@@ -37,6 +40,8 @@ public class EditUsersController { // TODO: убрать возможность 
     private CalendarRepository calendarRepository;
     @Autowired
     private SheduleRepository sheduleRepository;
+
+    private final SubjectService subjectService;
 
     //@GetMapping("/editUsers")
     //public List<User> getAllUsers() {
@@ -103,11 +108,13 @@ public class EditUsersController { // TODO: убрать возможность 
 
     @PostMapping("/createSubject")
     public Subject createSubject(@Validated @RequestBody Subject subject) {
+
         if (subjectRepository.findBySubjectName(subject.getSubjectName()) == null) {
             subjectRepository.save(subject);
             return subject;
         }
-        return null;
+
+        return null;//subjectService.saveSubject(subject);
     }
 
     @PostMapping("/createSheduleDTO")

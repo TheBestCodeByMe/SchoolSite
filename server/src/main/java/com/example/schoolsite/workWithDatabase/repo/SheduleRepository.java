@@ -2,10 +2,12 @@ package com.example.schoolsite.workWithDatabase.repo;
 
 import com.example.schoolsite.entity.Shedule;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
 
+@Repository
 public interface SheduleRepository extends JpaRepository<Shedule, Long> {
     Shedule findByCalendarIdAndClassroomIDAndDateAndSubjectIDAndTeacherIDAndWeekDay(Long calendarId, Long classroomID, Date date, Long subjectID, Long teacherID, int weekDay);
     Shedule findByTeacherIDAndCalendarIdAndDate(Long teacherId, Long calendarId, Date date);
